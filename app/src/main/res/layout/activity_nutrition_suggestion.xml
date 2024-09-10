@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NutritionSuggestion"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_choose"
+            android:layout_width="400dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="Choose the products you like: "
+            android:textSize="20sp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Veggies_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:elevation="15dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Veggies_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Veggies"
+                    android:textSize="21sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/Tomatobutton"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1599"
+                        android:backgroundTint="#D2CDFA"
+                        android:textColor="#000000"
+                        android:text="Tomato"
+                        android:textStyle="bold"
+                        android:textSize="11sp"/>
+
+                    <Button
+                        android:id="@+id/Cucumberobutton"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1620"
+                        android:backgroundTint="#BFF8CB"
+                        android:textColor="#000000"
+                        android:text="Cucumber"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/potato_image"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1609"
+
+                        android:backgroundTint="#ECAE59"
+                        android:textColor="#000000"
+                        android:text="Potato"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <!-- Spacing between icon and text -->
+
+                    <Button
+                        android:id="@+id/Pepperbutton"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#7DDCA2"
+
+                        android:drawableLeft="@drawable/image_1619"
+                        android:text="Pepper"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/carrotobutton"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1613"
+
+                        android:backgroundTint="#FFBD80"
+                        android:textColor="#000000"
+                        android:text="Carrot"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/lettuce_image"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1621"
+
+                        android:backgroundTint="#67EC65"
+                        android:textColor="#000000"
+                        android:text="Lettuce"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <!-- Spacing between icon and text -->
+
+                    <Button
+                        android:id="@+id/Eggplantbutton"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1607"
+
+                        android:backgroundTint="#C596C6"
+                        android:textColor="#000000"
+                        android:text="Eggplant"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/onion_image"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1625"
+
+                        android:backgroundTint="#F9CDAC"
+                        android:textColor="#000000"
+                        android:text="Onion"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Bread Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Grains_and_Breads_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:elevation="15dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Grains_and_Breads_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Grains and Breads"
+                    android:textSize="21sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/RICE_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1719"
+                        android:backgroundTint="#B4E3DB"
+                        android:textColor="#000000"
+                        android:text="Rice"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/Spaghetti_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1723"
+                        android:backgroundTint="#FC8686"
+                        android:textColor="#000000"
+                        android:text="Spaghetti"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/oats_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/oats"
+                        android:backgroundTint="#F9ECD1"
+                        android:textColor="#000000"
+                        android:text="Oats"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <Button
+                        android:id="@+id/bread_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1633"
+                        android:backgroundTint="#FCD0F5"
+                        android:textColor="#000000"
+                        android:text="Bread"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <!-- Bread Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Meats_and_Eggs_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:elevation="15dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Meats_and_Eggs_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Meats and Eggs"
+                    android:textSize="21sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/eggs_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#FFEDB4"
+                        android:drawableLeft="@drawable/image_1685"
+                        android:text="Egg"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/chicken_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1652"
+                        android:backgroundTint="#F4BCA2"
+                        android:textColor="#000000"
+                        android:text="Chicken"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/beef_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1651"
+                        android:backgroundTint="#AEE9F5"
+                        android:textColor="#000000"
+                        android:text="Beef"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <Button
+                        android:id="@+id/Chicken_sausage_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#95FFB222"
+                        android:drawableLeft="@drawable/image_1668"
+                        android:text="Sausage"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <!-- Bread Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/fish_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:elevation="15dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Fish_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fish"
+                    android:textSize="21sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/salmon_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1727"
+                        android:backgroundTint="#FCEAA1"
+                        android:textColor="#000000"
+                        android:text="Salmon"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/seabass_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1299"
+                        android:backgroundTint="#94EFFF"
+                        android:textColor="#000000"
+                        android:text="Sea bass"
+                        android:textSize="10sp"
+                        android:textStyle="bold"/>
+
+
+                    <Button
+                        android:id="@+id/tuna_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#FCB9B4"
+                        android:drawableLeft="@drawable/open_tuna_can_seen_from"
+                        android:text="Tuna"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <Button
+                        android:id="@+id/Shrimps_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1732"
+                        android:backgroundTint="#F5AE15"
+                        android:textColor="#000000"
+                        android:text="Shrimps"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Diary_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:elevation="15dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Diary_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Diary"
+                    android:textSize="21sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+
+
+
+
+                    <Button
+                        android:id="@+id/Milk_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#B9C7F4"
+                        android:drawableLeft="@drawable/image_1712"
+                        android:text="Milk"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/Cheese_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1646"
+                        android:backgroundTint="#EAF732"
+                        android:textColor="#000000"
+                        android:text="Cheese"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+
+                    <Button
+                        android:id="@+id/Yogurt_button"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#C2F5D9"
+                        android:drawableLeft="@drawable/greek_yogurt_wooden_bowl_isolated_white_background"
+                        android:text="Yogurt"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Fruits_and_berries_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:elevation="15dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Fruits_and_berries_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fruits and berries"
+                    android:textSize="21sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/Avocado_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1605"
+                        android:backgroundTint="#A6F6AD"
+                        android:textColor="#000000"
+                        android:text="Avocado"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+
+
+
+                    <Button
+                        android:id="@+id/Apple_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#72EA1A1A"
+                        android:drawableLeft="@drawable/image_1587"
+                        android:text="Apple"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/banana_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1578"
+                        android:backgroundTint="#E5E966"
+                        android:textColor="#000000"
+                        android:text="Banana"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <Button
+                        android:id="@+id/berries_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1594"
+                        android:backgroundTint="#BFB1FF"
+                        android:textColor="#000000"
+                        android:text="Berries"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/Mango_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/image_1748"
+                        android:backgroundTint="#D4F75E"
+                        android:textColor="#000000"
+                        android:text="Mango"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/Orange_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#FEAC54"
+                        android:drawableLeft="@drawable/image_1572__2_"
+                        android:text="Orange"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <Button
+                        android:id="@+id/peach_button"
+                        android:layout_width="136dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#FEC56F"
+                        android:drawableLeft="@drawable/image_1750__1_"
+                        android:text="Peach"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/Continue_button"
+            android:layout_width="177dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#8B80F6"
+            android:padding="12dp"
+            android:text="Continue"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddGroupActivity"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/buttonTextWorkout"
+        android:layout_width="382dp"
+        android:layout_height="59dp"
+        android:hint="Workout" />
+
+
+    <EditText
+        android:id="@+id/editTextLocation"
+        android:layout_width="380dp"
+        android:layout_height="116dp"
+        android:hint="Location" />
+
+    <EditText
+        android:id="@+id/Discribtion"
+        android:layout_width="382dp"
+        android:layout_height="56dp"
+        android:hint="Discribtion" />
+
+    <EditText
+        android:id="@+id/editTextLimitMembersNumber"
+        android:layout_width="382dp"
+        android:layout_height="59dp"
+        android:hint="Limit Members Number" />
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="383dp"
+        android:layout_height="111dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:hint="Enter birth date"
+        android:inputType="date" />
+
+    <TimePicker
+        android:id="@+id/starttimePicker"
+        android:layout_width="385dp"
+        android:layout_height="118dp"
+        android:timePickerMode="spinner" />
+
+    <TimePicker
+        android:id="@+id/endtimePicker"
+        android:layout_width="385dp"
+        android:layout_height="118dp"
+        android:timePickerMode="spinner" />
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Group" />
+
+</LinearLayout>

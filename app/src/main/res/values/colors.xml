@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="softpurple">#AC82E7</color>
+    <color name="purple">#6B3BAE</color>
+    <color name="transparent_white">#80FFFFFF</color>
+    <color name="colorStayHydrated">#B9C7F4</color>
+    <color name="colorEatBalanced">#FFEDB4</color>
+    <color name="colorMoveDaily">#B4E3DB</color>
+    <color name="colorStayActive">#F9CDAC</color>
+    <color name="primaryPurple">#7165E3</color>
+    <color name="red">#FF0000</color> <!-- Standard red color; adjust the hex code as needed -->
 </resources>

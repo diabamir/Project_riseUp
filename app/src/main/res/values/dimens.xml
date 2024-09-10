@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="yellow_line_stroke_width">2dp</dimen>
+    <dimen name="txt_size">18sp</dimen>
+    <dimen name="scale_line_small">4dp</dimen>
+    <dimen name="scale_line_medium">8dp</dimen>
+    <dimen name="scale_line_large">12dp</dimen>
+    <dimen name="text_start_point">30dp</dimen>
+</resources>

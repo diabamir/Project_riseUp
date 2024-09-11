@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     private Button b;
-
+    private Button groups;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
         b=findViewById(R.id.button2);
         b.setOnClickListener(v -> {
             Intent intent = new Intent(this, firstPageIcon.class);
+            startActivity(intent);
+        });
+
+
+        groups=findViewById(R.id.groups);
+        groups.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         });
 

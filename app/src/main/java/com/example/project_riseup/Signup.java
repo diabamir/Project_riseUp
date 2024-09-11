@@ -1,6 +1,7 @@
 package com.example.project_riseup;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -320,9 +321,19 @@ public class Signup extends AppCompatActivity {
         user.setFitnessLevel(fitnessLevel);
         userViewModel.insertUser(user);
         Toast.makeText(this, "You signed up successfully!", Toast.LENGTH_SHORT).show();
+
+
+
     }
 
-    private void loadNextStep() {
+    private void setupStep7() {
+
+
+
+
+    }
+
+        private void loadNextStep() {
         currentStep++;
         switch (currentStep) {
             case 1:
@@ -339,6 +350,10 @@ public class Signup extends AppCompatActivity {
                 break;
             case 5:
                 setupStep6();
+                break;
+
+            case 6:
+                setupStep7();
                 break;
         }
     }

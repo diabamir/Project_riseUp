@@ -27,8 +27,10 @@ public interface UserDao {
     void deleteUser(User user);
 
     @Query("SELECT * FROM users WHERE firstName = :firstName AND lastName = :lastName")
-    User getUserByUsername(String firstName, String lastName);
+    User getUserByFullName(String firstName, String lastName);
 
+
+//
     @Query("SELECT * FROM users WHERE phoneNumber = :phoneNumber")
     User getUserByPhoneNumber(String phoneNumber);
 

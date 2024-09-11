@@ -121,4 +121,8 @@ public class GroupViewModel extends AndroidViewModel {
         return null;
     }
 
+    public LiveData<Group> getGroupById(int groupId) {
+        return groupDao.getGroupById(groupId);  // Adjust method name and return type
+    }
+
 }

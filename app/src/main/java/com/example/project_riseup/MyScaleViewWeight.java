@@ -1,6 +1,5 @@
 package com.example.project_riseup;
 
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,10 +14,11 @@ import android.view.View;
 
 public class MyScaleViewWeight extends View {
 
+    // Class fields
     static int screenSize = 480;
     static private float pxmm = screenSize / 67.f;
     int width, height, midScreenPoint;
-    float startingPoint = 0;
+    float startingPoint = 40;  // Default minimum weight
     float downpoint = 0, movablePoint = 0, downPointClone = 0;
     private float mainPoint = 0, mainPointClone = 0;
     boolean isDown = false;
@@ -30,7 +30,7 @@ public class MyScaleViewWeight extends View {
     private Paint rulerPaint, textPaint, goldenPaint;
     private int endPoint;
     boolean isSizeChanged = false;
-    float userStartingPoint = 0f;
+    float userStartingPoint = 40f;  // Start from 40 kg by default
     private int scaleLineSmall;
     private int scaleLineMedium;
     private int scaleLineLarge;
@@ -116,10 +116,7 @@ public class MyScaleViewWeight extends View {
         pxmm = screenSize / 67.f;
         midScreenPoint = height / 2;
         endPoint = width - 40;
-        if (isSizeChanged) {
-            isSizeChanged = false;
-            mainPoint = midScreenPoint - (userStartingPoint * 10 * pxmm);
-        }
+        mainPoint = midScreenPoint - (userStartingPoint * 10 * pxmm);  // Start the ruler from the specified weight
         // Set up gradient background for the ruler
         gradientPaint.setShader(new LinearGradient(0, 0, width, rulersize, getResources().getColor(R.color.purple),
                 getResources().getColor(R.color.transparent_white), android.graphics.Shader.TileMode.MIRROR));
@@ -208,6 +205,9 @@ public class MyScaleViewWeight extends View {
      * Sets the starting point of the scale based on user input.
      */
     public void setStartingPoint(float point) {
+        if (point < 40) {
+            point = 40;  // Ensure the weight doesn't go below 40 kg
+        }
         userStartingPoint = point;
         isSizeChanged = true;
         if (isFirstTime) {
@@ -225,4 +225,3 @@ public class MyScaleViewWeight extends View {
         void onViewUpdate(float result);
     }
 }
-

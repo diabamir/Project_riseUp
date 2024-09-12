@@ -28,6 +28,9 @@ public interface UserDao {
     @Delete
     void deleteUser(User user);
 
+    @Query("SELECT * FROM users WHERE firstName = :firstName")
+    List<User> getUsersByFirstname(String firstName);
+
     @Query("SELECT * FROM users WHERE firstName = :firstName AND lastName = :lastName")
     User getUserByUsername(String firstName, String lastName);
 
@@ -63,5 +66,8 @@ public interface UserDao {
 
     @Query("SELECT * FROM users WHERE phoneNumber = :phone LIMIT 1")
     LiveData<User> getUserByPhone(String phone);
+
+
+
 
 }

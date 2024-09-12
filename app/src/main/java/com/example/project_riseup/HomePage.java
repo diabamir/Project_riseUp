@@ -14,6 +14,7 @@ public class HomePage extends AppCompatActivity {
     // Declare the ImageButton variable here
     ImageButton addWater;
     TextView greetingText;
+    UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,12 +4,14 @@ package com.example.project_riseup;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Database;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.TypeConverters;
 import androidx.room.Update;
-
 import java.util.List;
+
 @Dao
 public interface UserDao {
 
@@ -26,11 +28,12 @@ public interface UserDao {
     @Delete
     void deleteUser(User user);
 
+    @Query("SELECT * FROM users WHERE firstName = :firstName")
+    List<User> getUsersByFirstname(String firstName);
+
     @Query("SELECT * FROM users WHERE firstName = :firstName AND lastName = :lastName")
-    User getUserByFullName(String firstName, String lastName);
+    User getUserByUsername(String firstName, String lastName);
 
-
-//
     @Query("SELECT * FROM users WHERE phoneNumber = :phoneNumber")
     User getUserByPhoneNumber(String phoneNumber);
 
@@ -56,9 +59,17 @@ public interface UserDao {
 
     @Query("SELECT * FROM users WHERE height = :height")
     User getUserByHeight(String height);
+    @Query("SELECT * FROM users LIMIT 1")
+    LiveData<User> getFirstUser();
 
 
-//    @Query("SELECT * FROM users WHERE workoutList = :workoutList")
-//    User getUserByWorkoutList(String workoutList);
+    @Query("SELECT * FROM users WHERE workoutList = :workoutList")
+    User getUserByWorkoutList(String workoutList);
+
+    @Query("SELECT * FROM users WHERE phoneNumber = :phone LIMIT 1")
+    LiveData<User> getUserByPhone(String phone);
+
+
+
 
 }

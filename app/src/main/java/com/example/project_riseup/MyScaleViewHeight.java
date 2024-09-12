@@ -14,10 +14,11 @@ import android.view.View;
 
 public class MyScaleViewHeight extends View {
 
+    // Class fields
     static int screenSize = 480;
     static private float pxmm = screenSize / 67.f;
     int width, height, midScreenPoint;
-    float startingPoint = 0;
+    float startingPoint = 100;  // Default minimum height
     float downpoint = 0, movablePoint = 0, downPointClone = 0;
     private float mainPoint = 0, mainPointClone = 0;
     boolean isDown = false;
@@ -29,7 +30,7 @@ public class MyScaleViewHeight extends View {
     private Paint rulerPaint, textPaint, goldenPaint;
     private int endPoint;
     boolean isSizeChanged = false;
-    float userStartingPoint = 0f;
+    float userStartingPoint = 100f;  // Start from 100 cm by default
     private int scaleLineSmall;
     private int scaleLineMedium;
     private int scaleLineLarge;
@@ -115,10 +116,7 @@ public class MyScaleViewHeight extends View {
         pxmm = screenSize / 67.f;
         midScreenPoint = height / 2;
         endPoint = width - 40;
-        if (isSizeChanged) {
-            isSizeChanged = false;
-            mainPoint = midScreenPoint - (userStartingPoint * 10 * pxmm);
-        }
+        mainPoint = midScreenPoint - (userStartingPoint * 10 * pxmm);  // Start the ruler from the specified height
         // Set up gradient background for the ruler
         gradientPaint.setShader(new LinearGradient(0, 0, width, rulersize, getResources().getColor(R.color.purple),
                 getResources().getColor(R.color.transparent_white), android.graphics.Shader.TileMode.MIRROR));
@@ -207,6 +205,9 @@ public class MyScaleViewHeight extends View {
      * Sets the starting point of the scale based on user input.
      */
     public void setStartingPoint(float point) {
+        if (point < 100) {
+            point = 100;  // Ensure the height doesn't go below 100 cm
+        }
         userStartingPoint = point;
         isSizeChanged = true;
         if (isFirstTime) {

@@ -149,6 +149,11 @@ import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
+import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHolder> {
 
@@ -237,15 +242,52 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
 
             groupPic.setImageResource(group.getImageGroup());
 
-            joinButton.setOnClickListener(new View.OnClickListener() {
+            long currentUserId = 1;
+            long groupId = group.getId();
+            UserGroupApi api = ApiClient.getClient().create(UserGroupApi.class);
+            // Make the API call to get the user's status in the group
+            Call<UserGroupJoin> call = api.getUserStatusInGroup(currentUserId, group.getId());
+            call.enqueue(new Callback<UserGroupJoin>() {
                 @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onJoinClick(getAdapterPosition());
+                public void onResponse(Call<UserGroupJoin> call, Response<UserGroupJoin> response) {
+                    if (response.isSuccessful()) {
+                        UserGroupJoin userGroupJoin = response.body();
+                        if (userGroupJoin != null) {
+                            String status = userGroupJoin.getStatus();
+                            // Update the button text based on the status
+                            joinButton.setText("requested".equals(status) ? "Requested" : "Join");
+                        }
+                    } else {
+                        // Handle the case where the response was not successful
+                        // (e.g., show an error message or log the issue)
+                        joinButton.setText("Join"); // Default to "Join" in case of error
                     }
+                }
+
+                @Override
+                public void onFailure(Call<UserGroupJoin> call, Throwable t) {
+                    // Handle the error
+                    // (e.g., show an error message or log the issue)
+                    joinButton.setText("Join"); // Default to "Join" in case of failure
                 }
             });
         }
+
+//            joinButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (listener != null) {
+//                        listener.onJoinClick(getAdapterPosition());
+//                    }
+//                    UserGroupApi api = ApiClient.getClient().create(UserGroupApi.class);
+//                    long currentUserId=1;
+//                    Call<UserGroupJoin> call = api.getUserStatusInGroup(currentUserId, group.getId());
+//
+//
+//
+//                }
+//            });
+//        }
 
         // Helper method to apply bold style safely
         private void applyBoldSpan(SpannableString spannableString, String fullText, String target) {

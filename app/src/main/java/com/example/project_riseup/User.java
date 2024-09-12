@@ -2,8 +2,10 @@ package com.example.project_riseup;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import java.util.Date;
 import androidx.room.Entity;
@@ -36,11 +38,13 @@ public class User {
     @TypeConverters(Converters.class)
     private List<Nutrition> nutritionList;
 
+
+    @Ignore
     public User(){
 
     }
 
-    public User(long id, String userName, String firstName, String lastName, String phoneNumber, Date birthDate, String password, double weight, String gender, double height, String fitnessLevel, boolean seeTheInstructions, String profileImageUri, List<String> favActivities, List<Workout> workoutList, List<Nutrition> nutritionList) {
+    public User(long id, String userName, String firstName, String lastName, String phoneNumber, Date birthDate, String password, String gender, double weight, double height, String fitnessLevel, boolean seeTheInstructions, String profileImageUri, List<String> favActivities, List<Workout> workoutList, List<Nutrition> nutritionList) {
         this.id = id;
         this.userName = userName;
         this.firstName = firstName;
@@ -48,8 +52,8 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.password = password;
-        this.weight = weight;
         this.gender = gender;
+        this.weight = weight;
         this.height = height;
         this.fitnessLevel = fitnessLevel;
         this.seeTheInstructions = seeTheInstructions;
@@ -57,6 +61,7 @@ public class User {
         this.favActivities = favActivities;
         this.workoutList = workoutList;
         this.nutritionList = nutritionList;
+
     }
 
     public long getId() {

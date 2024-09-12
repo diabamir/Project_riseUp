@@ -19,17 +19,38 @@ import java.util.Date;
 import java.util.concurrent.Executors;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import retrofit2.Call;
+import static android.content.ContentValues.TAG;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.project_riseup.ApiClient;
+import com.example.project_riseup.GroupApi;
+import com.example.project_riseup.Group;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AddGroupActivity extends AppCompatActivity {
 
     private EditText Discribtion, editTextLimitMembersNumber;
     private Button buttonAdd;
     private DatePicker datePicker;
     private TimePicker starttimePicker,endtimePicker;
+    private GroupApi groupApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
+
+        groupApi = ApiClient.getClient().create(GroupApi.class);
 
         ImageView activityImageView = findViewById(R.id.activityImageView);
         TextView activityTextView = findViewById(R.id.activityTextView);
@@ -80,18 +101,45 @@ public class AddGroupActivity extends AppCompatActivity {
 
             if (ddate != null) {
                 Group group = new Group(0,work, location, discription,startTm,endTm,ddate,1,null, LimitMembersNumber,0,imageGroupResourceId);
+                Call<Group> call = groupApi.insertGroup(group);
+                call.enqueue(new Callback<Group>() {
+                    @Override
+                    public void onResponse(Call<Group> call, Response<Group> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(AddGroupActivity.this, "Group added successfully", Toast.LENGTH_SHORT).show();
+                            Intent viewGroupsIntent = new Intent(AddGroupActivity.this, ViewGroupsActivity.class);
+                            viewGroupsIntent.putExtra("LOCATION", location);
+                            startActivity(viewGroupsIntent);
 
-                Executors.newSingleThreadExecutor().execute(() -> {
-                    groupDataBase.getInstance(getApplicationContext()).groupDao().insertGroup(group);
-//                    runOnUiThread(this::finish);
-                    runOnUiThread(() -> {
-                        // After adding the group, navigate to ViewGroupsActivity with the location filter
-                        Intent viewGroupsIntent = new Intent(AddGroupActivity.this, ViewGroupsActivity.class);
-                        viewGroupsIntent.putExtra("LOCATION", location); // Pass the location as an extra
-                        startActivity(viewGroupsIntent);
-//                        finish(); // Finish this activity to go back to the previous one
-                    });
+                        } else {
+                            Toast.makeText(AddGroupActivity.this, "Failed to add Group", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Group> call, Throwable t) {
+                        Toast.makeText(AddGroupActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onFailure: " + t.getMessage());
+
+                    }
                 });
+
+
+
+
+
+//                Executors.newSingleThreadExecutor().execute(() -> {
+//                    groupDataBase.getInstance(getApplicationContext()).groupDao().insertGroup(group);
+////                    runOnUiThread(this::finish);
+//                    runOnUiThread(() -> {
+//                        // After adding the group, navigate to ViewGroupsActivity with the location filter
+//                        Intent viewGroupsIntent = new Intent(AddGroupActivity.this, ViewGroupsActivity.class);
+//                        viewGroupsIntent.putExtra("LOCATION", location); // Pass the location as an extra
+//                        startActivity(viewGroupsIntent);
+////                        finish(); // Finish this activity to go back to the previous one
+//                    });
+//                });
             }
         });
     }

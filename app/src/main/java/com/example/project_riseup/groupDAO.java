@@ -1,5 +1,7 @@
 package com.example.project_riseup;
 
+//package com.example.project_riseup;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -21,8 +23,8 @@ public interface groupDAO {
     @Delete
     void deleteGroup(Group group);
 
-//    @Query("SELECT * FROM groups WHERE id = :groupId")
-//    LiveData<Group> getGroupById(long groupId);
+    @Query("SELECT * FROM groups WHERE id = :groupId")
+    LiveData<Group> getGroupById(long groupId);
 
     @Query("SELECT * FROM groups")
     LiveData<List<Group>> getAllGroups();
@@ -32,9 +34,6 @@ public interface groupDAO {
 
     @Query("SELECT * FROM groups WHERE location = :location")
     LiveData<List<Group>> getGroupsByLocation(String location);
-
-    @Query("SELECT * FROM groups WHERE id = :id")
-    LiveData<Group> getGroupById(int id);
 
 
 }

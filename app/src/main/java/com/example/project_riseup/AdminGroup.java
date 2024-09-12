@@ -12,15 +12,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdminGroup extends AppCompatActivity {
     private Button groupMembersButton;
@@ -31,10 +31,15 @@ public class AdminGroup extends AppCompatActivity {
     private LinearLayout hiddenRequests;
     private long selectedGroupId;  // To store the selected group's ID
 
+    private UserGroupApi userGroupApi;  // API instance for server communication
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_group);
+
+        // Initialize the API client
+        userGroupApi = ApiClient.getClient().create(UserGroupApi.class);
 
         // Initialize views
         groupIdSpinner = findViewById(R.id.groupIdSpinner);
@@ -65,8 +70,8 @@ public class AdminGroup extends AppCompatActivity {
     private void setupViewModel() {
         groupViewModel = new ViewModelProvider(this).get(GroupViewModel.class);
 
-        // Observing the list of groups for this admin
-        groupViewModel.getAllGroupsForAdmin().observe(this, groups -> {
+        // Fetch all groups for admin
+        groupViewModel.getAllGroups().observe(this, groups -> {
             if (groups != null && !groups.isEmpty()) {
                 List<String> groupNames = new ArrayList<>();
                 for (Group g : groups) {
@@ -102,82 +107,147 @@ public class AdminGroup extends AppCompatActivity {
 
     // Load and display group members for the selected group
     private void loadGroupMembers(long groupId) {
-        groupViewModel.getUsersForGroup(groupId).observe(this, members -> {
-            hiddenMembers.removeAllViews();  // Clear previous views
+        Call<List<User>> call = userGroupApi.getUsersForGroup(groupId, "joined");
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                hiddenMembers.removeAllViews();  // Clear previous views
 
-            if (members.isEmpty()) {
-                Toast.makeText(AdminGroup.this, "There are no members in this group.", Toast.LENGTH_SHORT).show();
-            } else {
-                for (User user : members) {
-                    View cardView = LayoutInflater.from(AdminGroup.this)
-                            .inflate(R.layout.user_member_card, hiddenMembers, false);
+                List<User> members = response.body();
+                if (members == null || members.isEmpty()) {
+                    Toast.makeText(AdminGroup.this, "There are no members in this group.", Toast.LENGTH_SHORT).show();
+                } else {
+                    for (User user : members) {
+                        View cardView = LayoutInflater.from(AdminGroup.this)
+                                .inflate(R.layout.user_member_card, hiddenMembers, false);
 
-                    TextView firstNameLastName = cardView.findViewById(R.id.firstNameLastName);
-                    TextView phoneNumber = cardView.findViewById(R.id.phoneNumber);
-                    TextView gender = cardView.findViewById(R.id.gender);
-                    TextView fitnessLevel = cardView.findViewById(R.id.fitnessLevel);
-                    Button removeButton = cardView.findViewById(R.id.removeButton);
+                        TextView firstNameLastName = cardView.findViewById(R.id.firstNameLastName);
+                        TextView phoneNumber = cardView.findViewById(R.id.phoneNumber);
+                        TextView gender = cardView.findViewById(R.id.gender);
+                        TextView fitnessLevel = cardView.findViewById(R.id.fitnessLevel);
+                        Button removeButton = cardView.findViewById(R.id.removeButton);
 
-                    // Set the user's data
-                    firstNameLastName.setText(user.getFirstName() + " " + user.getLastName());
-                    phoneNumber.setText("Phone: " + user.getPhoneNumber());
-                    gender.setText("Gender: " + user.getGender());
-                    fitnessLevel.setText("Fitness Level: " + user.getFitnessLevel());
+                        // Set the user's data
+                        firstNameLastName.setText(user.getFirstName() + " " + user.getLastName());
+                        phoneNumber.setText("Phone: " + user.getPhoneNumber());
+                        gender.setText("Gender: " + user.getGender());
+                        fitnessLevel.setText("Fitness Level: " + user.getFitnessLevel());
 
-                    // Handle the Remove button click
-                    removeButton.setOnClickListener(v -> {
-                        groupViewModel.removeUserFromGroup(user.getId(), groupId);
-                        hiddenMembers.removeView(cardView);  // Remove the card from the view
-                        Toast.makeText(AdminGroup.this, user.getFirstName() + " has been removed.", Toast.LENGTH_SHORT).show();
-                    });
+                        // Handle the Remove button click
+                        removeButton.setOnClickListener(v -> {
+                            // Remove user from the group and set status to declined
+                            Call<Void> call2 = userGroupApi.updateUserStatusInGroup(user.getId(), groupId, "declined");
+                            call2.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call2, Response<Void> response) {
+                                    if (response.isSuccessful()) {
+                                        hiddenMembers.removeView(cardView);  // Remove the card from the view
+                                        Toast.makeText(AdminGroup.this, user.getFirstName() + " has been removed.", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(AdminGroup.this, "Failed to remove " + user.getFirstName(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
 
-                    hiddenMembers.addView(cardView);  // Add the user view to the hiddenMembers layout
+                                @Override
+                                public void onFailure(Call<Void> call2, Throwable t) {
+                                    Toast.makeText(AdminGroup.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        });
+
+                        hiddenMembers.addView(cardView);  // Add the user view to the hiddenMembers layout
+                    }
                 }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(AdminGroup.this, "Error loading members: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     // Load and display group join requests for the selected group
     private void loadGroupRequests(long groupId) {
-        groupViewModel.getPendingJoinRequestsForGroup(groupId).observe(this, requests -> {
-            hiddenRequests.removeAllViews();  // Clear previous views
+        Call<List<User>> call = userGroupApi.getUsersForGroup(groupId, "requested");
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                hiddenRequests.removeAllViews();  // Clear previous views
 
-            if (requests.isEmpty()) {
-                Toast.makeText(AdminGroup.this, "There are no join requests for this group.", Toast.LENGTH_SHORT).show();
-            } else {
-                for (User user : requests) {
-                    View cardView = LayoutInflater.from(AdminGroup.this)
-                            .inflate(R.layout.user_request_card, hiddenRequests, false);
+                List<User> requests = response.body();
+                if (requests == null || requests.isEmpty()) {
+                    Toast.makeText(AdminGroup.this, "There are no join requests for this group.", Toast.LENGTH_SHORT).show();
+                } else {
+                    for (User user : requests) {
+                        View cardView = LayoutInflater.from(AdminGroup.this)
+                                .inflate(R.layout.user_request_card, hiddenRequests, false);
 
-                    TextView firstNameLastName = cardView.findViewById(R.id.firstNameLastName);
-                    TextView phoneNumber = cardView.findViewById(R.id.phoneNumber);
-                    TextView gender = cardView.findViewById(R.id.gender);
-                    TextView fitnessLevel = cardView.findViewById(R.id.fitnessLevel);
-                    Button confirmButton = cardView.findViewById(R.id.confirmButton);
-                    Button removeButton = cardView.findViewById(R.id.removeButton);
+                        TextView firstNameLastName = cardView.findViewById(R.id.firstNameLastName);
+                        TextView phoneNumber = cardView.findViewById(R.id.phoneNumber);
+                        TextView gender = cardView.findViewById(R.id.gender);
+                        TextView fitnessLevel = cardView.findViewById(R.id.fitnessLevel);
+                        Button confirmButton = cardView.findViewById(R.id.confirmButton);
+                        Button declineButton = cardView.findViewById(R.id.removeButton);
 
-                    // Set the user's data
-                    firstNameLastName.setText(user.getFirstName() + " " + user.getLastName());
-                    phoneNumber.setText("Phone: " + user.getPhoneNumber());
-                    gender.setText("Gender: " + user.getGender());
-                    fitnessLevel.setText("Fitness Level: " + user.getFitnessLevel());
+                        // Set the user's data
+                        firstNameLastName.setText(user.getFirstName() + " " + user.getLastName());
+                        phoneNumber.setText("Phone: " + user.getPhoneNumber());
+                        gender.setText("Gender: " + user.getGender());
+                        fitnessLevel.setText("Fitness Level: " + user.getFitnessLevel());
 
-                    // Handle the Confirm button click
-                    confirmButton.setOnClickListener(v -> {
-                        groupViewModel.approveJoinRequest(user.getId(), groupId);
-                        hiddenRequests.removeView(cardView);  // Remove the card from the view
-                        Toast.makeText(AdminGroup.this, user.getFirstName() + " has been confirmed.", Toast.LENGTH_SHORT).show();
-                    });
+                        // Handle the Confirm button click
+                        confirmButton.setOnClickListener(v -> {
+                            // Confirm the user by changing the status to "joined"
+                            Call<Void> call3 = userGroupApi.updateUserStatusInGroup(user.getId(), groupId, "joined");
+                            call3.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call3, Response<Void> response) {
+                                    if (response.isSuccessful()) {
+                                        hiddenRequests.removeView(cardView);  // Remove the card from the view
+                                        Toast.makeText(AdminGroup.this, user.getFirstName() + " has been confirmed.", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(AdminGroup.this, "Failed to confirm " + user.getFirstName(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
 
-                    // Handle the Remove button click
-                    removeButton.setOnClickListener(v -> {
-                        groupViewModel.removeUserFromGroup(user.getId(), groupId);
-                        hiddenRequests.removeView(cardView);  // Remove the card from the view
-                        Toast.makeText(AdminGroup.this, user.getFirstName() + " has been removed.", Toast.LENGTH_SHORT).show();
-                    });
+                                @Override
+                                public void onFailure(Call<Void> call3, Throwable t) {
+                                    Toast.makeText(AdminGroup.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        });
 
-                    hiddenRequests.addView(cardView);  // Add the request view to the hiddenRequests layout
+                        // Handle the Decline button click
+                        declineButton.setOnClickListener(v -> {
+                            // Decline the user by changing the status to "declined"
+                            Call<Void> call4 = userGroupApi.updateUserStatusInGroup(user.getId(), groupId, "declined");
+                            call4.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call4, Response<Void> response) {
+                                    if (response.isSuccessful()) {
+                                        hiddenRequests.removeView(cardView);  // Remove the card from the view
+                                        Toast.makeText(AdminGroup.this, user.getFirstName() + " has been declined.", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(AdminGroup.this, "Failed to decline " + user.getFirstName(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call4, Throwable t) {
+                                    Toast.makeText(AdminGroup.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        });
+
+                        hiddenRequests.addView(cardView);  // Add the request view to the hiddenRequests layout
+                    }
                 }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(AdminGroup.this, "Error loading requests: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

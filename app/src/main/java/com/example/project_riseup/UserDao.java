@@ -59,6 +59,8 @@ public interface UserDao {
 
     @Query("SELECT * FROM users WHERE height = :height")
     User getUserByHeight(String height);
+    @Query("SELECT * FROM users LIMIT 1")
+    LiveData<User> getFirstUser();
 
 
     @Query("SELECT * FROM users WHERE workoutList = :workoutList")

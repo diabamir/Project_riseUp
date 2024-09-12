@@ -2,6 +2,7 @@ package com.example.project_riseup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -67,7 +68,7 @@ public class SignIn extends AppCompatActivity {
             // Fetch user from the database using phone number
             userViewModel.getUserByPhone(phone).observe(this, user -> {
                 if (user != null) {
-                    // User found, check password
+                    Log.d("SignIn", "User found: " + user.getUserName());  // Add logging to verify the user
                     if (user.getPassword().equals(password)) {
                         Toast.makeText(SignIn.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                         navigateToHomePage();
@@ -78,6 +79,7 @@ public class SignIn extends AppCompatActivity {
                     Toast.makeText(SignIn.this, "User not found! Please sign up.", Toast.LENGTH_SHORT).show();
                 }
             });
+
         }
     }
 

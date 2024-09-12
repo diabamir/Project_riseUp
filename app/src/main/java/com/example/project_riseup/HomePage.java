@@ -2,6 +2,7 @@ package com.example.project_riseup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ public class HomePage extends AppCompatActivity {
     ImageButton addWater;
     TextView greetingText;
     UserViewModel userViewModel;
+    Button profilebutton;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +67,13 @@ public class HomePage extends AppCompatActivity {
                 Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show();
             }
         });
+        profilebutton = findViewById(R.id.profile1);
+        profilebutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(HomePage.this, Profile.class));
+                    }
+                });
+
     }
 }

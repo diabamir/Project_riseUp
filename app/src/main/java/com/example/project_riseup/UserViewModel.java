@@ -6,34 +6,35 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class UserViewModel extends AndroidViewModel {
-    private final UserRepository userRepository;  // Make sure userRepository is initialized
+    private final UserRepository userRepository;
     private final LiveData<List<User>> allUsers;
 
     // ViewModel constructor
     public UserViewModel(Application application) {
         super(application);
-        // Initialize UserRepository
         userRepository = new UserRepository(application);
-        allUsers = userRepository.getAllUsers();  // Get all users from the repository
+        allUsers = userRepository.getAllUsers();
     }
 
-    // Method to get all users (returns LiveData)
+    // Get all users
     public LiveData<List<User>> getAllUsers() {
         return allUsers;
     }
 
-    // Method to insert a new user
+    // Insert a new user
     public void insertUser(User newUser) {
-        userRepository.insertUser(newUser);  // Delegate to the repository
+        userRepository.insertUser(newUser);
     }
 
-    // Method to fetch a user by phone number
+    // Get a user by phone
     public LiveData<User> getUserByPhone(String phone) {
-        return userRepository.getUserByPhone(phone);  // Delegate to the repository
+        return userRepository.getUserByPhone(phone);
+    }
+
+    // Get the first user (used for offline mode)
+    public LiveData<User> getFirstUser() {
+        return userRepository.getFirstUser(); // This should return a user from Room
     }
 }

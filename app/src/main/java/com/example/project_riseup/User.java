@@ -9,7 +9,7 @@ import java.util.Date;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
-@Entity(tableName = "Users")
+@Entity(tableName = "users")
 public class User {
 
     @PrimaryKey(autoGenerate = true)

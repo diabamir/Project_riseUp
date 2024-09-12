@@ -32,36 +32,33 @@ android {
 }
 
 dependencies {
-
+    // AndroidX Libraries
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    dependencies {
-        // AndroidX Libraries
-        implementation(libs.appcompat)
-        implementation(libs.material)
-        implementation(libs.activity)
-        implementation(libs.constraintlayout)
 
-        // Room dependencies
-        implementation(libs.room.common)
-        implementation(libs.room.runtime)
-        annotationProcessor(libs.room.compiler)
+    // Room dependencies
+    implementation(libs.room.common)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
 
-        // Firebase Crashlytics
-        implementation(libs.firebase.crashlytics.buildtools)
+    // Firebase Crashlytics
+    implementation(libs.firebase.crashlytics.buildtools)
 
-        // Gson library for JSON parsing
-        implementation("com.google.code.gson:gson:2.8.9")
+    // Gson library for JSON parsing
+    implementation("com.google.code.gson:gson:2.8.9")
 
-        // RecyclerView dependency
-        implementation("androidx.recyclerview:recyclerview:1.1.0")
+    // RecyclerView dependency
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
 
-        // Testing dependencies
-        testImplementation(libs.junit)
-        androidTestImplementation(libs.ext.junit)
-        androidTestImplementation(libs.espresso.core)
-    }
+    // Retrofit and OkHttp dependencies
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
+    // Testing dependencies
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

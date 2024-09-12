@@ -7,25 +7,25 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class}, version = 2)
 @TypeConverters(Converters.class)
 public abstract class UserDatabase extends RoomDatabase {
-    private static volatile UserDatabase INSTANCE;
+    private static UserDatabase instance;
 
     // Fix: Define the correct return type for userDao method
     public abstract UserDao userDao();
 
     public static UserDatabase getInstance(Context context) {
-        if (INSTANCE == null) {
+        if (instance == null) {
             synchronized (UserDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                if (instance == null) {
+                    instance = Room.databaseBuilder(context.getApplicationContext(),
                                     UserDatabase.class, "user_database")
                             .fallbackToDestructiveMigration()
                             .build();
                 }
             }
         }
-        return INSTANCE;
+        return instance;
     }
 }

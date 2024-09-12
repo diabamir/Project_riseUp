@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavActivites">
+>
 
     <ImageView
         android:id="@+id/tealSquare"
@@ -17,7 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.083"
-        app:srcCompat="@drawable/rectangleteal" />
+        app:srcCompat="@drawable/rectangleteal"
+        android:clickable="true"/>
 
     <ImageView
         android:id="@+id/purpleSquare"
@@ -129,7 +130,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.084"
-        app:srcCompat="@drawable/weightlifting" />
+        app:srcCompat="@drawable/weightlifting"
+        android:clickable="true"/>
 
     <ImageView
         android:id="@+id/blueSquare"
@@ -765,7 +767,7 @@
         app:layout_constraintVertical_bias="0.016" />
 
     <Button
-        android:id="@+id/continuee"
+        android:id="@+id/continue_button"
         android:layout_width="147dp"
         android:layout_height="67dp"
         android:text="continue"

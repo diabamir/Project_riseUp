@@ -559,9 +559,7 @@ public class Signup extends AppCompatActivity {
         // First, save the user locally using Room
         new Thread(() -> {
             try {
-                userDao.insertUser(user);  // Insert user into Room database
-
-                // After local saving is done, switch to UI thread to show success message
+                userDao.insertUser(user);
                 runOnUiThread(() -> {
                     Toast.makeText(Signup.this, "User saved!", Toast.LENGTH_SHORT).show();
                 });

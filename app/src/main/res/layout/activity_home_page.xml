@@ -44,7 +44,7 @@
         android:layout_marginStart="16dp"
         android:background="@drawable/gray_back"
         android:padding="8dp"
-        android:text="⚠️ Remember, every rep counts towards a stronger you! 💪Stay hydrated and tackle today's workout with vigor 🔥."
+        android:text="🚀 Let's Rise Up! Every step takes you closer to your goals. 💧 Stay hydrated, stay focused, and crush today's workout! 💪"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

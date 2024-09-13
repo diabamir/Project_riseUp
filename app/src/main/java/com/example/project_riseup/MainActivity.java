@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private Button groups;
     private UserRepository userRepository;
 
+    Button join;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,5 +79,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         userRepository = new UserRepository(this);
+
+//        join=findViewById(R.id.join);
+//        join.setOnClickListener(v -> {
+//            Intent intent = new Intent(this, UserGroups.class);
+//            startActivity(intent);
+//        });
+
+
     }
 }

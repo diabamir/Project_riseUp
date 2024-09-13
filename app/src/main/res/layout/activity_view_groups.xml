@@ -4,10 +4,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Add Button -->
-
-    <!-- View Through Map Button -->
-
     <Button
         android:id="@+id/btnAddGroup"
         android:layout_width="164dp"

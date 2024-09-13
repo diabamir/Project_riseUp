@@ -20,8 +20,14 @@ public class UserRepository {
     }
 
     // Insert a user into the database (runs on a background thread)
-    public void insertUser(User user) {
-        executorService.execute(() -> userDao.insertUser(user));  // Use executor instead of a raw thread
+    //Raghad: updated the return value
+    public long insertUser(User user) {
+        executorService.execute(() -> userDao.insertUser(user));
+        return user.id;  // Use executor instead of a raw thread
+    }
+
+    public User getUserByFirstName(String firstName) {
+        return userDao.getUserByFirstName(firstName);
     }
 
     // Retrieve all users from the database
@@ -47,5 +53,11 @@ public class UserRepository {
     // Delete a user from the database
     public void deleteUser(User user) {
         executorService.execute(() -> userDao.deleteUser(user));
+    }
+
+    //Raghad updates
+    // Retrieve the user synchronously (without LiveData)
+    public User getUserById(long userId) {
+        return userDao.getUserById(userId);
     }
 }

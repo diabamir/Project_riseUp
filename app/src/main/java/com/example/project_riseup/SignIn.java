@@ -1,6 +1,7 @@
 package com.example.project_riseup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -60,6 +61,29 @@ public class SignIn extends AppCompatActivity {
     }
 
     // Separate method for signing in the user
+//    private void signInUser() {
+//        String password = passwordInput.getText().toString().trim();
+//        String phone = phoneInput.getText().toString().trim();
+//
+//        if (validateInputs(phone, password)) {
+//            // Fetch user from the database using phone number
+//            userViewModel.getUserByPhone(phone).observe(this, user -> {
+//                if (user != null) {
+//                    Log.d("SignIn", "User found: " + user.getUserName());  // Add logging to verify the user
+//                    if (user.getPassword().equals(password)) {
+//                        Toast.makeText(SignIn.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+//                        navigateToHomePage();
+//                    } else {
+//                        Toast.makeText(SignIn.this, "Incorrect password!", Toast.LENGTH_SHORT).show();
+//                    }
+//                } else {
+//                    Toast.makeText(SignIn.this, "User not found! Please sign up.", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//
+//        }
+//    }
+    //Raghad updates
     private void signInUser() {
         String password = passwordInput.getText().toString().trim();
         String phone = phoneInput.getText().toString().trim();
@@ -71,7 +95,9 @@ public class SignIn extends AppCompatActivity {
                     Log.d("SignIn", "User found: " + user.getUserName());  // Add logging to verify the user
                     if (user.getPassword().equals(password)) {
                         Toast.makeText(SignIn.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                        navigateToHomePage();
+
+                        // Navigate to HomePage and pass the user ID
+                        navigateToHomePage(user.getId());
                     } else {
                         Toast.makeText(SignIn.this, "Incorrect password!", Toast.LENGTH_SHORT).show();
                     }
@@ -79,15 +105,29 @@ public class SignIn extends AppCompatActivity {
                     Toast.makeText(SignIn.this, "User not found! Please sign up.", Toast.LENGTH_SHORT).show();
                 }
             });
-
         }
     }
 
-    // Navigate to HomePage after successful login
-    private void navigateToHomePage() {
+
+    //    // Navigate to HomePage after successful login
+//    private void navigateToHomePage() {
+//        Intent intent = new Intent(SignIn.this, HomePage.class);
+//        startActivity(intent);
+//    }
+    //Raghad Updates
+    private void navigateToHomePage(long userId) {
+        // Save the user ID to SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong("USER_ID", userId);
+        editor.apply();  // Commit changes
+
+        // Navigate to HomePage
         Intent intent = new Intent(SignIn.this, HomePage.class);
         startActivity(intent);
     }
+
+
 
     // Validate phone number and password
     private boolean validateInputs(String phone, String password) {

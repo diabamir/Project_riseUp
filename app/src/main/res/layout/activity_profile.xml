@@ -5,18 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main">
+    android:id="@+id/main"
+    android:background="#FFFFFF">
 
     <!-- ImageView for logo -->
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="441dp"
-        android:layout_height="207dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logowob" />
 
     <!-- Welcome text -->
 
@@ -28,15 +20,15 @@
         android:id="@+id/welcomee"
         android:layout_width="169dp"
         android:layout_height="43dp"
-        android:text="Welcome back,"
+        android:text="Welcome back!"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
         android:id="@+id/fullName"
@@ -48,10 +40,21 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.284" />
+        app:layout_constraintVertical_bias="0.073" />
+
+
+    <!-- Edit profile button -->
+
+    <!-- Pin ImageView -->
+
+    <!-- Privacy button -->
+
+    <!-- Logout button -->
+
+    <!-- Privacy ImageView -->
 
     <LinearLayout
         android:id="@+id/cardLayout"
@@ -64,7 +67,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.434">
+        app:layout_constraintVertical_bias="0.308">
 
         <!-- First card for weight -->
 
@@ -133,24 +136,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/newButton"
-            android:layout_width="wrap_content"
-            android:layout_height="62dp"
-            android:layout_margin="8dp"
-            android:text="My groups" />
     </LinearLayout>
-
-
-    <!-- Edit profile button -->
-
-    <!-- Pin ImageView -->
-
-    <!-- Privacy button -->
-
-    <!-- Logout button -->
-
-    <!-- Privacy ImageView -->
 
     <Button
         android:id="@+id/editpro"
@@ -225,5 +211,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.86"
         app:srcCompat="@drawable/logout" />
+
+    <Button
+        android:id="@+id/newButton"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_margin="8dp"
+        android:text="My groups"
+        tools:layout_editor_absoluteX="183dp"
+        tools:layout_editor_absoluteY="345dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

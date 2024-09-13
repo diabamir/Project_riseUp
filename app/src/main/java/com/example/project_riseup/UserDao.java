@@ -16,7 +16,7 @@ import java.util.List;
 public interface UserDao {
 
     @Insert
-    void insertUser(User user);
+    long insertUser(User user);
 
     @Query("SELECT * FROM users")
     LiveData<List<User>> getAllUsers();
@@ -69,7 +69,8 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE phoneNumber = :phone LIMIT 1")
     LiveData<User> getUserByPhone(String phone);
 
-
+    @Query("SELECT * FROM users WHERE id = :userId LIMIT 1")
+    User getUserById(long userId);
 
 
 }

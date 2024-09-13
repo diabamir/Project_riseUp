@@ -33,7 +33,6 @@ import retrofit2.Response;
 
 public class Signup extends AppCompatActivity {
 
-
     private EditText firstNameField, lastNameField, phoneNumberField;
     private TextInputEditText passwordField, confirmPasswordField;
     private DatePicker birthDatePicker;
@@ -183,7 +182,6 @@ public class Signup extends AppCompatActivity {
         ImageView maleImage = findViewById(R.id.imageView3);
         Button continueButton = findViewById(R.id.continue_button);
 
-        // Click listener for female selection
         femaleImage.setOnClickListener(view -> {
             gender = "Female";
             blurOtherImages(femaleImage, maleImage);
@@ -326,13 +324,11 @@ public class Signup extends AppCompatActivity {
         beginnerCard.setOnClickListener(view -> {
             fitnessLevel = "Beginner";
             blurOtherCards(beginnerCard, intermediateCard, advancedCard);
-            completeSignUp();
         });
 
         intermediateCard.setOnClickListener(view -> {
             fitnessLevel = "Intermediate";
             blurOtherCards(intermediateCard, beginnerCard, advancedCard);
-            completeSignUp();
         });
 
         advancedCard.setOnClickListener(view -> {
@@ -550,7 +546,7 @@ public class Signup extends AppCompatActivity {
         }
     }
 
-//    private void completeSignUp() {
+    //    private void completeSignUp() {
 //        userViewModel.insertUser(user);
 //        Toast.makeText(this, "You signed up successfully!", Toast.LENGTH_SHORT).show();
 //
@@ -558,50 +554,80 @@ public class Signup extends AppCompatActivity {
 //        startActivity(intent);
 //        finish();
 //    }
-
     private void completeSignUp() {
-        // First, save the user locally using Room
         new Thread(() -> {
             try {
-                userDao.insertUser(user);
+                // Insert user into Room database and get the generated ID
+                long userId = userDao.insertUser(user);  // Capture the generated ID
+                user.setId(userId);  // Set the generated ID to the user object
+
+                // After local saving is done, switch to UI thread to show success message
                 runOnUiThread(() -> {
-                    Toast.makeText(Signup.this, "User saved!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Signup.this, "User signed up with ID: " + userId, Toast.LENGTH_SHORT).show();
+
+                    // Pass the user ID to HomePage without saving in SharedPreferences
+                    Intent intent = new Intent(Signup.this, HomePage.class);
+                    intent.putExtra("USER_ID", userId);  // Pass the generated user ID
+                    startActivity(intent);
+                    finish();
                 });
             } catch (Exception e) {
                 runOnUiThread(() -> {
                     Toast.makeText(Signup.this, "Error saving user locally", Toast.LENGTH_SHORT).show();
                 });
             }
-
-            // Now, save the user remotely using Retrofit
-            Call<User> call = userApi.insertUser(user);
-            call.enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if (response.isSuccessful()) {
-                        runOnUiThread(() -> {
-                            Toast.makeText(Signup.this, "User added successfully!", Toast.LENGTH_SHORT).show();
-
-                            // Proceed to HomePage activity after both local and remote saving
-                            Intent intent = new Intent(Signup.this, HomePage.class);
-                            startActivity(intent);
-                            finish();
-                        });
-                    } else {
-                        runOnUiThread(() -> {
-                            Toast.makeText(Signup.this, "Failed to add user: " + response.code(), Toast.LENGTH_SHORT).show();
-                        });
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    runOnUiThread(() -> {
-                        Toast.makeText(Signup.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-                }
-            });
         }).start();
+
+
+
+
+
+
+//    private void completeSignUp() {
+//        // First, save the user locally using Room
+//        new Thread(() -> {
+//            try {
+//                userDao.insertUser(user);  // Insert user into Room database
+//
+//                // After local saving is done, switch to UI thread to show success message
+//                runOnUiThread(() -> {
+//                    Toast.makeText(Signup.this, "User saved!", Toast.LENGTH_SHORT).show();
+//                });
+//            } catch (Exception e) {
+//                runOnUiThread(() -> {
+//                    Toast.makeText(Signup.this, "Error saving user locally", Toast.LENGTH_SHORT).show();
+//                });
+//            }
+//
+//            // Now, save the user remotely using Retrofit
+//            Call<User> call = userApi.insertUser(user);
+//            call.enqueue(new Callback<User>() {
+//                @Override
+//                public void onResponse(Call<User> call, Response<User> response) {
+//                    if (response.isSuccessful()) {
+//                        runOnUiThread(() -> {
+//                            Toast.makeText(Signup.this, "User added successfully!", Toast.LENGTH_SHORT).show();
+//
+//                            // Proceed to HomePage activity after both local and remote saving
+//                            Intent intent = new Intent(Signup.this, HomePage.class);
+//                            startActivity(intent);
+//                            finish();
+//                        });
+//                    } else {
+//                        runOnUiThread(() -> {
+//                            Toast.makeText(Signup.this, "Failed to add user: " + response.code(), Toast.LENGTH_SHORT).show();
+//                        });
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<User> call, Throwable t) {
+//                    runOnUiThread(() -> {
+//                        Toast.makeText(Signup.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                    });
+//                }
+//            });
+//        }).start();
     }
 
 

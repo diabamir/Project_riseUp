@@ -2,6 +2,7 @@ package com.example.project_riseup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -11,7 +12,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class firstPageIcon extends AppCompatActivity {
-    Button getStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +23,12 @@ public class firstPageIcon extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // Initialize the button and set its click listener
-        getStarted = findViewById(R.id.button);
-        getStarted.setOnClickListener(view -> {
+
+        // Timer using Handler to navigate to another activity after 4 seconds
+        new Handler().postDelayed(() -> {
             Intent intent = new Intent(firstPageIcon.this, SignIn.class);
             startActivity(intent);
-        });
-
+            finish(); // Close the current activity
+        }, 4000); // 4500 milliseconds = 4 seconds
     }
 }

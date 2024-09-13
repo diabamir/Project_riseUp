@@ -10,9 +10,9 @@ import androidx.room.TypeConverters;
 @Database(entities = {User.class}, version = 3)
 @TypeConverters(Converters.class)
 public abstract class UserDatabase extends RoomDatabase {
-    private static UserDatabase instance;
 
-    // Fix: Define the correct return type for userDao method
+    private static volatile UserDatabase instance;
+
     public abstract UserDao userDao();
 
     public static UserDatabase getInstance(Context context) {

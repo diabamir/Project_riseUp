@@ -13,7 +13,7 @@ public class UserGroupJoin {
     public UserGroupJoin(long userId, long groupId, String status) {
         this.userId = userId;
         this.groupId = groupId;
-        this.status = null;
+        this.status = status;
     }
 
     // Getters and setters

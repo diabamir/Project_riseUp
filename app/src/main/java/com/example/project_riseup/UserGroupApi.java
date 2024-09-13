@@ -31,4 +31,5 @@ public interface UserGroupApi {
     @PUT("/Users/{userId}/Groups/{groupId}/Status")
     Call<Void> updateUserStatusInGroup(@Path("userId") long userId, @Path("groupId") long groupId, @Body String status);
 
+
 }

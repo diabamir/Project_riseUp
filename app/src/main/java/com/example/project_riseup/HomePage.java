@@ -69,11 +69,11 @@ public class HomePage extends AppCompatActivity {
         });
         profilebutton = findViewById(R.id.profile1);
         profilebutton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(HomePage.this, Profile.class));
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomePage.this, Profile.class));
+            }
+        });
 
     }
 }

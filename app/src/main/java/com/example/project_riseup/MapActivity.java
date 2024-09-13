@@ -1,5 +1,8 @@
 package com.example.project_riseup;
 
+
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -9,10 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 public class MapActivity extends AppCompatActivity {
 
     private String location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +30,52 @@ public class MapActivity extends AppCompatActivity {
             return insets;
         });
 
+//        Intent intent = getIntent();
+//        int userId = intent.getIntExtra("USER_ID", -1);
+//
+//        if (userId != -1) {
+//            User user = UserDatabase.getInstance(this).userDao().getUserById(userId);
+//            if(!user.getSeeTheInstructions())
+//            {
+//                Intent intentt =new Intent(MapActivity.this, GroupExpActivity.class);
+//                intent.putExtra("USER_ID", userId);
+//                startActivity(intentt);
+//            }
+//        }
+
+
 
         location = "";
+        // Initialize SearchView
+        SearchView searchView = findViewById(R.id.searchView);
+        searchView.setQueryHint("Find group by ID");
+
+
+        // Set up SearchView listeners
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Check if the input is a valid number
+                if (query.matches("\\d+")) {
+                    // Start the ViewGroupById activity and pass the group ID
+                    Intent intent = new Intent(MapActivity.this, ViewGroupsActivity.class);
+                    intent.putExtra("GROUP_ID", Integer.parseInt(query));
+                    startActivity(intent);
+                    return true; // Indicate that the query has been handled
+                } else {
+                    // Show an error message if the input is not a valid ID
+                    Toast.makeText(MapActivity.this, "Please enter a valid group ID", Toast.LENGTH_SHORT).show();
+                    return false; // Indicate that the query was not handled
+                }
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Optional: Handle the text change if needed, or just return false
+                return false;
+            }
+        });
 
 
         // Find ImageViews by ID

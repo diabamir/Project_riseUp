@@ -33,6 +33,7 @@ import retrofit2.Response;
 
 public class Signup extends AppCompatActivity {
 
+
     private EditText firstNameField, lastNameField, phoneNumberField;
     private TextInputEditText passwordField, confirmPasswordField;
     private DatePicker birthDatePicker;
@@ -182,6 +183,7 @@ public class Signup extends AppCompatActivity {
         ImageView maleImage = findViewById(R.id.imageView3);
         Button continueButton = findViewById(R.id.continue_button);
 
+        // Click listener for female selection
         femaleImage.setOnClickListener(view -> {
             gender = "Female";
             blurOtherImages(femaleImage, maleImage);
@@ -324,11 +326,13 @@ public class Signup extends AppCompatActivity {
         beginnerCard.setOnClickListener(view -> {
             fitnessLevel = "Beginner";
             blurOtherCards(beginnerCard, intermediateCard, advancedCard);
+            completeSignUp();
         });
 
         intermediateCard.setOnClickListener(view -> {
             fitnessLevel = "Intermediate";
             blurOtherCards(intermediateCard, beginnerCard, advancedCard);
+            completeSignUp();
         });
 
         advancedCard.setOnClickListener(view -> {

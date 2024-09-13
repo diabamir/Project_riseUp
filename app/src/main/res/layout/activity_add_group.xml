@@ -1,38 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddGroupActivity"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/buttonTextWorkout"
-        android:layout_width="382dp"
-        android:layout_height="59dp"
-        android:hint="Workout" />
+    <LinearLayout
+        android:layout_width="244dp"
+        android:layout_height="88dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
 
 
-    <EditText
-        android:id="@+id/editTextLocation"
-        android:layout_width="380dp"
-        android:layout_height="116dp"
-        android:hint="Location" />
+        <ImageView
+            android:id="@+id/activityImageView"
+            android:layout_width="78dp"
+            android:layout_height="68dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Activity Image" />
+
+        <TextView
+            android:id="@+id/activityTextView"
+            android:layout_width="159dp"
+            android:layout_height="match_parent"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:gravity="center"/>
+    </LinearLayout>
+
+
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/buttonTextWorkout"-->
+    <!--        android:layout_width="382dp"-->
+    <!--        android:layout_height="59dp"-->
+    <!--        android:hint="Workout" />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/buttonTextWorkout"-->
+    <!--        android:layout_width="385dp"-->
+    <!--        android:layout_height="71dp"-->
+    <!--        android:backgroundTint="#63433C80"-->
+    <!--        android:text="Workout"-->
+    <!--        android:textColor="#FFFFFF" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/editTextLocation"-->
+    <!--        android:layout_width="380dp"-->
+    <!--        android:layout_height="116dp"-->
+    <!--        android:hint="Location" />-->
+
+    <LinearLayout
+        android:layout_width="244dp"
+        android:layout_height="88dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <!-- ImageView for the activity image -->
+
+        <!-- TextView for the activity name -->
+
+        <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:gravity="center"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/Discribtion"
-        android:layout_width="382dp"
-        android:layout_height="56dp"
+        android:layout_width="384dp"
+        android:layout_height="90dp"
         android:hint="Discribtion" />
 
     <EditText
         android:id="@+id/editTextLimitMembersNumber"
-        android:layout_width="382dp"
-        android:layout_height="59dp"
-        android:hint="Limit Members Number" />
+        android:layout_width="384dp"
+        android:layout_height="88dp"
+        android:hint="Limit Members Number"
+        android:inputType="number"/>
+
+    <TextView
+        android:id="@+id/chooseDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose the date:"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:layout_marginBottom="8dp" />
 
     <DatePicker
         android:id="@+id/datePicker"
@@ -43,11 +101,30 @@
         android:hint="Enter birth date"
         android:inputType="date" />
 
+    <TextView
+        android:id="@+id/chooseStartTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose the start time:"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:layout_marginBottom="8dp" />
+
     <TimePicker
         android:id="@+id/starttimePicker"
         android:layout_width="385dp"
         android:layout_height="118dp"
         android:timePickerMode="spinner" />
+
+
+    <TextView
+        android:id="@+id/chooseEndTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Choose the end time:"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <TimePicker
         android:id="@+id/endtimePicker"

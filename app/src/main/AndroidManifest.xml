@@ -29,6 +29,21 @@
             android:name=".HomePage"
             android:exported="false" />
         <activity
+            android:name=".HomePage"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".privacy"
+            android:exported="false" />
+        <activity
+            android:name=".editProfile"
+            android:exported="false" />
+        <activity
+            android:name=".UserGroups"
+            android:exported="false" />
+        <activity
             android:name=".ViewGroupsActivity"
             android:exported="false" />
         <activity

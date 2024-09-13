@@ -11,4 +11,6 @@
     <color name="colorStayActive">#F9CDAC</color>
     <color name="primaryPurple">#7165E3</color>
     <color name="red">#FF0000</color> <!-- Standard red color; adjust the hex code as needed -->
+    <color name="appColor">#8B80F6</color>
+    <color name="gray">#898989</color>
 </resources>

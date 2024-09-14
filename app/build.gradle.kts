@@ -59,6 +59,8 @@ dependencies {
 
     // Lottie Animation dependency
     implementation ("com.airbnb.android:lottie:+")
+    implementation ("com.google.android.material:material:1.8.0")  // Add this dependency
+
 
     // Testing dependencies
     testImplementation(libs.junit)

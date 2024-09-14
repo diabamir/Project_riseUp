@@ -24,7 +24,7 @@ public class editProfile extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         // Initialize fields and buttons
-        editFname = findViewById(R.id.editname);
+        editFname = findViewById(R.id.editname1);
         editLname = findViewById(R.id.editLname1);
         editPhone = findViewById(R.id.editphone1);
         newPassword = findViewById(R.id.Newpassword1);

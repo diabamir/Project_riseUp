@@ -44,40 +44,39 @@ Address: [Your Contact Address]"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.281" />
+        app:layout_constraintVertical_bias="0.359" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Privacy policy: "
-        android:textColor="#8B80F6"
+        android:textColor="#8175F0"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.021"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.007" />
 
     <Button
         android:id="@+id/approve"
         android:layout_width="112dp"
         android:layout_height="50dp"
-        android:backgroundTint="#D4CAD5"
+        android:backgroundTint="#8175F0"
         android:drawablePadding="8dp"
         android:text="Approve"
-        android:textColor="@color/primaryPurple"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
-
+        app:layout_constraintVertical_bias="0.991" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

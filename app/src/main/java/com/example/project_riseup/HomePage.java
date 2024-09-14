@@ -1,6 +1,7 @@
 package com.example.project_riseup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,39 +15,34 @@ import androidx.lifecycle.ViewModelProvider;
 
 public class HomePage extends AppCompatActivity {
 
-    // Declare the ImageButton variable here
     ImageButton addWater;
     TextView greetingText;
     UserViewModel userViewModel;
     Button profilebutton;
-    long userId;  // Store the passed user ID here
+    long userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        // Initialize the ImageButton after setContentView
+        // Initialize the ImageButton and TextView
         addWater = findViewById(R.id.addWater);
         greetingText = findViewById(R.id.greetingText);
 
-        // Get the user ID passed from Signup or other activities
-        Intent intent = getIntent();
-        userId = intent.getLongExtra("USER_ID", -1);  // Default to -1 if not passed
+        // Retrieve the user ID from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        long userId = sharedPreferences.getLong("USER_ID", -1);  // Default to -1 if not found
 
         if (userId != -1) {
             // Initialize the ViewModel
             userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-            // Run the database fetch on a background thread
+            // Fetch the user from the Room database on a background thread
             new Thread(() -> {
-                // Fetch the user from the Room database
                 User user = userViewModel.getUserById(userId);
-
-                // Update the UI on the main thread
-                new Handler(Looper.getMainLooper()).post(() -> {
+                runOnUiThread(() -> {
                     if (user != null) {
-                        // Get the first name and set it to the TextView
                         String firstName = user.getFirstName();
                         greetingText.setText("Hello, " + firstName + "!");
                     } else {
@@ -55,23 +51,22 @@ public class HomePage extends AppCompatActivity {
                 });
             }).start();
         } else {
-            greetingText.setText("User ID not passed or found.");
+            greetingText.setText("User ID not found in SharedPreferences");
         }
-
-        // Set click listeners for each CardView
+        // Set click listeners for each CardView (moving to MainActivity)
         findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
 
-        // Set an OnClickListener for the addWater button
+        // Handle the addWater button click
         addWater.setOnClickListener(v -> Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show());
 
-        // Set an OnClickListener for the profilebutton and pass userId to the Profile activity
+        // Navigate to the Profile activity and pass userId
         profilebutton = findViewById(R.id.profile1);
         profilebutton.setOnClickListener(v -> {
             Intent intentProfile = new Intent(HomePage.this, Profile.class);
-            intentProfile.putExtra("USER_ID", userId);  // Pass the user ID to the Profile activity
+            intentProfile.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
             startActivity(intentProfile);
         });
     }

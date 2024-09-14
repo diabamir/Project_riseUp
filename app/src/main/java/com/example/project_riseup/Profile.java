@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class Profile extends AppCompatActivity {
     private TextView fullNameTextView, card1Header, card1Content, card2Header, card2Content;
     private UserViewModel userViewModel;
     private long userId;  // Declare userId variable to store the passed userId
+    private ImageView profileviewphoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class Profile extends AppCompatActivity {
         card2Header = findViewById(R.id.card2Header);
         card2Content = findViewById(R.id.card2Content);
         logout = findViewById(R.id.logout);
+        profileviewphoto = findViewById(R.id.profileview);
 
         // Handle edge-to-edge layout
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.profile), (v, insets) -> {
@@ -77,6 +80,8 @@ public class Profile extends AppCompatActivity {
             Intent privacyIntent = new Intent(Profile.this, privacy.class);
             startActivity(privacyIntent);
         });
+
+
     }
 
     // Method to load user data from the Room database
@@ -103,10 +108,20 @@ public class Profile extends AppCompatActivity {
                     // Set card2Header and card2Content for height
                     card2Header.setText("Height");
                     card2Content.setText(formattedHeight + " cm");
+
+                    // Check the gender and set the appropriate profile photo
+                    if (user.getGender().equalsIgnoreCase("female")) {
+                        profileviewphoto.setImageResource(R.drawable.womanprofile);  // Set female profile photo
+                    } else if (user.getGender().equalsIgnoreCase("male")) {
+                        profileviewphoto.setImageResource(R.drawable.manprofile);  // Set male profile photo
+                    } else {
+                        profileviewphoto.setImageResource(R.drawable.defaultprofile);  // Optional: set default profile photo if gender is unspecified
+                    }
                 });
             } else {
                 runOnUiThread(() -> Toast.makeText(Profile.this, "User not found in local database", Toast.LENGTH_SHORT).show());
             }
         }).start();
     }
+
 }

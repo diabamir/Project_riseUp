@@ -41,7 +41,7 @@
         android:layout_height="41dp"
         android:gravity="center"
         android:text="Fname Lname"
-        android:textColor="#8B80F6"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.277">
+        app:layout_constraintVertical_bias="0.323">
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -94,8 +94,9 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:text="88 kg"
-                    android:textColor="#000000"
+                    android:textColor="@color/purple"
                     android:textSize="20sp" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -117,6 +118,7 @@
                     android:id="@+id/card2Header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Height:"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -125,40 +127,70 @@
                     android:id="@+id/card2Content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:text="185 cm"
-                    android:textColor="#000000"
+                    android:textColor="@color/purple"
                     android:textSize="20sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/pin2"
-        android:layout_width="64dp"
-        android:layout_height="66dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.972"
-        app:srcCompat="@drawable/maneditp" />
-
     <Button
         android:id="@+id/editpro"
-        android:layout_width="127dp"
+        android:layout_width="240dp"
         android:layout_height="58dp"
-        android:layout_marginTop="80dp"
-        android:backgroundTint="#8B80F6"
+        android:backgroundTint="#B3A6F9"
         android:text="Edit Profile"
-        android:textColor="#FFFFFF"
+        android:textColor="#945ba4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardLayout"
-        app:layout_constraintVertical_bias="0.943" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.667" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="240dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#ACBEFF"
+        android:text="Logout"
+        android:textColor="#082b75"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
+
+    <Button
+        android:id="@+id/newButton"
+        android:layout_width="240dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#FFD8A8"
+        android:text="My Groups"
+        android:textColor="#945ba4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.557" />
+
+    <Button
+        android:id="@+id/privacy"
+        android:layout_width="240dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#FFE49C"
+        android:text="Privacy"
+        android:textColor="#67367c"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.78" />
 
     <ImageView
         android:id="@+id/pin1"
@@ -166,26 +198,11 @@
         android:layout_height="66dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintHorizontal_bias="0.783"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.972"
+        app:layout_constraintVertical_bias="0.663"
         app:srcCompat="@drawable/maneditp" />
-
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="127dp"
-        android:layout_height="58dp"
-        android:backgroundTint="#082b75"
-        android:text="Logout"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.867" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -193,41 +210,11 @@
         android:layout_height="67dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintHorizontal_bias="0.823"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.873"
+        app:layout_constraintVertical_bias="0.9"
         app:srcCompat="@drawable/logouttttt" />
-
-    <Button
-        android:id="@+id/newButton"
-        android:layout_width="127dp"
-        android:layout_height="58dp"
-        android:layout_margin="8dp"
-        android:backgroundTint="#ffa301"
-        android:padding="16dp"
-        android:text="My Groups"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.933"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.875" />
-
-    <Button
-        android:id="@+id/privacy"
-        android:layout_width="127dp"
-        android:layout_height="58dp"
-        android:backgroundTint="#ffd200"
-        android:text="Privacy"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.197"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973" />
 
     <ImageView
         android:id="@+id/privacyPic"
@@ -235,23 +222,22 @@
         android:layout_height="69dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.969"
+        app:layout_constraintVertical_bias="0.776"
         app:srcCompat="@drawable/fitnessprivacy" />
 
     <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="115dp"
-        android:layout_height="102dp"
+        android:id="@+id/profileview"
+        android:layout_width="138dp"
+        android:layout_height="112dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintHorizontal_bias="0.816"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
-        app:srcCompat="@drawable/womanprofile" />
+        app:layout_constraintVertical_bias="0.113" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -259,10 +245,10 @@
         android:layout_height="67dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.643"
+        app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.865"
+        app:layout_constraintVertical_bias="0.551"
         app:srcCompat="@drawable/mygroups" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

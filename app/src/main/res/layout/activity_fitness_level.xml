@@ -1,209 +1,25 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:onClick="setupStep6">
-
-    <TextView
-        android:id="@+id/title_choose"
-        android:layout_width="375dp"
-        android:layout_height="150dp"
-        android:gravity="center"
-        android:text="What’s your current fitness level?"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.087" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/Advanced_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:clickable="true"
-        android:elevation="15dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintTop_toBottomOf="@id/title_choose">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="121dp">
-
-            <ImageView
-                android:id="@+id/gold_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:contentDescription="Gold image"
-                android:src="@drawable/image_1340"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/advanced_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Advanced"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/Advanced_center_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="I work out almost every day"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/advanced_label"
-                app:layout_constraintVertical_bias="0.5" />
-
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main" android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView android:id="@+id/title_choose" android:layout_width="375dp" android:layout_height="150dp" android:gravity="center" android:text="What’s your current fitness level?" android:textSize="24sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.087"/>
+    <com.google.android.material.card.MaterialCardView android:id="@+id/Advanced_card" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="15dp" android:clickable="true" android:elevation="15dp" app:cardCornerRadius="15dp" app:layout_constraintTop_toBottomOf="@id/title_choose">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="121dp">
+            <ImageView android:id="@+id/gold_image" android:layout_width="40dp" android:layout_height="40dp" android:contentDescription="Gold image" android:src="@drawable/image_1340" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="1.0" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0"/>
+            <TextView android:id="@+id/advanced_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_marginTop="8dp" android:text="Advanced" android:textSize="16sp" android:textStyle="bold" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+            <TextView android:id="@+id/Advanced_center_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:text="I work out almost every day" android:textColor="#000000" android:textSize="18sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/advanced_label" app:layout_constraintVertical_bias="0.5"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/Intermediate_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:clickable="true"
-        android:elevation="15dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintTop_toBottomOf="@id/Advanced_card">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="121dp">
-
-            <ImageView
-                android:id="@+id/Intermediate_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:contentDescription="Intermediate image"
-                android:src="@drawable/image_1339"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.994"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/Intermediate_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Intermediate"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/Intermediate_center_text"
-                android:layout_width="211dp"
-                android:layout_height="62dp"
-                android:gravity="center"
-                android:text="I work out two or three times a week"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/Intermediate_label"
-                app:layout_constraintVertical_bias="0.5" />
-
+    <com.google.android.material.card.MaterialCardView android:id="@+id/Intermediate_card" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="15dp" android:clickable="true" android:elevation="15dp" app:cardCornerRadius="15dp" app:layout_constraintTop_toBottomOf="@id/Advanced_card">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="121dp">
+            <ImageView android:id="@+id/Intermediate_image" android:layout_width="40dp" android:layout_height="40dp" android:contentDescription="Intermediate image" android:src="@drawable/image_1339" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.994" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0"/>
+            <TextView android:id="@+id/Intermediate_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_marginTop="8dp" android:text="Intermediate" android:textSize="16sp" android:textStyle="bold" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+            <TextView android:id="@+id/Intermediate_center_text" android:layout_width="211dp" android:layout_height="62dp" android:gravity="center" android:text="I work out two or three times a week" android:textColor="#000000" android:textSize="18sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/Intermediate_label" app:layout_constraintVertical_bias="0.5"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/Beginner_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:clickable="true"
-        android:elevation="15dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintTop_toBottomOf="@id/Intermediate_card">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="121dp">
-
-            <ImageView
-                android:id="@+id/Beginner_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:contentDescription="Beginner image"
-                android:src="@drawable/image_1338"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.997"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/Beginner_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Beginner"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/Beginner_center_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="I’m starting to exercise"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/Beginner_label"
-                app:layout_constraintVertical_bias="0.5" />
-
+    <com.google.android.material.card.MaterialCardView android:id="@+id/Beginner_card" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="15dp" android:clickable="true" android:elevation="15dp" app:cardCornerRadius="15dp" app:layout_constraintTop_toBottomOf="@id/Intermediate_card">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="121dp">
+            <ImageView android:id="@+id/Beginner_image" android:layout_width="40dp" android:layout_height="40dp" android:contentDescription="Beginner image" android:src="@drawable/image_1338" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.997" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0"/>
+            <TextView android:id="@+id/Beginner_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_marginTop="8dp" android:text="Beginner" android:textSize="16sp" android:textStyle="bold" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+            <TextView android:id="@+id/Beginner_center_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:text="I’m starting to exercise" android:textColor="#000000" android:textSize="18sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/Beginner_label" app:layout_constraintVertical_bias="0.5"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </com.google.android.material.card.MaterialCardView>
-
-    <Button
-        android:id="@+id/Continue_button"
-        android:layout_width="177dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#8B80F6"
-        android:padding="12dp"
-        android:text="Continue"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginBottom="16dp"/>
-
+    <Button android:id="@+id/Continue_button" android:layout_width="177dp" android:layout_height="wrap_content" android:backgroundTint="#8B80F6" android:padding="12dp" android:text="Continue" android:textColor="#FFFFFF" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5" android:layout_marginBottom="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,7 @@ dependencies {
         implementation(libs.activity)
         implementation(libs.constraintlayout)
 
+        implementation ("com.airbnb.android:lottie:+")
         // Room dependencies
         implementation(libs.room.common)
         implementation(libs.room.runtime)

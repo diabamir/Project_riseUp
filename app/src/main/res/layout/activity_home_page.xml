@@ -1,46 +1,292 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".HomePage" android:background="@color/white">
-    <!--  Profile Image and Greeting Section  -->
-    <!--  Reminder Section  -->
-    <!--  Move Daily Card  -->
-    <ImageView android:id="@+id/profileImage" android:layout_width="60dp" android:layout_height="60dp" android:layout_marginTop="48dp" android:layout_marginEnd="28dp" android:contentDescription="Profile Image" android:scaleType="centerCrop" android:src="@drawable/womanprofile" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
-    <TextView android:id="@+id/greetingText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_marginTop="88dp" android:text="Hello, User!" android:textSize="24sp" android:textStyle="bold" app:layout_constraintEnd_toStartOf="@id/profileImage" app:layout_constraintHorizontal_bias="0.0" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
-    <TextView android:id="@+id/reminderText" android:layout_width="423dp" android:layout_height="87dp" android:letterSpacing="0.05" android:lineSpacingExtra="6dp" android:padding="16dp" android:text="Rise Up! Every step fuels your strength. Hydrate, focus, conquer!" android:textColor="@android:color/black" android:textSize="18sp" android:textStyle="bold" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.172"/>
-    <androidx.cardview.widget.CardView android:id="@+id/cardMoveDaily" android:layout_width="0dp" android:layout_height="191dp" android:layout_marginStart="16dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" app:cardBackgroundColor="@color/colorMoveDaily" app:cardCornerRadius="20dp" app:layout_constraintEnd_toStartOf="@+id/cardStayHydrated" app:layout_constraintHorizontal_chainStyle="packed" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/reminderText">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".HomePage">
+
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="Profile Image"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/greetingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="108dp"
+        android:text="Hello, User!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/profileImage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reminderText"
+        android:layout_width="423dp"
+        android:layout_height="87dp"
+        android:letterSpacing="0.05"
+        android:lineSpacingExtra="6dp"
+        android:padding="16dp"
+        android:text="Rise Up! Every step fuels your strength. Hydrate, focus, conquer!"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.64"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.179" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMoveDaily"
+        android:layout_width="0dp"
+        android:layout_height="191dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/colorMoveDaily"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cardStayHydrated"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
         <!--  Content inside CardView  -->
-        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent" android:padding="16dp">
-            <ImageView android:id="@+id/moveDailyIcon" android:layout_width="76dp" android:layout_height="76dp" android:src="@drawable/run" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
-            <TextView android:id="@+id/moveDailyValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="116dp" android:text="7.5 km" android:textSize="14sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.504" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/moveDailyText"/>
-            <TextView android:id="@+id/moveDailyText" android:layout_width="138dp" android:layout_height="wrap_content" android:text="Move daily!" android:textSize="16sp" android:textStyle="normal" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/moveDailyIcon"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:src="@drawable/run"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/moveDailyValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="116dp"
+                android:text="7.5 km"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/moveDailyText" />
+
+            <TextView
+                android:id="@+id/moveDailyText"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:text="Move daily!"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
     <!--  Stay Hydrated Card  -->
-    <androidx.cardview.widget.CardView android:id="@+id/cardStayHydrated" android:layout_width="0dp" android:layout_height="191dp" android:layout_marginStart="8dp" android:layout_marginEnd="16dp" android:clickable="true" android:focusable="true" app:cardBackgroundColor="@color/colorStayHydrated" app:cardCornerRadius="20dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_chainStyle="packed" app:layout_constraintStart_toEndOf="@+id/cardMoveDaily" app:layout_constraintTop_toBottomOf="@id/reminderText">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardStayHydrated"
+        android:layout_width="0dp"
+        android:layout_height="191dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/colorStayHydrated"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/cardMoveDaily"
+        app:layout_constraintTop_toTopOf="parent">
         <!--  Content inside CardView  -->
-        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent" android:padding="16dp">
-            <ImageView android:id="@+id/stayHydratedIcon" android:layout_width="76dp" android:layout_height="76dp" android:src="@drawable/water" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.493"/>
-            <ImageButton android:id="@+id/addWater" android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/plus" android:background="@null" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="1.0" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="1.0"/>
-            <TextView android:id="@+id/stayHydratedValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="116dp" android:text="750 ml" android:textSize="14sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.504" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/stayHydratedText"/>
-            <TextView android:id="@+id/stayHydratedText" android:layout_width="138dp" android:layout_height="wrap_content" android:text="Stay hydrated!" android:textSize="16sp" android:textStyle="normal" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/stayHydratedIcon"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:src="@drawable/water"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.493" />
+
+            <ImageButton
+                android:id="@+id/addWater"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/plus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintHorizontal_bias="1.0" />
+
+
+            <TextView
+                android:id="@+id/stayHydratedValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="116dp"
+                android:text="750 ml"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stayHydratedText" />
+
+            <TextView
+                android:id="@+id/stayHydratedText"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:text="Stay hydrated!"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
     <!--  Stay Active Card  -->
-    <androidx.cardview.widget.CardView android:id="@+id/cardStayActive" android:layout_width="0dp" android:layout_height="191dp" android:layout_marginStart="16dp" android:layout_marginTop="16dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" app:cardBackgroundColor="@color/colorStayActive" app:cardCornerRadius="20dp" app:layout_constraintEnd_toStartOf="@+id/cardEatBalanced" app:layout_constraintHorizontal_chainStyle="packed" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/cardMoveDaily">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardStayActive"
+        android:layout_width="0dp"
+        android:layout_height="191dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/colorStayActive"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/cardEatBalanced"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardMoveDaily">
         <!--  Content inside CardView  -->
-        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent" android:padding="16dp">
-            <ImageView android:id="@+id/stayActiveIcon" android:layout_width="76dp" android:layout_height="76dp" android:src="@drawable/sport" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.493"/>
-            <TextView android:id="@+id/stayActiveValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="2,000 cal" android:textSize="14sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/stayActiveIcon"/>
-            <TextView android:id="@+id/stayActiveText" android:layout_width="138dp" android:layout_height="wrap_content" android:text="Stay active!" android:textSize="16sp" android:textStyle="normal" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/stayActiveIcon"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:src="@drawable/sport"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.493" />
+
+            <TextView
+                android:id="@+id/stayActiveText"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:text="Stay active!"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
     <!--  Eat Balanced Card  -->
-    <androidx.cardview.widget.CardView android:id="@+id/cardEatBalanced" android:layout_width="0dp" android:layout_height="191dp" android:layout_marginStart="8dp" android:layout_marginTop="16dp" android:layout_marginEnd="16dp" android:clickable="true" android:focusable="true" app:cardBackgroundColor="@color/colorEatBalanced" app:cardCornerRadius="20dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_chainStyle="packed" app:layout_constraintStart_toEndOf="@+id/cardStayActive" app:layout_constraintTop_toBottomOf="@id/cardStayHydrated">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardEatBalanced"
+        android:layout_width="0dp"
+        android:layout_height="191dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/colorEatBalanced"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/cardStayActive"
+        app:layout_constraintTop_toBottomOf="@id/cardStayHydrated">
         <!--  Content inside CardView  -->
-        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent" android:padding="16dp">
-            <ImageView android:id="@+id/eatBalancedIcon" android:layout_width="76dp" android:layout_height="76dp" android:src="@drawable/salad" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.493"/>
-            <TextView android:id="@+id/eatBalancedText" android:layout_width="138dp" android:layout_height="wrap_content" android:text="Eat balanced!" android:textSize="16sp" android:textStyle="normal" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/eatBalancedIcon"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:src="@drawable/salad"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.493" />
+
+            <TextView
+                android:id="@+id/eatBalancedText"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:text="Eat balanced!"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
     <!--  Profile Button at the Bottom  -->
-    <Button android:id="@+id/profile1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="32dp" android:text="Profile" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
-    <ImageView android:id="@+id/imageView4" android:layout_width="138dp" android:layout_height="57dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.023" app:srcCompat="@drawable/smalllogo"/>
+    <Button
+        android:id="@+id/profile1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="160dp"
+        android:layout_height="59dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/riseupsmalllogo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

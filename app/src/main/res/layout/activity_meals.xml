@@ -5,6 +5,13 @@
         <!--  Container where dynamically added meal cards will be inserted  -->
         <LinearLayout android:id="@+id/mealsContainer" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"/>
         <!--  Add new meal button  -->
-        <Button android:id="@+id/addMealButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="Add New Meal"/>
+        <Button
+            android:id="@+id/addMealButton"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#8175F0"
+            android:text="Add New Meal" />
     </LinearLayout>
 </ScrollView>

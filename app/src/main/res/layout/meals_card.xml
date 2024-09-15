@@ -1,5 +1,5 @@
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/mealCard" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="15dp" android:elevation="15dp" app:cardCornerRadius="15dp">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/mealCard" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="15dp" android:background="#ffff" android:elevation="15dp" app:cardCornerRadius="15dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="#ffff">
         <!--  Title of the meal  -->
         <TextView android:id="@+id/mealTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="15dp" android:text=" Meal name" android:textSize="20sp" android:textStyle="bold"/>
         <!--  Description of the meal  -->
@@ -27,7 +27,25 @@
                 <TextView android:layout_width="60dp" android:layout_height="60dp" android:layout_marginTop="6dp" android:text=" 22 gr\nFats"/>
             </LinearLayout>
         </LinearLayout>
-        <com.google.android.material.button.MaterialButton android:id="@+id/recipe" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:backgroundTint="#D9CEED" android:drawableStart="@drawable/recipe_icon" android:elevation="8dp" android:paddingStart="5dp" android:paddingEnd="5dp" android:text="Recipe" android:textColor="@color/primaryPurple" android:textSize="16sp" android:textStyle="bold" app:cornerRadius="50dp" app:icon="@drawable/recipe_icon" app:iconGravity="textStart" app:iconPadding="10dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/recipe"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#8175F0"
+            android:drawableStart="@drawable/recipe_icon"
+            android:elevation="8dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Recipe"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="50dp"
+            app:icon="@drawable/recipe_icon"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp" />
         <LinearLayout android:id="@+id/hiddenview" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp" android:visibility="gone">
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text=" Recipe of Meal"/>
         </LinearLayout>

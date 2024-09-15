@@ -226,4 +226,3 @@
         app:srcCompat="@drawable/setting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     private Button b;
+    private UserRepository userRepository;
     private Handler handlerHydrationNotification;
     private Handler handlerStepsNotification;
     private Runnable runnableHydrationNotification;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, firstPageIcon.class);
             startActivity(intent);
         });
+        userRepository = new UserRepository(this);
 
         // Create notification channel (for Android 8.0 and above)
         createNotificationChannel();

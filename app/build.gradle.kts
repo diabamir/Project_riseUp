@@ -60,7 +60,10 @@ dependencies {
     // Lottie Animation dependency
     implementation ("com.airbnb.android:lottie:+")
     implementation ("com.google.android.material:material:1.8.0")  // Add this dependency
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    // Add ThreeTenABP for Java time support
+    implementation("com.jakewharton.threetenabp:threetenabp:1.3.1")
 
     // Testing dependencies
     testImplementation(libs.junit)

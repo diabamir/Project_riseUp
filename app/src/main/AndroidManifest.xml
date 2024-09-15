@@ -5,6 +5,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Required for step counter -->
+    <uses-feature android:name="android.hardware.sensor.stepcounter" android:required="true"/>
+    <uses-feature android:name="android.hardware.sensor.stepdetector" android:required="true"/>
+
+    <!-- Permissions required for activity recognition and foreground services -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -64,6 +72,16 @@
         <activity
             android:name=".MyScaleActivityWeight"
             android:exported="false" />
+        <!-- DetailsActivity Declaration -->
+        <activity
+            android:name=".DetailsActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="true">
+        </activity>
+
         <activity
             android:name=".MyScaleActivityHeight"
             android:exported="false" />
@@ -79,6 +97,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <!-- StepCountingService Declaration -->
+        <service
+            android:name=".StepCountingService"
+            android:foregroundServiceType="location"
+            android:exported="false"
+            tools:ignore="ForegroundServicePermission"/>
     </application>
 
 </manifest>

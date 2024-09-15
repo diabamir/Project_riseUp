@@ -3,8 +3,6 @@ package com.example.project_riseup;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -53,8 +51,9 @@ public class HomePage extends AppCompatActivity {
         } else {
             greetingText.setText("User ID not found in SharedPreferences");
         }
-        // Set click listeners for each CardView (moving to MainActivity)
-        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
+
+        // Set click listeners for each CardView
+        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, StepsMain.class))); // This will take you to StepsMain
         findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));

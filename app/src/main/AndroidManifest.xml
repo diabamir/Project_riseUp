@@ -87,15 +87,8 @@
             android:name=".MyScaleActivityHeight"
             android:exported="false" />
 
-        <activity
-            android:name=".StepsMain"
-            android:exported="true">  <!-- Explicitly declaring exported as true -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".StepsMain" android:exported="false">
         </activity>
-
 
         <activity
             android:name=".firstPageIcon"

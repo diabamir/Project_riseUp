@@ -44,7 +44,7 @@ public class MapActivity extends AppCompatActivity {
         if (userId != -1) {
             // Initialize Retrofit and UserApi
             userApi = ApiClient.getClient().create(UserApi.class);
-            getUserById(userId);
+//            getUserById(userId);
         } else {
             Toast.makeText(this, "User ID not found", Toast.LENGTH_SHORT).show();
         }
@@ -165,38 +165,40 @@ public class MapActivity extends AppCompatActivity {
     }
 
 
-    private void getUserById(long userId) {
-        Call<User> call = userApi.getUserById(userId);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    User user = response.body();
-                    // Handle the user object, e.g., display user details in the UI
-                    if (user != null) {
-                        // Check if the user has seen the instructions
-                        if (!user.getSeeTheInstructions()) {
-                            // Redirect to GroupExpActivity if getSeeTheInstructions is false
-                            Intent intent = new Intent(MapActivity.this, GroupExpActivity.class);
-                            intent.putExtra("USER_ID", userId);
-                            startActivity(intent);
-                            finish();  // Optionally finish the current activity so the user can't navigate back
-                        } else {
-                            Toast.makeText(MapActivity.this, "User: " + user.getFirstName(), Toast.LENGTH_SHORT).show();
-                            // Proceed with the rest of your logic if needed
-                        }
-                    }
-                } else {
-                    Toast.makeText(MapActivity.this, "Failed to retrieve user", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(MapActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void getUserById(long userId) {
+//        Call<User> call = userApi.getUserById(userId);
+//        call.enqueue(new Callback<User>() {
+//            @Override
+//            public void onResponse(Call<User> call, Response<User> response) {
+//                Toast.makeText(MapActivity.this, "User ID: " + userId, Toast.LENGTH_SHORT).show();
+//
+//                if (response.isSuccessful()) {
+//                    User user = response.body();
+//                    // Handle the user object, e.g., display user details in the UI
+////                    if (user != null) {
+//                        // Check if the user has seen the instructions
+////                        if (!user.getSeeTheInstructions()) {
+////                            // Redirect to GroupExpActivity if getSeeTheInstructions is false
+////                            Intent intent = new Intent(MapActivity.this, GroupExpActivity.class);
+////                            intent.putExtra("USER_ID", userId);
+////                            startActivity(intent);
+//////                            finish();  // Optionally finish the current activity so the user can't navigate back
+////                        } else {
+////                            Toast.makeText(MapActivity.this, "User: " + user.getFirstName(), Toast.LENGTH_SHORT).show();
+////                            // Proceed with the rest of your logic if needed
+////                        }
+////                    }
+//                } else {
+//                    Toast.makeText(MapActivity.this, "Failed to retrieve user", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<User> call, Throwable t) {
+//                Toast.makeText(MapActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 }
 //package com.example.project_riseup;
 //

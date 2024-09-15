@@ -217,26 +217,97 @@ public class UserGroups extends AppCompatActivity {
         builder.setSpan(new StyleSpan(Typeface.BOLD), start, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
+//    private void unjoinGroup(long groupId) {
+//        userGroupApi.updateUserStatusInGroup(currentUserId, groupId, null).enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                if (response.isSuccessful()) {
+//                    // Handle successful unjoin, e.g., refresh the joined groups list
+//                    fetchGroups(); // To refresh the list of groups
+//                } else {
+//                    // Handle failure
+//                    Toast.makeText(UserGroups.this, "Failed to unjoin the group", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                // Handle failure
+//                Toast.makeText(UserGroups.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+
+
     private void unjoinGroup(long groupId) {
         userGroupApi.updateUserStatusInGroup(currentUserId, groupId, null).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    // Handle successful unjoin, e.g., refresh the joined groups list
-                    fetchGroups(); // To refresh the list of groups
+                    // Successfully removed the user from the group, now decrement the number of members
+                    decrementGroupMembers(groupId);
                 } else {
-                    // Handle failure
                     Toast.makeText(UserGroups.this, "Failed to unjoin the group", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Handle failure
                 Toast.makeText(UserGroups.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
+    private void decrementGroupMembers(long groupId) {
+        GroupApi groupApi = ApiClient.getClient().create(GroupApi.class);
+
+        // Fetch the group details
+        Call<Group> getGroupCall = groupApi.getGroupById(groupId);
+        getGroupCall.enqueue(new Callback<Group>() {
+            @Override
+            public void onResponse(Call<Group> call, Response<Group> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Group group = response.body();
+                    int currentMembers = group.getHowManyJoin();
+
+                    // Decrement the number of members
+                    if (currentMembers > 0) {
+                        group.setHowManyJoin(currentMembers - 1);
+
+                        // Update the group with the new member count
+                        Call<Group> updateGroupCall = groupApi.updateGroup(groupId, group);
+                        updateGroupCall.enqueue(new Callback<Group>() {
+                            @Override
+                            public void onResponse(Call<Group> call, Response<Group> response) {
+                                if (response.isSuccessful()) {
+                                    Toast.makeText(UserGroups.this, "Member count updated", Toast.LENGTH_SHORT).show();
+                                    fetchGroups(); // Refresh the list of groups
+                                } else {
+                                    Toast.makeText(UserGroups.this, "Failed to update member count", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Group> call, Throwable t) {
+                                Toast.makeText(UserGroups.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(UserGroups.this, "Member count is already zero", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(UserGroups.this, "Failed to retrieve group details", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Group> call, Throwable t) {
+                Toast.makeText(UserGroups.this, "Network error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void unrequestGroup(long groupId) {
         userGroupApi.updateUserStatusInGroup(currentUserId, groupId, null).enqueue(new Callback<Void>() {
             @Override

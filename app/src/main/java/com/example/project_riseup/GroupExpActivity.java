@@ -66,6 +66,57 @@ public class GroupExpActivity extends AppCompatActivity {
     }
 
 
+//    private void updateUserSeeInstructions(int userId) {
+//        Call<User> call = userApi.getUserById(userId);
+//        call.enqueue(new Callback<User>() {
+//            @Override
+//            public void onResponse(Call<User> call, Response<User> response) {
+//                if (response.isSuccessful()) {
+//                    User user = response.body();
+//                    if (user != null) {
+//                        // Update the seeTheInstructions field to true
+//                        user.setSeeTheInstructions(true);
+//
+//                        // Now, make an API call to update the user
+//                        Call<User> updateCall = userApi.updateUser(userId, user); // Change here
+//                        updateCall.enqueue(new Callback<User>() {
+//                            @Override
+//                            public void onResponse(Call<User> call, Response<User> response) {
+//                                if (response.isSuccessful()) {
+//                                    // User updated successfully, navigate to ViewGroupsActivity
+//                                    runOnUiThread(() -> {
+//                                        Intent nextIntent = new Intent(GroupExpActivity.this, MapActivity.class);
+//                                        nextIntent.putExtra("USER_ID", userId);
+//                                        startActivity(nextIntent);
+//                                        Toast.makeText(GroupExpActivity.this, "User intent reached", Toast.LENGTH_SHORT).show();
+//                                        finish();  // Finish current activity
+//                                    });
+//                                } else {
+//                                    // Handle failure in updating user
+//                                    runOnUiThread(() -> Toast.makeText(GroupExpActivity.this, "Failed to update user", Toast.LENGTH_SHORT).show());
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<User> call, Throwable t) {
+//                                // Handle API failure
+//                                runOnUiThread(() -> Toast.makeText(GroupExpActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show());
+//                            }
+//                        });
+//                    }
+//                } else {
+//                    // Handle failure in retrieving user
+//                    runOnUiThread(() -> Toast.makeText(GroupExpActivity.this, "Failed to retrieve user", Toast.LENGTH_SHORT).show());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<User> call, Throwable t) {
+//                // Handle API failure
+//                runOnUiThread(() -> Toast.makeText(GroupExpActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show());
+//            }
+//        });
+//    }
     private void updateUserSeeInstructions(int userId) {
         Call<User> call = userApi.getUserById(userId);
         call.enqueue(new Callback<User>() {
@@ -78,44 +129,44 @@ public class GroupExpActivity extends AppCompatActivity {
                         user.setSeeTheInstructions(true);
 
                         // Now, make an API call to update the user
-                        Call<User> updateCall = userApi.updateUser(userId, user); // Change here
+                        Call<User> updateCall = userApi.updateUser(userId, user);
                         updateCall.enqueue(new Callback<User>() {
                             @Override
                             public void onResponse(Call<User> call, Response<User> response) {
                                 if (response.isSuccessful()) {
-                                    // User updated successfully, navigate to ViewGroupsActivity
-                                    runOnUiThread(() -> {
-                                        Intent nextIntent = new Intent(GroupExpActivity.this, MapActivity.class);
-                                        nextIntent.putExtra("USER_ID", userId);
-                                        startActivity(nextIntent);
-                                        finish();  // Finish current activity
-                                    });
+                                    // User updated successfully, navigate to MapActivity
+                                    Intent nextIntent = new Intent(GroupExpActivity.this, MapActivity.class);
+                                    nextIntent.putExtra("USER_ID", userId);
+                                    startActivity(nextIntent);
+                                    Toast.makeText(GroupExpActivity.this, "Navigating to MapActivity", Toast.LENGTH_SHORT).show();
+                                    finish();  // Finish current activity
                                 } else {
                                     // Handle failure in updating user
-                                    runOnUiThread(() -> Toast.makeText(GroupExpActivity.this, "Failed to update user", Toast.LENGTH_SHORT).show());
+                                    Toast.makeText(GroupExpActivity.this, "Failed to update user", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<User> call, Throwable t) {
-                                // Handle API failure
-                                runOnUiThread(() -> Toast.makeText(GroupExpActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show());
+                                // Handle API failure when updating user
+                                Toast.makeText(GroupExpActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 } else {
                     // Handle failure in retrieving user
-                    runOnUiThread(() -> Toast.makeText(GroupExpActivity.this, "Failed to retrieve user", Toast.LENGTH_SHORT).show());
+                    Toast.makeText(GroupExpActivity.this, "Failed to retrieve user", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                // Handle API failure
-                runOnUiThread(() -> Toast.makeText(GroupExpActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show());
+                // Handle API failure when retrieving user
+                Toast.makeText(GroupExpActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
 }
 

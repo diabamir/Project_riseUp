@@ -66,8 +66,8 @@ public class editProfile extends AppCompatActivity {
             editFname.setText(currentUser.getFirstName());
             editLname.setText(currentUser.getLastName());
             editPhone.setText(currentUser.getPhoneNumber());
-            editweight.setText(String.valueOf(currentUser.getWeight()));
-            editheight.setText(String.valueOf(currentUser.getHeight()));
+            editweight.setText(String.format("%.2f", currentUser.getWeight()));
+            editheight.setText(String.format("%.2f", currentUser.getHeight()));
         }
     }
 

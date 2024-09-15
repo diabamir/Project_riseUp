@@ -23,11 +23,7 @@ public class Profile extends AppCompatActivity {
     private UserViewModel userViewModel;
     private long userId;  // Declare userId variable to store the passed userId
     private ImageView profileviewphoto;
-    private Button editpro, privacy, logout,myGroups;
-    private TextView fullNameTextView, card1Header, card1Content, card2Header, card2Content;
-    private UserViewModel userViewModel;
-    private long userId;  // Declare userId variable to store the passed userId
-    private ImageView profileviewphoto;
+    private Button myGroups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

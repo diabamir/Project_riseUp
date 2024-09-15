@@ -165,7 +165,7 @@
         app:layout_constraintVertical_bias="0.888" />
 
     <Button
-        android:id="@+id/newButton"
+        android:id="@+id/myGroups"
         android:layout_width="240dp"
         android:layout_height="58dp"
         android:backgroundTint="#FFD8A8"

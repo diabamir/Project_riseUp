@@ -1,0 +1,27 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background circle (unfilled part) -->
+    <item>
+        <shape
+            android:innerRadiusRatio="2.5"
+            android:shape="ring"
+            android:thickness="20dp"
+            android:useLevel="false">
+            <solid android:color="#CFCCF4" />
+        </shape>
+    </item>
+
+    <!-- Progress (filled part) -->
+    <item>
+        <rotate
+            android:fromDegrees="270"
+            android:toDegrees="270">
+            <shape
+                android:innerRadiusRatio="2.5"
+                android:shape="ring"
+                android:thickness="20dp"
+                android:useLevel="true">
+                <solid android:color="#8B80F6" /> <!-- Set the solid color here -->
+            </shape>
+        </rotate>
+    </item>
+</layer-list>

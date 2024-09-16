@@ -91,12 +91,14 @@ public class Profile extends AppCompatActivity {
         // Set up the logout button to navigate to the SignIn activity
         logout.setOnClickListener(view -> {
             Intent signInIntent = new Intent(Profile.this, SignIn.class);
+            intent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
             startActivity(signInIntent);
         });
 
         // Set up the privacy button to navigate to the privacy activity
         privacy.setOnClickListener(view -> {
             Intent privacyIntent = new Intent(Profile.this, privacy.class);
+            intent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
             startActivity(privacyIntent);
         });
 

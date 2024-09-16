@@ -253,7 +253,10 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
                     "Start time: " + startTime + "\n" +
                     "End time: " + endTime + "\n" +
                     "Limit Members Number: " + group.getMembersNumber() + "\n" +
-                    "Joined Members Number: " + group.getHowManyJoin();
+                    "Joined Members Number: " + group.getHowManyJoin() +"\n" +
+                    "Phone Number(admin id- need to replace it): "+group.getUserAdminId()
+
+                    ;
 
             // Create a SpannableString
             SpannableString spannableString = new SpannableString(fullText);

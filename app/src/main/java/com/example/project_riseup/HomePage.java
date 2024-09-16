@@ -16,8 +16,7 @@ public class HomePage extends AppCompatActivity {
     ImageButton addWater, homeButton, groupsButton, calendarButton, profileButton;
     TextView greetingText;
     UserViewModel userViewModel;
-    Button profilebutton;
-    long userId=1;
+    long userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +74,7 @@ public class HomePage extends AppCompatActivity {
         // Handle the addWater button click
         addWater.setOnClickListener(v -> Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show());
 
-        // Navigate to the Profile activity and pass userId
-        profilebutton = findViewById(R.id.profile1);
-        profilebutton.setOnClickListener(v -> {
-            Intent intentProfile = new Intent(HomePage.this, Profile.class);
-            intentProfile.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
-            startActivity(intentProfile);
-        });
+
     }
 
     // Methods to handle button clicks

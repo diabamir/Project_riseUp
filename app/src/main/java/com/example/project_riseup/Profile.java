@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ public class Profile extends AppCompatActivity {
     private long userId;  // Declare userId variable to store the passed userId
     private ImageView profileviewphoto;
     private Button myGroups;
+    private ImageButton homeButton, groupsButton, calendarButton, profileButton; // Add the ImageButtons for navigation
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,22 @@ public class Profile extends AppCompatActivity {
         card2Content = findViewById(R.id.card2Content);
         logout = findViewById(R.id.logout);
         profileviewphoto = findViewById(R.id.profileview);
-        logout = findViewById(R.id.logout);
-        profileviewphoto = findViewById(R.id.profileview);
         myGroups = findViewById(R.id.myGroups);
+
+        // Initialize navigation bar buttons
+        homeButton = findViewById(R.id.homeImageButton);
+        groupsButton = findViewById(R.id.groupsImageButton);
+        calendarButton = findViewById(R.id.calendarImageButton);
+        profileButton = findViewById(R.id.profileImageButton);
+
+        // Set the profile button as selected
+        profileButton.setSelected(true);
+
+        // Set up click listeners for navigation buttons
+        homeButton.setOnClickListener(this::onHomeClicked);
+        groupsButton.setOnClickListener(this::onGroupsClicked);
+        //calendarButton.setOnClickListener(this::onCalendarClicked);
+        profileButton.setOnClickListener(this::onProfileClicked);  // Already in profile, no need to navigate
 
         // Handle edge-to-edge layout
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.profile), (v, insets) -> {
@@ -83,26 +99,53 @@ public class Profile extends AppCompatActivity {
         logout.setOnClickListener(view -> {
             Intent signInIntent = new Intent(Profile.this, SignIn.class);
             startActivity(signInIntent);
-            Intent editIntent = new Intent(Profile.this, editProfile.class);
-            editIntent.putExtra("USER_ID", userId);  // Pass the user ID to the edit activity
-            startActivity(editIntent);  // Start the EditProfileActivity
-        });
-
-        // Set up the logout button to navigate to the SignIn activity
-        logout.setOnClickListener(view -> {
-            Intent signInIntent = new Intent(Profile.this, SignIn.class);
-            intent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
-            startActivity(signInIntent);
         });
 
         // Set up the privacy button to navigate to the privacy activity
         privacy.setOnClickListener(view -> {
             Intent privacyIntent = new Intent(Profile.this, privacy.class);
-            intent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
+            privacyIntent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
             startActivity(privacyIntent);
         });
+    }
 
+    // Navigation button handlers
+    public void onHomeClicked(View view) {
+        updateButtonStates(homeButton);
+        Intent intent = new Intent(this, HomePage.class);
+        intent.putExtra("USER_ID", userId);  // Pass the user ID
+        startActivity(intent);
+    }
 
+    public void onGroupsClicked(View view) {
+        updateButtonStates(groupsButton);
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("USER_ID", userId);  // Pass the user ID
+        startActivity(intent);
+    }
+
+    //public void onCalendarClicked(View view) {
+    //    updateButtonStates(calendarButton);
+   //     Intent intent = new Intent(this, CalendarActivity.class);
+     //   intent.putExtra("USER_ID", userId);  // Pass the user ID
+       // startActivity(intent);
+    //}
+
+    public void onProfileClicked(View view) {
+        updateButtonStates(profileButton);
+        // No need to navigate as we're already in the Profile activity
+    }
+
+    // Method to update the selected state of the buttons
+    private void updateButtonStates(ImageButton selectedButton) {
+        // Deselect all buttons
+        homeButton.setSelected(false);
+        groupsButton.setSelected(false);
+        calendarButton.setSelected(false);
+        profileButton.setSelected(false);
+
+        // Set the selected button to true
+        selectedButton.setSelected(true);
     }
 
     // Method to load user data from the Room database
@@ -144,5 +187,4 @@ public class Profile extends AppCompatActivity {
             }
         }).start();
     }
-
 }

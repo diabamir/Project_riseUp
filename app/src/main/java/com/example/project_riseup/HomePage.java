@@ -3,6 +3,7 @@ package com.example.project_riseup;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -11,141 +12,104 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class HomePage extends AppCompatActivity {
 
-    ImageButton addWater;
-    TextView greetingText;
-    UserViewModel userViewModel;
-    Button profilebutton;
-    long userId;
+    private ImageButton addWater;
+    private TextView greetingText;
+    private Button profileButton;
+    private long userId;
+    private UserViewModel userViewModel;
+    private StepsDatabase stepsDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        // Initialize the ImageButton and TextView
+        // Initialize UI elements
         addWater = findViewById(R.id.addWater);
         greetingText = findViewById(R.id.greetingText);
+        profileButton = findViewById(R.id.profile1);
 
         // Retrieve the user ID from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-        long userId = sharedPreferences.getLong("USER_ID", -1);  // Default to -1 if not found
+        userId = sharedPreferences.getLong("USER_ID", -1);
+        Log.d("HomePage", "User ID retrieved: " + userId);
 
-        if (userId != -1) {
-            // Initialize the ViewModel
-            userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
-            // Fetch the user from the Room database on a background thread
-            new Thread(() -> {
-                User user = userViewModel.getUserById(userId);
-                runOnUiThread(() -> {
-                    if (user != null) {
-                        String firstName = user.getFirstName();
-                        greetingText.setText("Hello, " + firstName + "!");
-                    } else {
-                        greetingText.setText("User not found");
-                    }
-                });
-            }).start();
-        } else {
+        if (userId == -1) {
+            Log.e("HomePage", "Invalid User ID! Redirecting to Signup or Login page.");
             greetingText.setText("User ID not found in SharedPreferences");
+            return;
         }
 
-        // Set click listeners for each CardView
-        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, StepsMain.class))); // This will take you to StepsMain
-        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
-        findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
-        findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
+        // Initialize the ViewModel and database
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        stepsDatabase = StepsDatabase.getInstance(this);
 
-        // Handle the addWater button click
-        addWater.setOnClickListener(v -> Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show());
+        loadUserAndSteps();  // Initialize user and steps
 
-        // Navigate to the Profile activity and pass userId
-        profilebutton = findViewById(R.id.profile1);
-        profilebutton.setOnClickListener(v -> {
+        profileButton.setOnClickListener(v -> {
             Intent intentProfile = new Intent(HomePage.this, Profile.class);
             intentProfile.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
             startActivity(intentProfile);
         });
+
+        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, StepsMain.class);
+            intent.putExtra("USER_ID", userId);
+            startActivity(intent);
+        });
+
+        addWater.setOnClickListener(v -> Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show());
+    }
+
+    private void loadUserAndSteps() {
+        new Thread(() -> {
+            try {
+                User user = userViewModel.getUserById(userId);
+                if (user != null) {
+                    runOnUiThread(() -> greetingText.setText("Hello, " + user.getFirstName() + "!"));
+                    initializeOrUpdateStepsForToday();  // Initialize or update steps for today
+                } else {
+                    runOnUiThread(() -> greetingText.setText("User not found"));
+                }
+            } catch (Exception e) {
+                Log.e("HomePage", "Error loading user or initializing steps: " + e.getMessage());
+                runOnUiThread(() -> Toast.makeText(HomePage.this, "Error occurred: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }
+        }).start();
+    }
+
+    private void initializeOrUpdateStepsForToday() {
+        new Thread(() -> {
+            try {
+                Date today = getTodayDate();
+                Steps existingSteps = stepsDatabase.stepsDao().findStepsByDate(today, userId);
+                if (existingSteps == null) {
+                    // Insert new steps data for today
+                    Steps newSteps = new Steps(today, 0, 0, userId);
+                    stepsDatabase.stepsDao().insertOrUpdateStep(newSteps);
+                    runOnUiThread(() -> Toast.makeText(HomePage.this, "Steps for today initialized!", Toast.LENGTH_SHORT).show());
+                } else {
+                    runOnUiThread(() -> Toast.makeText(HomePage.this, "Continuing from " + existingSteps.getStepsTaken() + " steps", Toast.LENGTH_SHORT).show());
+                }
+            } catch (Exception e) {
+                Log.e("HomePage", "Error in steps initialization: " + e.getMessage());
+                runOnUiThread(() -> Toast.makeText(HomePage.this, "Error occurred: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }
+        }).start();
+    }
+
+    private Date getTodayDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
     }
 }
-//package com.example.project_riseup;
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.Button;
-//import android.widget.EditText;
-//import android.widget.ImageButton;
-//import android.widget.TextView;
-//import android.widget.Toast;
-//
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//public class HomePage extends AppCompatActivity {
-//
-//    // Declare the ImageButton variable here
-//    ImageButton addWater;
-//    TextView greetingText;
-//    UserViewModel userViewModel;
-//    Button profilebutton;;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_home_page);
-//
-//        // Initialize the ImageButton after setContentView
-//        addWater = findViewById(R.id.addWater);
-//
-//        // Set click listeners for each CardView
-//        findViewById(R.id.cardMoveDaily).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HomePage.this, MainActivity.class));
-//            }
-//        });
-//
-//        greetingText = findViewById(R.id.greetingText);
-//        String firstName = getIntent().getStringExtra("firstName");
-//        greetingText.setText("Hello, " + firstName + "!");
-//
-//        findViewById(R.id.cardStayHydrated).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HomePage.this, MainActivity.class));
-//            }
-//        });
-//
-//        findViewById(R.id.cardStayActive).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HomePage.this, MainActivity.class));
-//            }
-//        });
-//
-//        findViewById(R.id.cardEatBalanced).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HomePage.this, MainActivity.class));
-//            }
-//        });
-//
-//        // Set an OnClickListener for the addWater button
-//        addWater.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Perform the action to add water
-//                Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        profilebutton = findViewById(R.id.profile1);
-//        profilebutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HomePage.this, Profile.class));
-//            }
-//        });
-//
-//    }
-//}
+

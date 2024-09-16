@@ -1,6 +1,8 @@
 package com.example.project_riseup;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -14,96 +16,84 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class StepsMain extends AppCompatActivity implements SensorEventListener {
 
     private TextView stepCounterText;
-    private TextView distanceText;
+    private ProgressBar progressBar;
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
-    private int initialStepCount = -1;
-    private int stepsTaken = 0;
-    private ProgressBar progressBar;
-    private float stepLengthInMeter = 0.762f;
-    private int stepCountTarget = 200;
-    private TextView stepCountTargetTextview;
     private StepsDatabase database;
+    private long userId;
+    private int stepsTaken = 0;
+    private int cumulativeStepCount = -1;
     private Button details;
-    private Button calendarButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.steps_main);  // Updated to match the XML file
+        setContentView(R.layout.steps_main);
 
         stepCounterText = findViewById(R.id.stepCounterText);
-        distanceText = findViewById(R.id.distanceText);
-        details = findViewById(R.id.details);
-        calendarButton = findViewById(R.id.calendarButton);
-        stepCountTargetTextview = findViewById(R.id.stepCountTargetTextview);
         progressBar = findViewById(R.id.progressBar);
+        details = findViewById(R.id.details);
+
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         database = StepsDatabase.getInstance(this);
 
-        progressBar.setMax(stepCountTarget);
-        stepCountTargetTextview.setText("Step Goal: " + stepCountTarget);
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        userId = sharedPreferences.getLong("USER_ID", -1);
 
-        Intent serviceIntent = new Intent(this, StepCountingService.class);
-        startService(serviceIntent); // Use startService for API 21
+        if (userId == -1) {
+            return;
+        }
+
+        loadSavedSteps();
 
         details.setOnClickListener(v -> {
-            Intent intent = new Intent(StepsMain.this, DetailsActivity.class);
-            startActivity(intent);
+            Intent intentDetails = new Intent(StepsMain.this, DetailsActivity.class);
+            intentDetails.putExtra("USER_ID", userId);
+            startActivity(intentDetails);
         });
 
-        calendarButton.setOnClickListener(v -> {
-            Intent intent = new Intent(StepsMain.this, CalendarActivity.class);
-            startActivity(intent);
-        });
+        Intent serviceIntent = new Intent(this, StepCountingService.class);
+        serviceIntent.putExtra("USER_ID", userId);
+        startService(serviceIntent);
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            int cumulativeStepCount = (int) sensorEvent.values[0];
+            int sensorStepCount = (int) sensorEvent.values[0];
 
-            if (initialStepCount == -1) {
-                // First reading, set as initial step count
-                initialStepCount = cumulativeStepCount;
-                saveInitialStepCount();
+            if (cumulativeStepCount == -1) {
+                cumulativeStepCount = sensorStepCount;
             }
 
-            // Calculate steps taken since initial step count
-            stepsTaken = cumulativeStepCount - initialStepCount;
-
-            // Update UI
-            stepCounterText.setText("Steps: " + stepsTaken);
-            progressBar.setProgress(stepsTaken);
-
-            if (stepsTaken >= stepCountTarget) {
-                stepCountTargetTextview.setText("Step target achieved!");
-            }
-
-            float distanceInKm = (stepsTaken * stepLengthInMeter) / 1000;
-            distanceText.setText(String.format(Locale.getDefault(), "Distance: %.2f km", distanceInKm));
-
-            // Save steps taken to database
-            saveStepsTaken();
+            stepsTaken = sensorStepCount - cumulativeStepCount;
+            updateStepUI();
         }
     }
 
-    private void saveInitialStepCount() {
-        Date today = getTodayDate();
-        Steps steps = new Steps(today, initialStepCount, 0);
-        new Thread(() -> database.stepsDao().insertOrUpdateStep(steps)).start();
+    private void loadSavedSteps() {
+        new Thread(() -> {
+            Date today = getTodayDate();
+            Steps savedSteps = database.stepsDao().findStepsByDate(today, userId);
+
+            if (savedSteps != null) {
+                stepsTaken = savedSteps.getStepsTaken();
+                cumulativeStepCount = savedSteps.getInitialStepCount();
+                runOnUiThread(this::updateStepUI);
+            }
+        }).start();
     }
 
-    private void saveStepsTaken() {
-        Date today = getTodayDate();
-        Steps steps = new Steps(today, initialStepCount, stepsTaken);
-        new Thread(() -> database.stepsDao().insertOrUpdateStep(steps)).start();
+    private void updateStepUI() {
+        runOnUiThread(() -> {
+            stepCounterText.setText("Steps: " + stepsTaken);
+            progressBar.setProgress(stepsTaken);
+        });
     }
 
     private Date getTodayDate() {
@@ -124,19 +114,20 @@ public class StepsMain extends AppCompatActivity implements SensorEventListener 
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         if (stepCounterSensor != null) {
             sensorManager.unregisterListener(this);
         }
+        saveSteps();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Stop the foreground service when the app is destroyed
-        Intent serviceIntent = new Intent(this, StepCountingService.class);
-        stopService(serviceIntent);
+    private void saveSteps() {
+        new Thread(() -> {
+            Date today = getTodayDate();
+            Steps steps = new Steps(today, cumulativeStepCount, stepsTaken, userId);
+            database.stepsDao().insertOrUpdateStep(steps);
+        }).start();
     }
 
     @Override

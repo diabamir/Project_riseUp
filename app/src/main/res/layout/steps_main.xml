@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
@@ -8,12 +7,12 @@
     android:gravity="center"
     android:padding="16dp"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".StepsMain"> <!-- Make sure the context matches the new StepsMain class -->
+    tools:context=".StepsMain">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="step counter"
+        android:text="Step Counter"
         android:gravity="center"
         android:padding="16dp"
         android:textSize="25sp"
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/stepCountTargetTextview"
-        android:text="step target: 7000"
+        android:text="Step target: 7000"
         android:padding="16dp"
         android:textSize="20sp" />
 
@@ -35,9 +34,8 @@
         android:layout_height="218dp"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:progressDrawable="@drawable/custom_progress"
         android:padding="10dp"
-        android:max="100"
+        android:max="7000"
         android:progress="0"
         android:indeterminate="false" />
 
@@ -57,26 +55,7 @@
             android:layout_height="75dp"
             android:layout_gravity="center"
             android:padding="20dp"
-            android:text="steps: 0"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout android:layout_width="328dp"
-        android:layout_height="75dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="61dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/distance" />
-
-        <TextView
-            android:id="@+id/distanceText"
-            android:layout_width="263dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:padding="20dp"
-            android:text="distance: 0"
+            android:text="Steps: 0"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -84,7 +63,7 @@
         android:id="@+id/details"
         android:layout_width="195dp"
         android:layout_height="55dp"
-        android:text="details" />
+        android:text="Details" />
 
     <Button
         android:id="@+id/calendarButton"

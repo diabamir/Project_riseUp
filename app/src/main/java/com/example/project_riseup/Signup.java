@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -573,6 +574,8 @@ public class Signup extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Toast.makeText(Signup.this, "User saved locally with ID: " + userId, Toast.LENGTH_SHORT).show();
 
+                    initializeStepsForToday(userId);
+
                     // Pass the user ID to HomePage
                     Intent intent = new Intent(Signup.this, HomePage.class);
                     intent.putExtra("USER_ID", userId);  // Pass the generated user ID
@@ -662,9 +665,44 @@ public class Signup extends AppCompatActivity {
 //            });
 //        }).start();
     }
+    private void initializeStepsForToday(long userId) {
+        new Thread(() -> {
+            try {
+                // Get the current date
+                Date today = getTodayDate();
+
+                // Initialize steps with 0 count if not already initialized
+                StepsDatabase stepsDatabase = StepsDatabase.getInstance(Signup.this);
+                StepsDAO stepsDao = stepsDatabase.stepsDao();
+                Steps existingSteps = stepsDao.findStepsByDate(today, userId);
+
+                if (existingSteps == null) {
+                    // Insert a new record for today's steps
+                    Steps newSteps = new Steps(today, 0, 0, userId);
+                    stepsDao.insertOrUpdateStep(newSteps);
+                    Log.d("Signup", "Steps initialized for userId: " + userId);
+                } else {
+                    Log.d("Signup", "Steps already initialized for today");
+                }
+            } catch (Exception e) {
+                Log.e("Signup", "Error initializing steps for userId: " + userId, e);
+            }
+        }).start();
+    }
 
 
 
+
+
+    // Helper method to get today's date with time reset to 00:00:00
+    private Date getTodayDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
 
     // Move to the next step based on current step
     private void loadNextStep() {

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -19,8 +20,6 @@ public class HomePage extends AppCompatActivity {
     UserViewModel userViewModel;
     Button profilebutton;
     long userId=1;
-
-    private ConstraintLayout hydrationCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,7 @@ public class HomePage extends AppCompatActivity {
 
         // Set click listeners for each CardView (moving to MainActivity)
         findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
-        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
+//        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
 
@@ -88,7 +87,7 @@ public class HomePage extends AppCompatActivity {
 
 
         // Initialize the ConstraintLayout (hydration card)
-        hydrationCard = findViewById(R.id.hydrationCard);
+        CardView hydrationCard = findViewById(R.id.cardStayHydrated);
         // Set onClickListener for the entire card
         hydrationCard.setOnClickListener(new View.OnClickListener() {
             @Override

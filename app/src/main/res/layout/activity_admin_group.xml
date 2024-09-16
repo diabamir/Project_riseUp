@@ -1,14 +1,81 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="16dp" tools:context=".AdminGroup">
-    <LinearLayout android:layout_width="342dp" android:layout_height="wrap_content" android:orientation="horizontal">
-        <TextView android:id="@+id/adminGroupTitle" android:layout_width="wrap_content" android:layout_height="68dp" android:layout_marginBottom="16dp" android:padding="16dp" android:text="Admin of Group:" android:textColor="#9C27B0" android:textSize="18sp" android:textStyle="bold"/>
-        <Spinner android:id="@+id/groupIdSpinner" android:layout_width="wrap_content" android:layout_height="68dp" android:layout_marginBottom="16dp"/>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".AdminGroup">
+
+    <!-- Title and Spinner -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/adminGroupTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Admin of Group:"
+            android:textColor="#8175F0"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="16dp"/>
+
+        <Spinner
+            android:id="@+id/groupIdSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"/>
     </LinearLayout>
-    <com.google.android.material.button.MaterialButton android:id="@+id/groupRequestsButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="24dp" android:backgroundTint="#DACBDC" android:text="Show Group Requests" android:textColor="#AB47BC"/>
-    <LinearLayout android:id="@+id/hiddenMembers" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone">
-        <!--  Group members will be dynamically added here  -->
+
+    <!-- Hidden Group Members Section -->
+    <LinearLayout
+        android:id="@+id/hiddenMembers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <!-- Group members will be dynamically added here -->
     </LinearLayout>
-    <com.google.android.material.button.MaterialButton android:id="@+id/groupMembersButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="16dp" android:backgroundTint="#DACBDC" android:text="Show Group Members" android:textColor="#AB47BC"/>
-    <LinearLayout android:id="@+id/hiddenRequests" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone">
-        <!--  Group requests will be dynamically added here  -->
+
+    <!-- Show Group Requests Button -->
+
+    <!-- Show Group Members Button -->
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/groupRequestsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#8175F0"
+        android:gravity="center"
+        android:text="Show Group Requests"
+        android:textColor="#ffffff" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/groupMembersButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#8175F0"
+        android:text="Show Group Members"
+        android:textColor="#ffff"
+        android:gravity="center"/>
+
+    <!-- Hidden Group Requests Section -->
+    <LinearLayout
+        android:id="@+id/hiddenRequests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <!-- Group requests will be dynamically added here -->
     </LinearLayout>
+
 </LinearLayout>

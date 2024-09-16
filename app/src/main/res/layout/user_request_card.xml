@@ -18,9 +18,11 @@
         <!--  Confirm and Remove Buttons  -->
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="end" android:orientation="horizontal" android:paddingTop="8dp">
             <!--  Confirm Button  -->
-            <com.google.android.material.button.MaterialButton android:id="@+id/confirmButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Confirm" app:icon="@drawable/image_630" app:iconTint="@android:color/holo_green_light"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/confirmButton" android:layout_width="wrap_content"             android:backgroundTint="#8175F0"
+                android:layout_height="wrap_content" android:text="Confirm" app:icon="@drawable/image_630" app:iconTint="@android:color/holo_green_light"/>
             <!--  Remove Button  -->
-            <com.google.android.material.button.MaterialButton android:id="@+id/removeButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remove" app:icon="@drawable/image_627" app:iconTint="@color/red"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/removeButton" android:layout_width="wrap_content"             android:backgroundTint="#8175F0"
+                android:layout_height="wrap_content" android:text="Remove" app:icon="@drawable/image_627" app:iconTint="@color/red"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

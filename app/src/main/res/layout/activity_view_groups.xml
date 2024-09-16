@@ -18,41 +18,27 @@
 
     <Button
         android:id="@+id/btnForMap"
-        android:layout_width="94dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnAddGroup"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="67dp"
         android:layout_marginTop="-55dp"
-        android:layout_marginEnd="271dp"
+        android:layout_marginEnd="250dp"
         android:backgroundTint="#FFFFFF"
         android:contentDescription="Go to map"
         android:drawableLeft="@drawable/map_icon" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="432dp"
-        android:layout_height="783dp"
+        android:layout_width="430dp"
+        android:layout_height="876dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="79dp"
-        android:layout_marginEnd="0dp" />
-
-    <Button
-        android:id="@+id/adminGroupButton"
-        android:layout_width="165dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="247dp"
-        android:layout_marginTop="883dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="47dp"
-        android:text="Admin Groups" />
+        android:layout_marginEnd="2dp" />
 
 
 </RelativeLayout>

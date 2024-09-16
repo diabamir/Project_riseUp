@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,45 +21,49 @@ public class HomePage extends AppCompatActivity {
     UserViewModel userViewModel;
     Button profilebutton;
     long userId=1;
+    ImageView profileviewphoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState); // Call this before accessing UI components
-        setContentView(R.layout.activity_home_page); // Ensure this is called first
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home_page);
 
-        // Initialize ImageButtons
+        // Initialize UI components
         homeButton = findViewById(R.id.homeImageButton);
         groupsButton = findViewById(R.id.groupsImageButton);
         calendarButton = findViewById(R.id.calendarImageButton);
         profileButton = findViewById(R.id.profileImageButton);
+        addWater = findViewById(R.id.addWater);
+        greetingText = findViewById(R.id.greetingText);
 
         // Set the home button as selected by default
         homeButton.setSelected(true);
 
-        // Set click listeners for each button
-        homeButton.setOnClickListener(this::onHomeClicked);
-        groupsButton.setOnClickListener(this::onGroupsClicked);
-        profileButton.setOnClickListener(this::onProfileClicked);
-
-        // Initialize the ImageButton and TextView
-        addWater = findViewById(R.id.addWater);
-        greetingText = findViewById(R.id.greetingText);
+        // Initialize the ImageView for profile photo (Ensure this is in your XML layout)
+        profileviewphoto = findViewById(R.id.profileImage);
 
         // Retrieve the user ID from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-        userId = sharedPreferences.getLong("USER_ID", -1);  // Default to -1 if not found
+        userId = sharedPreferences.getLong("USER_ID", -1);
 
         if (userId != -1) {
-            // Initialize the ViewModel
+            // Initialize ViewModel and fetch user data
             userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-            // Fetch the user from the Room database on a background thread
             new Thread(() -> {
                 User user = userViewModel.getUserById(userId);
                 runOnUiThread(() -> {
                     if (user != null) {
-                        String firstName = user.getFirstName();
-                        greetingText.setText("Hello, " + firstName + "!");
+                        greetingText.setText("Hello, " + user.getFirstName() + "!");
+
+                        // Set the appropriate profile photo based on gender
+                        if (user.getGender().equalsIgnoreCase("female")) {
+                            profileviewphoto.setImageResource(R.drawable.womanprofile);
+                        } else if (user.getGender().equalsIgnoreCase("male")) {
+                            profileviewphoto.setImageResource(R.drawable.manprofile);
+                        } else {
+                            profileviewphoto.setImageResource(R.drawable.defaultprofile);
+                        }
                     } else {
                         greetingText.setText("User not found");
                     }
@@ -66,17 +71,22 @@ public class HomePage extends AppCompatActivity {
             }).start();
         } else {
             greetingText.setText("User ID not found in SharedPreferences");
+            // Optionally, log an error or redirect the user to the login page
         }
 
-        // Set click listeners for each CardView (moving to MainActivity)
+        // Set click listeners for CardViews
         findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
-//        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
+        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
 
-        // Handle the addWater button click
+        // Handle addWater button click
         addWater.setOnClickListener(v -> Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show());
 
+        // Set click listeners for navigation buttons
+        homeButton.setOnClickListener(this::onHomeClicked);
+        groupsButton.setOnClickListener(this::onGroupsClicked);
+        profileButton.setOnClickListener(this::onProfileClicked);
         // Navigate to the Profile activity and pass userId
         profilebutton = findViewById(R.id.profile1);
         profilebutton.setOnClickListener(v -> {
@@ -100,6 +110,8 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
+
+
     // Methods to handle button clicks
     public void onHomeClicked(View view) {
         // No need to start the HomeActivity again, just update button state
@@ -110,7 +122,7 @@ public class HomePage extends AppCompatActivity {
         updateButtonStates(groupsButton);
 
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("USER_ID", userId);  // Pass the user ID to groups activity
+        intent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
         startActivity(intent);
     }
 

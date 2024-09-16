@@ -235,15 +235,41 @@ public class MapActivity extends AppCompatActivity {
         userId = intent.getLongExtra("USER_ID", -1);
 //        int userId = intent.getIntExtra("USER_ID", -1);
 //
+//        if (userId != -1) {
+//            new Thread(() -> {
+//                try {
+//                    User user = UserDatabase.getInstance(this).userDao().getUserById(userId);
+//                    if (!user.getSeeTheInstructions()) {
+//                        Intent intentt = new Intent(MapActivity.this, GroupExpActivity.class);
+//                        intentt.putExtra("USER_ID", userId);
+//                        startActivity(intentt);
+//                    });
+//                } catch (Exception e) {
+//                    runOnUiThread(() -> {
+//                        Toast.makeText(MapActivity.this, "Error saving user locally", Toast.LENGTH_SHORT).show();
+//                    });
+//                }
+//            }).start();
         if (userId != -1) {
-            User user = UserDatabase.getInstance(this).userDao().getUserById(userId);
-            if(!user.getSeeTheInstructions())
-            {
-                Intent intentt =new Intent(MapActivity.this, GroupExpActivity.class);
-                intent.putExtra("USER_ID", userId);
-                startActivity(intentt);
-            }
+            new Thread(() -> {
+                try {
+                    User user = UserDatabase.getInstance(this).userDao().getUserById(userId);
+                    runOnUiThread(() -> { // Ensure UI operations are done on the main thread
+                        if (user != null && !user.getSeeTheInstructions()) {
+                            Intent intentt = new Intent(MapActivity.this, GroupExpActivity.class);
+                            intentt.putExtra("USER_ID", userId);
+                            startActivity(intentt);
+//                            finish(); // Optional: Finish current activity if you don't want it in the back stack
+                        }
+                    });
+                } catch (Exception e) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(MapActivity.this, "Error retrieving user from database", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }).start();
         }
+
 
 
 
@@ -263,6 +289,7 @@ public class MapActivity extends AppCompatActivity {
                     // Start the ViewGroupById activity and pass the group ID
                     Intent intent = new Intent(MapActivity.this, ViewGroupsActivity.class);
                     intent.putExtra("GROUP_ID", Integer.parseInt(query));
+                    intent.putExtra("USER_ID", userId);
                     startActivity(intent);
                     return true; // Indicate that the query has been handled
                 } else {

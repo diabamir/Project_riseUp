@@ -9,7 +9,14 @@
         <!--  Fitness Level  -->
         <TextView android:id="@+id/fitnessLevel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fitness Level: Intermediate" android:textSize="14sp"/>
         <!--  Remove Button  -->
-        <com.google.android.material.button.MaterialButton android:id="@+id/removeButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remove" app:iconTint="@color/red" app:icon="@drawable/image_627"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/removeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8175F0"
+            android:text="Remove"
+            app:icon="@drawable/image_627"
+            app:iconTint="@color/red" />
         <!--  Replace with your icon  -->
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

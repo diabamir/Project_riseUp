@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 public class HomePage extends AppCompatActivity {
@@ -18,6 +19,8 @@ public class HomePage extends AppCompatActivity {
     UserViewModel userViewModel;
     Button profilebutton;
     long userId=1;
+
+    private ConstraintLayout hydrationCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,20 @@ public class HomePage extends AppCompatActivity {
             intentProfile.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
             startActivity(intentProfile);
         });
+
+
+        // Initialize the ConstraintLayout (hydration card)
+        hydrationCard = findViewById(R.id.hydrationCard);
+        // Set onClickListener for the entire card
+        hydrationCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to HydrationActivity
+                Intent intent = new Intent(HomePage.this, HydrationActivity.class);
+//                intent.putExtra("USER_ID", userId);  // Pass the user ID to the hydration
+                startActivity(intent);
+            }
+        });
     }
 
     // Methods to handle button clicks
@@ -94,7 +111,7 @@ public class HomePage extends AppCompatActivity {
         updateButtonStates(groupsButton);
 
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
+        intent.putExtra("USER_ID", userId);  // Pass the user ID to groups activity
         startActivity(intent);
     }
 

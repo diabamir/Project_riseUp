@@ -554,6 +554,7 @@ public class Signup extends AppCompatActivity {
             try {
                 // Insert user into Room database and get the generated ID
                 long userId = userDao.insertUser(user);
+                user.setSeeTheInstructions(false);
                 user.setId(userId);  // Set the generated ID to the user object
 
                 // Store the user ID in SharedPreferences to continue the session

@@ -290,4 +290,54 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023"
         app:srcCompat="@drawable/riseupsmalllogo" />
+    <Button android:id="@+id/profile1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="32dp" android:text="Profile" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+    <ImageView android:id="@+id/imageView4" android:layout_width="138dp" android:layout_height="57dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.023" app:srcCompat="@drawable/smalllogo"/>
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/homeImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/home_button_state"
+            android:background="@color/white"
+            android:onClick="onHomeClicked"/>
+
+        <ImageButton
+            android:id="@+id/groupsImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/groups_button_state"
+            android:onClick="onGroupsClicked" />
+
+        <ImageButton
+            android:id="@+id/calendarImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/calendar_button_state"
+            android:onClick="onCalendarClicked" />
+
+        <ImageButton
+            android:id="@+id/profileImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile_button_state"
+            android:background="@color/white"
+            android:onClick="onProfileClicked"/>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

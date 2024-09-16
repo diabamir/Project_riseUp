@@ -79,6 +79,13 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <service android:name=".NotificationService"
+            android:exported="false"/>
+
+
+
+
     </application>
 
 </manifest>

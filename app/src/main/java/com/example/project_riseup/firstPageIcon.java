@@ -24,6 +24,9 @@ public class firstPageIcon extends AppCompatActivity {
             return insets;
         });
 
+        // Start the notification service to show notifications every 5 seconds
+        startService(new Intent(this, NotificationService.class));
+
         // Timer using Handler to navigate to another activity after 4 seconds
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(firstPageIcon.this, SignIn.class);

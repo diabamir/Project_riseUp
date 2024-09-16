@@ -1,78 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="8dp" app:cardCornerRadius="8dp" app:cardElevation="4dp">
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <!-- Person's First and Last Name -->
-        <TextView
-            android:id="@+id/firstNameLastName"
+        <!--  Person's First and Last Name  -->
+        <TextView android:id="@+id/firstNameLastName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="John Doe"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <!-- Phone Number -->
-        <TextView
-            android:id="@+id/phoneNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone Number: 1234567890"
-            android:textSize="14sp" />
-
-        <!-- Gender -->
-        <TextView
-            android:id="@+id/gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gender: Male"
-            android:textSize="14sp" />
-
-        <!-- Fitness Level -->
-        <TextView
-            android:id="@+id/fitnessLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fitness Level: Intermediate"
-            android:textSize="14sp" />
-
-        <!-- Confirm and Remove Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:orientation="horizontal"
-            android:paddingTop="8dp">
-
-            <!-- Confirm Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/confirmButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Confirm"
-                app:icon="@drawable/image_630"
-                app:iconTint="@android:color/holo_green_light" />
-
-            <!-- Remove Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/removeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Remove"
-                app:icon="@drawable/image_627"
-                app:iconTint="@color/red" />
+            android:text="John Doe" android:textSize="16sp"
+            android:textStyle="bold"/>
+        <!--  Phone Number  -->
+        <TextView android:id="@+id/phoneNumber" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Phone Number: 1234567890" android:textSize="14sp"/>
+        <!--  Gender  -->
+        <TextView android:id="@+id/gender" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gender: Male" android:textSize="14sp"/>
+        <!--  Fitness Level  -->
+        <TextView android:id="@+id/fitnessLevel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fitness Level: Intermediate" android:textSize="14sp"/>
+        <!--  Confirm and Remove Buttons  -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="end" android:orientation="horizontal" android:paddingTop="8dp">
+            <!--  Confirm Button  -->
+            <com.google.android.material.button.MaterialButton android:id="@+id/confirmButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Confirm" app:icon="@drawable/image_630" app:iconTint="@android:color/holo_green_light"/>
+            <!--  Remove Button  -->
+            <com.google.android.material.button.MaterialButton android:id="@+id/removeButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remove" app:icon="@drawable/image_627" app:iconTint="@color/red"/>
         </LinearLayout>
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

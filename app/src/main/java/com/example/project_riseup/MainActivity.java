@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     private Button b;
+    private UserRepository userRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, firstPageIcon.class);
             startActivity(intent);
         });
-
+        userRepository = new UserRepository(this);
     }
 }

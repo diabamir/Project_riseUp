@@ -7,25 +7,56 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class}, version = 3)
 @TypeConverters(Converters.class)
 public abstract class UserDatabase extends RoomDatabase {
-    private static volatile UserDatabase INSTANCE;
 
-    // Fix: Define the correct return type for userDao method
+    private static volatile UserDatabase instance;
+
     public abstract UserDao userDao();
 
     public static UserDatabase getInstance(Context context) {
-        if (INSTANCE == null) {
+        if (instance == null) {
             synchronized (UserDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                if (instance == null) {
+                    instance = Room.databaseBuilder(context.getApplicationContext(),
                                     UserDatabase.class, "user_database")
                             .fallbackToDestructiveMigration()
                             .build();
                 }
             }
         }
-        return INSTANCE;
+        return instance;
     }
 }
+//package com.example.project_riseup;
+//
+//import android.content.Context;
+//
+//import androidx.room.Database;
+//import androidx.room.Room;
+//import androidx.room.RoomDatabase;
+//import androidx.room.TypeConverters;
+//
+//@Database(entities = {User.class}, version = 3)
+//@TypeConverters(Converters.class)
+//public abstract class UserDatabase extends RoomDatabase {
+//    private static UserDatabase instance;
+//
+//    // Fix: Define the correct return type for userDao method
+//    public abstract UserDao userDao();
+//
+//    public static UserDatabase getInstance(Context context) {
+//        if (instance == null) {
+//            synchronized (UserDatabase.class) {
+//                if (instance == null) {
+//                    instance = Room.databaseBuilder(context.getApplicationContext(),
+//                                    UserDatabase.class, "user_database")
+//                            .fallbackToDestructiveMigration()
+//                            .build();
+//                }
+//            }
+//        }
+//        return instance;
+//    }
+//}

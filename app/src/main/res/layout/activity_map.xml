@@ -2,21 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MapActivity">
+    android:background="#FFFFFF"
+    android:id="@+id/main"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/map"
-        android:layout_width="442dp"
-        android:layout_height="996dp"
+        android:layout_width="450dp"
+        android:layout_height="930dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/map" />
 
     <ImageView
@@ -344,16 +344,31 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="146dp"
-        android:layout_height="41dp"
-        android:text="Choose group area:"
+        android:layout_width="188dp"
+        android:layout_height="25dp"
+        android:text="Choose location:"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintHorizontal_bias="0.103"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.016" />
+        app:layout_constraintVertical_bias="0.033" />
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="218dp"
+        android:layout_height="32dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Find group by ID"
+        android:scrollbarSize="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.082" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

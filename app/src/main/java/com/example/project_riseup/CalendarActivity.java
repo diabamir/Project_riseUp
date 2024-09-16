@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +27,6 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
     private StepsDatabase database;
-    private long userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +37,6 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         AndroidThreeTen.init(this);
 
         database = StepsDatabase.getInstance(this);
-
-        // Retrieve user ID from SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-        userId = sharedPreferences.getLong("USER_ID", -1);
 
         initWidgets();
         selectedDate = LocalDate.now();
@@ -59,17 +53,22 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         fetchStepsForMonth(selectedDate);
     }
 
+    // Fetch steps for the whole month and update the view
     private void fetchStepsForMonth(LocalDate date) {
         new Thread(() -> {
+            // Get the first and last date of the month
             YearMonth yearMonth = YearMonth.from(date);
-            LocalDate firstDayOfMonth = yearMonth.atDay(1);
-            LocalDate lastDayOfMonth = yearMonth.atEndOfMonth();
+            LocalDate firstDayOfMonth = yearMonth.atDay(1); // First day of the month
+            LocalDate lastDayOfMonth = yearMonth.atEndOfMonth(); // Last day of the month
 
-            Date startDate = Date.valueOf(firstDayOfMonth.toString());
-            Date endDate = Date.valueOf(lastDayOfMonth.toString());
+            // Correct way to convert LocalDate to java.sql.Date for backward compatibility
+            Date startDate = Date.valueOf(firstDayOfMonth.toString()); // LocalDate to java.sql.Date
+            Date endDate = Date.valueOf(lastDayOfMonth.toString());    // LocalDate to java.sql.Date
 
-            List<Steps> stepsList = database.stepsDao().findStepsByDateRange(startDate, endDate, userId);
+            // Fetch steps data for the month from the database
+            List<Steps> stepsList = database.stepsDao().findStepsByDateRange(startDate, endDate);
 
+            // Update the UI on the main thread
             runOnUiThread(() -> updateCalendarWithSteps(stepsList));
         }).start();
     }
@@ -90,17 +89,22 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         LocalDate firstOfMonth = date.withDayOfMonth(1);
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
+        // Adjust dayOfWeek for a calendar starting on Sunday (if Sunday = 1st day of the week)
         int firstDayIndex = (dayOfWeek == 7) ? 0 : dayOfWeek;
 
         Calendar calendar = Calendar.getInstance();
         for (int i = 1; i <= 42; i++) {
             if (i <= firstDayIndex || i > daysInMonth + firstDayIndex) {
+                // Blank days for padding
                 daysInMonthArray.add(new DayItem("", ""));
             } else {
                 int dayOfMonth = i - firstDayIndex;
                 LocalDate currentDay = date.withDayOfMonth(dayOfMonth);
+
+                // Default steps to 0
                 String steps = " ";
 
+                // Check if we have steps data for this day
                 for (Steps step : stepsList) {
                     calendar.setTime(step.getDate());
                     if (calendar.get(Calendar.DAY_OF_MONTH) == dayOfMonth) {
@@ -109,7 +113,9 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
                     }
                 }
 
+                // Log for debugging
                 Log.d("CalendarActivity", "Steps for " + currentDay + ": " + steps);
+
                 daysInMonthArray.add(new DayItem(String.valueOf(dayOfMonth), steps));
             }
         }

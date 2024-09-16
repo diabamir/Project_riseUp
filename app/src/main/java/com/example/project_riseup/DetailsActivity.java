@@ -1,10 +1,8 @@
 package com.example.project_riseup;
 
 import android.os.Bundle;
-import android.util.Log;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.util.Log;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -23,39 +21,50 @@ public class DetailsActivity extends AppCompatActivity {
     private BarChart barChart;
     private StepsDatabase database;
     private SimpleDateFormat sdf;
-    private long userId;
+
+    // Define custom colors for the bar chart
+    private final int[] chartColors = {
+            0xFF8B80F6, 0xFFCFCCF4, 0xFF1E88FF, 0xFFB1D3F9,
+            0xFF80C1F6, 0xFF62A0EB, 0xFF499AEF, 0xFF216FED
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+        setContentView(R.layout.activity_details);  // Make sure your layout file contains only the BarChart
 
         barChart = findViewById(R.id.barChart);
         database = StepsDatabase.getInstance(this);
 
+        // Use a date format without time for consistent labels
         sdf = new SimpleDateFormat("yyyy-MM-dd");
-        userId = getIntent().getLongExtra("USER_ID", -1);
 
+        // Fetch data and display the bar chart
         fetchStepsDataAndDisplayChart();
     }
 
     private void fetchStepsDataAndDisplayChart() {
         new Thread(() -> {
+            // Get today's date (start of today)
             Date today = getTodayDate();
+
+            // Go back 6 days (total 7 days including today)
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DAY_OF_YEAR, -6);
             Date lastWeek = calendar.getTime();
 
-            List<Steps> stepsList = database.stepsDao().findStepsByDateRange(lastWeek, today, userId);
+            // Fetch steps data from last week to today
+            List<Steps> stepsList = database.stepsDao().findStepsByDateRange(lastWeek, today);
 
             Log.d("DetailsActivity", "Fetching steps between: " + lastWeek + " and " + today);
 
+            // Update UI on the main thread
             runOnUiThread(() -> {
                 if (stepsList != null && !stepsList.isEmpty()) {
                     displayBarChart(stepsList);
                 } else {
                     barChart.setNoDataText("No steps data available for the past week.");
-                    barChart.invalidate();
+                    barChart.invalidate();  // Refresh the chart
                 }
             });
         }).start();
@@ -66,40 +75,60 @@ public class DetailsActivity extends AppCompatActivity {
         ArrayList<String> labels = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
 
+        // Loop over the last 7 days
         for (int i = 0; i < 7; i++) {
             calendar.setTime(new Date());
-            calendar.add(Calendar.DATE, -i);
+            calendar.add(Calendar.DATE, -i);  // Move one day back
             Date day = calendar.getTime();
             String dateLabel = sdf.format(day);
-            labels.add(dateLabel);
+            labels.add(dateLabel);  // Use formatted date as a label
 
+            // Default step count to 0
             int steps = 0;
+
+            // Check if we have steps for this day
             for (Steps step : stepsList) {
                 if (sdf.format(step.getDate()).equals(dateLabel)) {
                     steps = step.getStepsTaken();
+                    Log.d("DetailsActivity", "Steps for " + dateLabel + ": " + steps);  // Log steps data
                     break;
                 }
             }
+
+            // Add the steps data to the chart
             barEntries.add(new BarEntry(i, steps));
         }
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "Steps Count");
+
+        // Set custom colors for the bar chart
+        ArrayList<Integer> colors = new ArrayList<>();
+        for (int i = 0; i < barEntries.size(); i++) {
+            colors.add(chartColors[i % chartColors.length]);  // Cycle through the colors
+        }
+        barDataSet.setColors(colors);
+
         BarData barData = new BarData(barDataSet);
-        barData.setBarWidth(0.8f);
+        barData.setBarWidth(0.8f);  // Set bar width to make bars visible
         barChart.setData(barData);
 
+        // Configure X-axis
         XAxis xAxis = barChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
-        xAxis.setGranularity(1f);
+        xAxis.setGranularity(1f);  // Only show whole numbers on the X-axis
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
+        // Ensure Y-axis starts from 0
         barChart.getAxisLeft().setAxisMinimum(0f);
-        barChart.getAxisRight().setEnabled(false);
+        barChart.getAxisRight().setEnabled(false);  // Disable right Y-axis
+
+        // Refresh the chart
         barChart.invalidate();
     }
 
     private Date getTodayDate() {
         Calendar calendar = Calendar.getInstance();
+        // Set time to start of the day
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);

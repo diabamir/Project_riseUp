@@ -1,45 +1,70 @@
 package com.example.project_riseup;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
 import java.util.Calendar;
 import java.util.Date;
 
 public class StepCountingService extends Service implements SensorEventListener {
 
+    private static final String CHANNEL_ID = "StepCounterChannel";
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
-    private StepsDatabase database;
-    private long userId;
     private int initialStepCount = -1;
     private int stepsTaken = 0;
+    private StepsDatabase database;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         database = StepsDatabase.getInstance(this);
 
         if (stepCounterSensor != null) {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
+
+        startForeground(1, createNotification());
+    }
+
+    private Notification createNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "Step Counter Service",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
+        }
+
+        return new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("Step Counter")
+                .setContentText("Counting your steps in the background.")
+                .setSmallIcon(R.drawable.running)
+                .build();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent != null) {
-            userId = intent.getLongExtra("USER_ID", -1);
-        }
         return START_STICKY;
     }
 
@@ -53,31 +78,15 @@ public class StepCountingService extends Service implements SensorEventListener 
             }
 
             stepsTaken = cumulativeStepCount - initialStepCount;
-
             saveStepsTaken();
+            Log.d("StepCountingService", "Steps counted: " + stepsTaken);
         }
     }
 
     private void saveStepsTaken() {
         Date today = getTodayDate();
-
-        new Thread(() -> {
-            User user = database.userDao().getUserById(userId);
-            if (user != null) {
-                Steps existingSteps = database.stepsDao().findStepsByDate(today, userId);
-                if (existingSteps != null) {
-                    existingSteps.setStepsTaken(stepsTaken);
-                    existingSteps.setInitialStepCount(initialStepCount);
-                    database.stepsDao().insertOrUpdateStep(existingSteps);
-                } else {
-                    Steps newSteps = new Steps(today, initialStepCount, stepsTaken, userId);
-                    database.stepsDao().insertOrUpdateStep(newSteps);
-                }
-                Log.d("StepCountingService", "Steps saved: " + stepsTaken);
-            } else {
-                Log.e("StepCountingService", "Error: User not found for userId: " + userId);
-            }
-        }).start();
+        Steps steps = new Steps(today, initialStepCount, stepsTaken);
+        new Thread(() -> database.stepsDao().insertOrUpdateStep(steps)).start();
     }
 
     private Date getTodayDate() {
@@ -95,7 +104,7 @@ public class StepCountingService extends Service implements SensorEventListener 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (sensorManager != null) {
+        if (sensorManager != null && stepCounterSensor != null) {
             sensorManager.unregisterListener(this);
         }
     }

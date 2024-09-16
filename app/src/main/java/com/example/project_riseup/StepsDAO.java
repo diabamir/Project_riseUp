@@ -12,11 +12,11 @@ import java.util.List;
 public interface StepsDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertOrUpdateStep(Steps steps);
+    void insertOrUpdateStep(Steps step);
 
-    @Query("SELECT * FROM steps WHERE date = :date AND userId = :userId")
-    Steps findStepsByDate(Date date, long userId);
+    @Query("SELECT * FROM steps WHERE date >= :startDate AND date <= :endDate")
+    List<Steps> findStepsByDateRange(Date startDate, Date endDate);
 
-    @Query("SELECT * FROM steps WHERE userId = :userId AND date BETWEEN :startDate AND :endDate")
-    List<Steps> findStepsByDateRange(Date startDate, Date endDate, long userId);
+    @Query("SELECT * FROM steps WHERE date(date) = date(:date)")
+    Steps findStepsByDate(Date date);
 }

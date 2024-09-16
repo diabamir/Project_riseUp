@@ -1,5 +1,6 @@
 package com.example.project_riseup;
 import android.app.Application;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.AndroidViewModel;
@@ -114,13 +115,20 @@ public class GroupViewModel extends AndroidViewModel {
 
     private groupDAO groupDao;
 
+
+
     public GroupViewModel(Application application) {
         super(application);
-
+        Log.d("GroupsViewModel", "Constructor called");
         // Initialize the database and DAO
-        groupDataBase db = groupDataBase.getInstance(application);
-        groupDao = db.groupDao();
-        allGroups = groupDao.getAllGroups();
+        try {
+            groupDataBase db = groupDataBase.getInstance(application);
+            groupDao = db.groupDao();
+            allGroups = groupDao.getAllGroups();
+        }
+        catch (Exception e) {
+            Log.e("GroupsViewModel", "Error initializing ViewModel", e);
+        }
     }
 
     // Fetch all groups from the database

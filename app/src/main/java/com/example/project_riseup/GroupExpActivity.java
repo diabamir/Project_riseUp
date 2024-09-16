@@ -159,7 +159,7 @@ public class GroupExpActivity extends AppCompatActivity {
                         UserDatabase.getInstance(this).userDao().updateUser(user);
 
                         // Start the new activity and pass the userId
-                        Intent nextIntent = new Intent(GroupExpActivity.this, ViewGroupsActivity.class);
+                        Intent nextIntent = new Intent(GroupExpActivity.this, MapActivity.class);
 //                        nextIntent.putExtra("USER_ID", userId);
                         startActivity(nextIntent);
                         // Optional: finish the current activity

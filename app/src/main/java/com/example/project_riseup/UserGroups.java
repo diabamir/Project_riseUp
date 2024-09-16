@@ -73,26 +73,54 @@ public class UserGroups extends AppCompatActivity {
 //        });
 //    }
 
+//    private void fetchGroups() {
+//        userGroupJoinDao.getUserGroups(currentUserId).observe(this, userGroupJoins -> {
+//            List<Group> groups = new ArrayList<>();
+//            if (userGroupJoins != null) {
+//                for (UserGroupJoin join : userGroupJoins) {
+//                    long groupId = join.getGroupId();
+//                    // Use Room's asynchronous query mechanism
+//                    groupDao.getGroupById(groupId).observe(this, group -> {
+//                        if (group != null) {
+//                            groups.add(group);
+//                            // Display the groups once all have been fetched
+//                            if (groups.size() == userGroupJoins.size()) {
+//                                displayGroups(groups, R.id.linearLayoutJoinedGroups);
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        });
+//    }
+
+
     private void fetchGroups() {
         userGroupJoinDao.getUserGroups(currentUserId).observe(this, userGroupJoins -> {
             List<Group> groups = new ArrayList<>();
             if (userGroupJoins != null) {
                 for (UserGroupJoin join : userGroupJoins) {
-                    long groupId = join.getGroupId();
-                    // Use Room's asynchronous query mechanism
-                    groupDao.getGroupById(groupId).observe(this, group -> {
-                        if (group != null) {
-                            groups.add(group);
-                            // Display the groups once all have been fetched
-                            if (groups.size() == userGroupJoins.size()) {
-                                displayGroups(groups, R.id.linearLayoutJoinedGroups);
+                    // Only process the groups with "joined" status
+                    if ("joined".equals(join.getStatus())) {
+                        long groupId = join.getGroupId();
+
+                        // Fetch the group by its ID
+                        groupDao.getGroupById(groupId).observe(this, group -> {
+                            if (group != null) {
+                                groups.add(group);
+
+                                // Once all "joined" groups are fetched, display them
+                                if (groups.size() == userGroupJoins.size()) {
+                                    displayGroups(groups, R.id.linearLayoutJoinedGroups);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
         });
     }
+
 
 
     private LiveData<Group> fetchGroupById(long groupId) {
@@ -147,7 +175,7 @@ public class UserGroups extends AppCompatActivity {
 
             Button actionButton = new Button(this);
             actionButton.setBackgroundColor(Color.parseColor("#AC82E7"));
-            actionButton.setText("Unjoin");
+            actionButton.setText("Remove Group");
             actionButton.setOnClickListener(v -> unjoinGroup(group.getId()));
 
             groupLayout.addView(groupImageView);
@@ -166,13 +194,29 @@ public class UserGroups extends AppCompatActivity {
 
     private void unjoinGroup(long groupId) {
         new Thread(() -> {
+            // Delete the UserGroupJoin entry from the database
             userGroupJoinDao.deleteUserGroupJoin(currentUserId, groupId);
+
             runOnUiThread(() -> {
+                // Immediately remove the group from the list by refetching the joined groups
                 fetchGroups();
+
+                // Show feedback to the user
                 Toast.makeText(UserGroups.this, "Successfully unjoined the group", Toast.LENGTH_SHORT).show();
             });
         }).start();
     }
+
+
+//    private void unjoinGroup(long groupId) {
+//        new Thread(() -> {
+//            userGroupJoinDao.deleteUserGroupJoin(currentUserId, groupId);
+//            runOnUiThread(() -> {
+//                fetchGroups();
+//                Toast.makeText(UserGroups.this, "Successfully unjoined the group", Toast.LENGTH_SHORT).show();
+//            });
+//        }).start();
+//    }
 }
 
 //public class UserGroups extends AppCompatActivity {

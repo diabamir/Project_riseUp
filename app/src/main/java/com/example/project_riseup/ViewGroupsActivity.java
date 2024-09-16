@@ -402,31 +402,34 @@ public class ViewGroupsActivity extends AppCompatActivity implements OnJoinClick
             // Check if there is a LOCATION parameter
             if (intent.hasExtra("LOCATION")) {
                 locationToFilter = intent.getStringExtra("LOCATION");
+                userId = intent.getLongExtra("USER_ID", -1);
                 filterGroupsByLocation(locationToFilter);
             }
-            if (intent.hasExtra("USER_ID")) {
-                userId = intent.getLongExtra("USER_ID", -1);
-            }
+
+//            // Check if there is a USER_ID parameter
+//            if (intent.hasExtra("USER_ID")) {
+//                userId = intent.getLongExtra("USER_ID", -1);
+//            }
+
             // Check if there is a GROUP_ID parameter
-            if (intent.hasExtra("GROUP_ID")) {
+            else if (intent.hasExtra("GROUP_ID")) {
+                userId = intent.getLongExtra("USER_ID", -1);
                 int groupId = intent.getIntExtra("GROUP_ID", -1); // Default to -1 if not found
                 if (groupId != -1) {
                     filterGroupsById(groupId);
-                    btnAddGroup.setVisibility(View.GONE);
+                    btnAddGroup.setVisibility(View.GONE); // Hide the button if a group ID is present
                 } else {
                     Toast.makeText(this, "Invalid Group ID", Toast.LENGTH_SHORT).show();
                 }
-            }
-            // If no filters are set, observe all groups
-            else {
+            } else {
+                // No GROUP_ID provided, observe all groups
                 observeAllGroups();
             }
         } else {
+            // No intent or extras, observe all groups
             observeAllGroups();
         }
-
     }
-
     private void observeAllGroups() {
         groupViewModel.getAllGroups().observe(this, new Observer<List<Group>>() {
             @Override
@@ -466,11 +469,46 @@ public class ViewGroupsActivity extends AppCompatActivity implements OnJoinClick
         });
     }
 
-    //    @Override
+//        @Override
 //    public void onJoinClick(int position) {
 //        Group group = groupAdapter.getGroupAtPosition(position);
 //        // Handle the join click event as needed
 //    }
+//    @Override
+//    public void onJoinClick(int position) {
+//
+//        Group group = groupAdapter.getGroupAtPosition(position);
+//
+//        // Increase the joined member count
+//        int newCount = group.getHowManyJoin() + 1;
+//        group.setHowManyJoin(newCount);
+//
+//
+//        new Thread(() -> {
+//            try {
+//                groupDataBase.getInstance(this).groupDao().updateGroup(group);
+//                // Create a new UserGroupJoin object
+//                UserGroupJoin userGroupJoin = new UserGroupJoin(userId, group.getId(), "joined");
+//
+//                // Insert the UserGroupJoin object into the database
+//                UserGroupJoinDatabase.getInstance(this).UserGroupJoinDao().insert(userGroupJoin);
+//
+//                // Update the UI to reflect the joined group
+//                groupAdapter.notifyItemChanged(position);
+//
+//                // Provide feedback to the user
+//                Toast.makeText(ViewGroupsActivity.this, "You have joined the group!", Toast.LENGTH_SHORT).show();
+//
+//            } catch (Exception e) {
+//                runOnUiThread(() -> {
+//                    Toast.makeText(ViewGroupsActivity.this, "Error !!!", Toast.LENGTH_SHORT).show();
+//                });
+//            }
+//        }).start();
+//
+//
+//    }
+
     @Override
     public void onJoinClick(int position) {
         Group group = groupAdapter.getGroupAtPosition(position);
@@ -479,21 +517,52 @@ public class ViewGroupsActivity extends AppCompatActivity implements OnJoinClick
         int newCount = group.getHowManyJoin() + 1;
         group.setHowManyJoin(newCount);
 
-        groupDataBase.getInstance(this).groupDao().updateGroup(group);
+        new Thread(() -> {
+            try {
+                // Update group in the database
+                groupDataBase.getInstance(this).groupDao().updateGroup(group);
 
-        // Create a new UserGroupJoin object
-        UserGroupJoin userGroupJoin = new UserGroupJoin(userId, group.getId(), "joined");
+                // Create a new UserGroupJoin object
+                UserGroupJoin userGroupJoin = new UserGroupJoin(userId, group.getId(), "joined");
 
-        // Insert the UserGroupJoin object into the database
-        UserGroupJoinDatabase.getInstance(this).UserGroupJoinDao().insert(userGroupJoin);
+                // Insert the UserGroupJoin object into the database
+                UserGroupJoinDatabase.getInstance(this).UserGroupJoinDao().insert(userGroupJoin);
 
-        // Update the UI to reflect the joined group
-        groupAdapter.notifyItemChanged(position);
+                runOnUiThread(() -> {
+                    // Update the UI to reflect the joined group
+                    groupAdapter.notifyItemChanged(position);
 
-        // Provide feedback to the user
-        Toast.makeText(ViewGroupsActivity.this, "You have joined the group!", Toast.LENGTH_SHORT).show();
+                    // Provide feedback to the user
+                    Toast.makeText(ViewGroupsActivity.this, "You have joined the group!", Toast.LENGTH_SHORT).show();
 
+                    // Check join status and update button state
+                    checkJoinStatus(group);
+                });
 
+            } catch (Exception e) {
+                runOnUiThread(() -> {
+                    Toast.makeText(ViewGroupsActivity.this, "Error joining group", Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
     }
+
+
+    private void checkJoinStatus(Group group) {
+        UserGroupJoinDatabase.getInstance(this).UserGroupJoinDao()
+                .getUserGroupJoin(userId, group.getId())
+                .observe(this, userGroupJoin -> {
+                    Button joinButton = findViewById(R.id.joinButton); // Make sure to get the button by its ID
+                    if (userGroupJoin != null && "joined".equals(userGroupJoin.getStatus())) {
+                        joinButton.setText("Joined");
+                        joinButton.setEnabled(false);
+                    } else {
+                        joinButton.setText("Join");
+                        joinButton.setEnabled(true);
+                    }
+                });
+    }
+
+
 
 }

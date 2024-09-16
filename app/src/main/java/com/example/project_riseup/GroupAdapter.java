@@ -244,22 +244,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
             String startTime = group.getStartTime() != null ? group.getStartTime() : "No contact time";
             String endTime = group.getEndTime() != null ? group.getEndTime() : "No contact time";
 
-//            groupTextView.setText("Id: " + group.getId() + "\n" +
-//                    "WorkOut: " + group.getWorkOut() + "\n" +
-//                    "Location: " + group.getLocation() + "\n" +
-//                    "Discribtion: " + group.getDiscribtion() + "\n" +
-//                    "Date: " + date + "\n" +
-//                    "Start time: " + startTime + "\n" +
-//                    "End time: " + endTime + "\n" +
-//                    "Limit Members Number: " + group.getMembersNumber() + "\n" +
-//                    "Joined Members Number: " + group.getHowManyJoin());
-
-
             // Create the full text
             String fullText = "Id: " + group.getId() + "\n" +
                     "Workout: " + group.getWorkOut() + "\n" +
                     "Location: " + group.getLocation() + "\n" +
-                    "Discribtion: " + group.getDiscribtion() + "\n" +
+                    "Description: " + group.getDiscribtion() + "\n" +
                     "Date: " + date + "\n" +
                     "Start time: " + startTime + "\n" +
                     "End time: " + endTime + "\n" +
@@ -269,31 +258,22 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
             // Create a SpannableString
             SpannableString spannableString = new SpannableString(fullText);
 
-            // Set the spans for bolding "Id:", "WorkOut:", and "Location:"
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), fullText.indexOf("Id:"), fullText.indexOf("Id:") + "Id:".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), fullText.indexOf("WorkOut:"), fullText.indexOf("WorkOut:") + "WorkOut:".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), fullText.indexOf("Location:"), fullText.indexOf("Location:") + "Location:".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), fullText.indexOf("Discribtion:"), fullText.indexOf("Location:") + "Location:".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), fullText.indexOf("Date:"), fullText.indexOf("Location:") + "Location:".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), fullText.indexOf("Start time:"), fullText.indexOf("Location:") + "Location:".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), fullText.indexOf("End time:"), fullText.indexOf("Location:") + "Location:".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), fullText.indexOf("Limit Members Number:"), fullText.indexOf("Location:") + "Location:".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), fullText.indexOf("Joined Members Number:"), fullText.indexOf("Location:") + "Location:".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            // Set the spans for bolding each label
+            setBoldSpan(spannableString, "Id:");
+            setBoldSpan(spannableString, "Workout:");
+            setBoldSpan(spannableString, "Location:");
+            setBoldSpan(spannableString, "Description:");
+            setBoldSpan(spannableString, "Date:");
+            setBoldSpan(spannableString, "Start time:");
+            setBoldSpan(spannableString, "End time:");
+            setBoldSpan(spannableString, "Limit Members Number:");
+            setBoldSpan(spannableString, "Joined Members Number:");
 
             // Set the styled text to the TextView
             groupTextView.setText(spannableString);
 
-
             groupPic.setImageResource(group.getImageGroup());
 
-//            joinButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (listener != null) {
-//                        listener.onJoinClick(getAdapterPosition());
-//                    }
-//                }
-//            });
             joinButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -306,8 +286,17 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
                     }
                 }
             });
-
         }
+
+        // Helper method to set bold span
+        private void setBoldSpan(SpannableString spannableString, String label) {
+            int start = spannableString.toString().indexOf(label);
+            if (start >= 0) {
+                int end = start + label.length();
+                spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+
     }
 }
 //package com.example.project_riseup;

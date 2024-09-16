@@ -43,14 +43,14 @@ public class AddGroupActivity extends AppCompatActivity {
     private Button buttonAdd;
     private DatePicker datePicker;
     private TimePicker starttimePicker,endtimePicker;
-    private GroupApi groupApi;
+//    private GroupApi groupApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
 
-        groupApi = ApiClient.getClient().create(GroupApi.class);
+//        groupApi = ApiClient.getClient().create(GroupApi.class);
 
         ImageView activityImageView = findViewById(R.id.activityImageView);
         TextView activityTextView = findViewById(R.id.activityTextView);
@@ -101,30 +101,43 @@ public class AddGroupActivity extends AppCompatActivity {
 
 
             if (ddate != null) {
+
                 Group group = new Group(0,work, location, discription,startTm,endTm,ddate,(int)userId,null, LimitMembersNumber,0,imageGroupResourceId);
-                Call<Group> call = groupApi.insertGroup(group);
-                call.enqueue(new Callback<Group>() {
-                    @Override
-                    public void onResponse(Call<Group> call, Response<Group> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(AddGroupActivity.this, "Group added successfully", Toast.LENGTH_SHORT).show();
-                            Intent viewGroupsIntent = new Intent(AddGroupActivity.this, ViewGroupsActivity.class);
-                            viewGroupsIntent.putExtra("LOCATION", location);
-                            startActivity(viewGroupsIntent);
-
-                        } else {
-                            Toast.makeText(AddGroupActivity.this, "Failed to add Group", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Group> call, Throwable t) {
-                        Toast.makeText(AddGroupActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "onFailure: " + t.getMessage());
-
-                    }
+                Executors.newSingleThreadExecutor().execute(() -> {
+                    groupDataBase.getInstance(getApplicationContext()).groupDao().insertGroup(group);
+//                    runOnUiThread(this::finish);
+                    runOnUiThread(() -> {
+                        // After adding the group, navigate to ViewGroupsActivity with the location filter
+                        Intent viewGroupsIntent = new Intent(AddGroupActivity.this, ViewGroupsActivity.class);
+                        viewGroupsIntent.putExtra("LOCATION", location); // Pass the location as an extra
+                        viewGroupsIntent.putExtra("USER_ID", userId);
+                        startActivity(viewGroupsIntent);
+//                        finish(); // Finish this activity to go back to the previous one
+                    });
                 });
+//                Call<Group> call = groupApi.insertGroup(group);
+//                call.enqueue(new Callback<Group>() {
+//                    @Override
+//                    public void onResponse(Call<Group> call, Response<Group> response) {
+//                        if (response.isSuccessful()) {
+//                            Toast.makeText(AddGroupActivity.this, "Group added successfully", Toast.LENGTH_SHORT).show();
+//                            Intent viewGroupsIntent = new Intent(AddGroupActivity.this, ViewGroupsActivity.class);
+//                            viewGroupsIntent.putExtra("LOCATION", location);
+//                            startActivity(viewGroupsIntent);
+//
+//                        } else {
+//                            Toast.makeText(AddGroupActivity.this, "Failed to add Group", Toast.LENGTH_SHORT).show();
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Group> call, Throwable t) {
+//                        Toast.makeText(AddGroupActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Log.d(TAG, "onFailure: " + t.getMessage());
+//
+//                    }
+//                });
 
 
 

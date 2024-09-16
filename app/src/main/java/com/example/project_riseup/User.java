@@ -36,6 +36,8 @@ public class User {
     @TypeConverters(Converters.class)
     private List<Nutrition> nutritionList;
 
+    private Hydration hydration;
+
     public User(){
 
     }

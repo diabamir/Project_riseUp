@@ -94,7 +94,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 // Navigate to HydrationActivity
                 Intent intent = new Intent(HomePage.this, HydrationActivity.class);
-//                intent.putExtra("USER_ID", userId);  // Pass the user ID to the hydration
+                intent.putExtra("USER_ID", userId);  // Pass the user ID to the hydration
                 startActivity(intent);
             }
         });

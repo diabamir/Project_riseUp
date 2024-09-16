@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".HydrationActivity">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView4"
@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/textViewWater"
-        android:text="water drinked in ml"
+        android:text="water drinked ml + of water"
         android:gravity="center"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -42,17 +42,19 @@
         android:id="@+id/motivateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="keep hydrated / well done"
+        android:text="keep hydrated / well done!"
         android:gravity="center"
         android:layout_marginBottom="20dp"
         android:textStyle="bold"
         android:textColor="@color/gray"/>
 
+    <!-- Dynamic height allocation to fit screen -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:layout_weight="1"
         android:layout_marginBottom="20dp">
 
         <com.example.project_riseup.MyView
@@ -115,19 +117,15 @@
         android:text="💧 Add Drink"
         android:backgroundTint="@color/appColor"/>
 
-
-
-
+    <!-- Bottom Bar -->
     <LinearLayout
         android:id="@+id/bottomBar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_gravity="bottom"
+        android:background="@color/white">
 
         <ImageButton
             android:id="@+id/homeImageButton"
@@ -145,7 +143,7 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@drawable/groups_button_state"
-            android:onClick="onGroupsClicked" />
+            android:onClick="onGroupsClicked"/>
 
         <ImageButton
             android:id="@+id/calendarImageButton"
@@ -154,7 +152,7 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@drawable/calendar_button_state"
-            android:onClick="onCalendarClicked" />
+            android:onClick="onCalendarClicked"/>
 
         <ImageButton
             android:id="@+id/profileImageButton"
@@ -164,8 +162,177 @@
             android:src="@drawable/profile_button_state"
             android:background="@color/white"
             android:onClick="onProfileClicked"/>
-
     </LinearLayout>
 
-
 </LinearLayout>
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="16dp"-->
+<!--    tools:context=".HydrationActivity">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="HYDRATION"-->
+<!--        android:textColor="@color/appColor"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginTop="20dp"/>-->
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Today you took :"-->
+<!--        android:textSize="30sp"-->
+<!--        android:textStyle="bold"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textViewWater"-->
+<!--        android:text="water drinked in ml"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="25sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/appColor"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/motivateTextView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="keep hydrated / well done"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/gray"/>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_marginBottom="20dp">-->
+
+<!--        <com.example.project_riseup.MyView-->
+<!--            android:id="@+id/my_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/bubble" />-->
+
+<!--    </LinearLayout>-->
+
+<!--    &lt;!&ndash; Horizontal LinearLayout for buttons &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/decrease_button"-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:backgroundTint="@color/appColor"-->
+<!--            android:text="-"-->
+<!--            android:textSize="20sp"/>-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/imageButton"-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="16dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:contentDescription="Watercupbutton"-->
+<!--            app:srcCompat="@drawable/watercup"/>-->
+
+<!--        <Button-->
+<!--            android:id="@+id/increase_button"-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:backgroundTint="@color/appColor"-->
+<!--            android:textSize="20sp"-->
+<!--            android:text="+" />-->
+<!--    </LinearLayout>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/cupText"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="100 ml"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginTop="10dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/addDrinkButton"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="💧 Add Drink"-->
+<!--        android:backgroundTint="@color/appColor"/>-->
+
+
+
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/bottomBar"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center"-->
+<!--        android:background="@color/white"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/homeImageButton"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:src="@drawable/home_button_state"-->
+<!--            android:background="@color/white"-->
+<!--            android:onClick="onHomeClicked"/>-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/groupsImageButton"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@color/white"-->
+<!--            android:src="@drawable/groups_button_state"-->
+<!--            android:onClick="onGroupsClicked" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/calendarImageButton"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@color/white"-->
+<!--            android:src="@drawable/calendar_button_state"-->
+<!--            android:onClick="onCalendarClicked" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/profileImageButton"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:src="@drawable/profile_button_state"-->
+<!--            android:background="@color/white"-->
+<!--            android:onClick="onProfileClicked"/>-->
+
+<!--    </LinearLayout>-->
+
+
+<!--</LinearLayout>-->

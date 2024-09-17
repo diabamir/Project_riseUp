@@ -169,6 +169,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Calendar;
@@ -235,7 +236,7 @@ public class HomePage extends AppCompatActivity {
 
         // Set click listeners for CardViews and buttons
         findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, StepMain.class)));
-        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
+//        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, ExerciseActivity.class))); // Navigate to ExerciseActivity
         findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, mealActivity.class)));
 
@@ -252,12 +253,6 @@ public class HomePage extends AppCompatActivity {
         } else {
             greetingText.setText("User ID not found in SharedPreferences");
         }
-
-        // Set click listeners for CardViews
-//        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, StepMain.class)));
-//        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
-        findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
-        findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
 
         if (userId == -1) {
             greetingText.setText("User ID not found in SharedPreferences");
@@ -288,8 +283,6 @@ public class HomePage extends AppCompatActivity {
         //calendarButton.setOnClickListener(this::onCalendarClicked);
         profileButton.setOnClickListener(this::onProfileClicked);
 
-        // Set default selected button
-        homeButton.setSelected(true);
 
         // Initialize the ConstraintLayout (hydration card)
         CardView hydrationCard = findViewById(R.id.cardStayHydrated);

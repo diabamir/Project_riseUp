@@ -63,8 +63,6 @@ public class UserGroups extends AppCompatActivity {
         calendarButton = findViewById(R.id.calendarImageButton);
         profileButton = findViewById(R.id.profileImageButton);
 
-        // Set the home button as selected by default, since this is the HomeActivity
-        homeButton.setSelected(true);
 
         // Set click listeners for each button
         homeButton.setOnClickListener(this::onHomeClicked);
@@ -86,11 +84,12 @@ public class UserGroups extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void onCalendarClicked(View view) {
-//        updateButtonStates(calendarButton);
-//        Intent intent = new Intent(this, CalendarActivity.class);
-//        startActivity(intent);
-//    }
+    public void onCalendarClicked(View view) {
+        updateButtonStates(calendarButton);
+        Intent intent = new Intent(this, CalendarActivity.class);
+        intent.putExtra("USER_ID", currentUserId);
+        startActivity(intent);
+    }
 
     public void onProfileClicked(View view) {
         updateButtonStates(profileButton);

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,14 +12,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class HomePage extends AppCompatActivity {
     ImageButton addWater, homeButton, groupsButton, calendarButton, profileButton;
-    TextView greetingText;
+    TextView greetingText, moveDailyValue;
     UserViewModel userViewModel;
-    Button profilebutton;
     ImageView profileviewphoto;
     long userId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,29 +34,23 @@ public class HomePage extends AppCompatActivity {
         profileButton = findViewById(R.id.profileImageButton);
         addWater = findViewById(R.id.addWater);
         greetingText = findViewById(R.id.greetingText);
+        moveDailyValue = findViewById(R.id.moveDailyValue);
+        profileviewphoto = findViewById(R.id.profileImage);
 
         // Set the home button as selected by default
         homeButton.setSelected(true);
-
-
-        // Initialize the ImageView for profile photo (Ensure this is in your XML layout)
-        profileviewphoto = findViewById(R.id.profileImage);
 
         // Retrieve the user ID from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
         userId = sharedPreferences.getLong("USER_ID", -1);
 
         if (userId != -1) {
-            // Initialize ViewModel and fetch user data
             userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
             new Thread(() -> {
                 User user = userViewModel.getUserById(userId);
                 runOnUiThread(() -> {
                     if (user != null) {
                         greetingText.setText("Hello, " + user.getFirstName() + "!");
-
-                        // Set the appropriate profile photo based on gender
                         if (user.getGender().equalsIgnoreCase("female")) {
                             profileviewphoto.setImageResource(R.drawable.womanprofile);
                         } else if (user.getGender().equalsIgnoreCase("male")) {
@@ -71,56 +65,75 @@ public class HomePage extends AppCompatActivity {
             }).start();
         } else {
             greetingText.setText("User ID not found in SharedPreferences");
-            // Optionally, log an error or redirect the user to the login page
         }
 
-        // Set click listeners for CardViews
-        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
+        // Fetch steps for today and update the TextView
+        fetchStepsForToday();
+
+        // Set click listeners for CardViews and buttons
+        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, StepMain.class)));
         findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
 
-        // Handle addWater button click
         addWater.setOnClickListener(v -> Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show());
 
-        // Set click listeners for navigation buttons
         homeButton.setOnClickListener(this::onHomeClicked);
         groupsButton.setOnClickListener(this::onGroupsClicked);
         profileButton.setOnClickListener(this::onProfileClicked);
+        calendarButton.setOnClickListener(v -> startActivity(new Intent(HomePage.this, CalendarActivity.class)));
     }
 
+    private void fetchStepsForToday() {
+        StepsDatabase database = StepsDatabase.getInstance(this);
+        Date today = getTodayDate(); // Get today's date (at midnight)
 
+        new Thread(() -> {
+            // Fetch today's steps from the database
+            Steps todaySteps = database.stepsDao().findStepsByDate(today);
 
-    // Methods to handle button clicks
+            runOnUiThread(() -> {
+                if (todaySteps != null) {
+                    moveDailyValue.setText(todaySteps.getStepsTaken() + " steps");
+                } else {
+                    moveDailyValue.setText("0 steps");
+                }
+            });
+        }).start();
+    }
+
+    private Date getTodayDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();  // Return today's date at midnight
+    }
+
     public void onHomeClicked(View view) {
-        // No need to start the HomeActivity again, just update button state
         updateButtonStates(homeButton);
     }
 
     public void onGroupsClicked(View view) {
         updateButtonStates(groupsButton);
-
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
 
     public void onProfileClicked(View view) {
         updateButtonStates(profileButton);
         Intent intent = new Intent(this, Profile.class);
-        intent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
 
-    // Method to update the selected state of the buttons
     private void updateButtonStates(ImageButton selectedButton) {
-        // Deselect all buttons
         homeButton.setSelected(false);
         groupsButton.setSelected(false);
         calendarButton.setSelected(false);
         profileButton.setSelected(false);
-
-        // Set the selected button to true
         selectedButton.setSelected(true);
     }
 }

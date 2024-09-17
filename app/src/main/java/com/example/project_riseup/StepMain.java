@@ -29,9 +29,11 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
     private float stepLengthInMeter = 0.762f;
     private int stepCountTarget = 200;
     private TextView stepCountTargetTextview;
-    private StepsDatabase database;
     private Button details;
     private Button calendarButton;
+
+    // Database instance
+    private StepsDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +48,23 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
         progressBar = findViewById(R.id.progressBar);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+
+        // Initialize Room database
         database = StepsDatabase.getInstance(this);
 
         progressBar.setMax(stepCountTarget);
         stepCountTargetTextview.setText("Step Goal: " + stepCountTarget);
 
-        Intent serviceIntent = new Intent(this, StepCountingService.class);
+        // Load the initial step count (if exists) when the app starts
+        loadInitialStepCount();
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            startForegroundService(serviceIntent);
-        } else {
-            startService(serviceIntent);
-        }
-
+        // Open details activity when "details" button is clicked
         details.setOnClickListener(v -> {
             Intent intent = new Intent(StepMain.this, DetailsActivity.class);
             startActivity(intent);
         });
 
+        // Open calendar activity when "calendarButton" is clicked
         calendarButton.setOnClickListener(v -> {
             Intent intent = new Intent(StepMain.this, CalendarActivity.class);
             startActivity(intent);
@@ -76,6 +77,7 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
             int cumulativeStepCount = (int) sensorEvent.values[0];
 
             if (initialStepCount == -1) {
+                // Set the initial step count from the sensor
                 initialStepCount = cumulativeStepCount;
                 saveInitialStepCount();
             }
@@ -92,20 +94,33 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
             float distanceInKm = (stepsTaken * stepLengthInMeter) / 1000;
             distanceText.setText(String.format(Locale.getDefault(), "Distance: %.2f km", distanceInKm));
 
+            // Save steps taken for today
             saveStepsTaken();
         }
     }
 
-    private void saveInitialStepCount() {
-        Date today = getTodayDate();
-        Steps steps = new Steps(today, initialStepCount, 0);
-        new Thread(() -> database.stepsDao().insertOrUpdateStep(steps)).start();
-    }
-
     private void saveStepsTaken() {
+        // Save today's steps to Room database
         Date today = getTodayDate();
         Steps steps = new Steps(today, initialStepCount, stepsTaken);
-        new Thread(() -> database.stepsDao().insertOrUpdateStep(steps)).start();
+
+        new Thread(() -> {
+            database.stepsDao().insertOrUpdateStep(steps);
+        }).start();
+    }
+
+    private void saveInitialStepCount() {
+        // Save the initial step count to SharedPreferences
+        getSharedPreferences("StepPrefs", MODE_PRIVATE)
+                .edit()
+                .putInt("initialStepCount", initialStepCount)
+                .apply();
+    }
+
+    private void loadInitialStepCount() {
+        // Load the initial step count from SharedPreferences
+        initialStepCount = getSharedPreferences("StepPrefs", MODE_PRIVATE)
+                .getInt("initialStepCount", -1);
     }
 
     private Date getTodayDate() {
@@ -126,8 +141,8 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         if (stepCounterSensor != null) {
             sensorManager.unregisterListener(this);
         }
@@ -136,10 +151,9 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Intent serviceIntent = new Intent(this, StepCountingService.class);
-        stopService(serviceIntent);
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {}
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
 }

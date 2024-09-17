@@ -78,6 +78,7 @@ public class Profile extends AppCompatActivity {
     private void setupNavigationButtons() {
         homeButton.setOnClickListener(view -> navigateToActivity(HomePage.class));
         groupsButton.setOnClickListener(view -> navigateToActivity(MapActivity.class));
+        calendarButton.setOnClickListener(view -> navigateToActivity(CalendarActivity.class));
         profileButton.setOnClickListener(view -> updateButtonStates(profileButton));
     }
 

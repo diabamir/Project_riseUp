@@ -175,7 +175,7 @@ public class AddGroupActivity extends AppCompatActivity {
         // Set click listeners for each button
         homeButton.setOnClickListener(this::onHomeClicked);
         groupsButton.setOnClickListener(this::onGroupsClicked);
-//        calendarButton.setOnClickListener(this::onCalendarClicked);
+        calendarButton.setOnClickListener(v -> startActivity(new Intent(this, CalendarActivity.class)));
         profileButton.setOnClickListener(this::onProfileClicked);
     }
     // Methods to handle button clicks

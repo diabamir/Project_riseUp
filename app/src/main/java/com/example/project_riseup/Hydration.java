@@ -17,6 +17,7 @@ public class Hydration {
 
     private String drinkDate;
 
+
     // Constructors, Getters, and Setters
     public Hydration() {}
 

@@ -26,4 +26,5 @@ public abstract class HydrationDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
 }

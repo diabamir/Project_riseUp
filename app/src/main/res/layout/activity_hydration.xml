@@ -118,6 +118,7 @@
         android:text="💧 Add Drink"
         android:backgroundTint="@color/appColor"/>
 
+
     <!-- Bottom Bar -->
     <LinearLayout
         android:id="@+id/bottomBar"

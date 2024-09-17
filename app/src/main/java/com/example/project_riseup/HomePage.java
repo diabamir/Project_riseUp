@@ -231,7 +231,6 @@ public class HomePage extends AppCompatActivity {
         //calendarButton.setOnClickListener(this::onCalendarClicked);
         profileButton.setOnClickListener(this::onProfileClicked);
 
-
         // Set default selected button
         homeButton.setSelected(true);
 

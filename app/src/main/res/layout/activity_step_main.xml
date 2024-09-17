@@ -82,11 +82,8 @@
         android:id="@+id/details"
         android:layout_width="195dp"
         android:layout_height="55dp"
-        android:text="Details" />
+        android:text="Details"
+        android:background="@drawable/rounded_button" />
 
-    <Button
-        android:id="@+id/calendarButton"
-        android:layout_width="195dp"
-        android:layout_height="55dp"
-        android:text="Calendar" />
+
 </LinearLayout>

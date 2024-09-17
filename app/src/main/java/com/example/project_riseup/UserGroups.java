@@ -111,44 +111,6 @@ public class UserGroups extends AppCompatActivity {
         selectedButton.setSelected(true);
     }
 
-//    private void fetchGroups() {
-//        userGroupJoinDao.getUserGroups(currentUserId).observe(this, userGroupJoins -> {
-//            List<Group> groups = new ArrayList<>();
-//            new Thread(() -> {
-//                for (UserGroupJoin join : userGroupJoins) {
-//                    long groupId = join.getGroupId();
-//                    Group group = fetchGroupById(groupId);
-//                    if (group != null) {
-//                        groups.add(group);
-//                    }
-//                }
-//                runOnUiThread(() -> displayGroups(groups, R.id.linearLayoutJoinedGroups));
-//            }).start();
-//        });
-//    }
-
-//    private void fetchGroups() {
-//        userGroupJoinDao.getUserGroups(currentUserId).observe(this, userGroupJoins -> {
-//            List<Group> groups = new ArrayList<>();
-//            if (userGroupJoins != null) {
-//                for (UserGroupJoin join : userGroupJoins) {
-//                    long groupId = join.getGroupId();
-//                    // Use Room's asynchronous query mechanism
-//                    groupDao.getGroupById(groupId).observe(this, group -> {
-//                        if (group != null) {
-//                            groups.add(group);
-//                            // Display the groups once all have been fetched
-//                            if (groups.size() == userGroupJoins.size()) {
-//                                displayGroups(groups, R.id.linearLayoutJoinedGroups);
-//                            }
-//                        }
-//                    });
-//                }
-//            }
-//        });
-//    }
-
-
     private void fetchGroups() {
         userGroupJoinDao.getUserGroups(currentUserId).observe(this, userGroupJoins -> {
             List<Group> groups = new ArrayList<>();

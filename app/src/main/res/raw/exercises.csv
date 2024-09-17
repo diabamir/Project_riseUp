@@ -1,0 +1,348 @@
+ID,Description,Type,Level
+1,"Push-ups: A classic upper-body exercise that targets the chest, shoulders, triceps, and core muscles.",Strength,Beginner
+2,"Squats: A fundamental lower-body exercise that targets the thighs, hips, and buttocks.",Strength,Intermediate
+5,"Plank: A core-strengthening exercise that engages the abdominal muscles, back, and shoulders.",Strength,Advanced
+6,"Burpees: A high-intensity full-body exercise that improves strength, cardio, and agility.",Strength,Intermediate
+8,"Swimming: A low-impact cardiovascular exercise that strengthens the whole body, especially the shoulders, back, and legs.",Cardio,Intermediate
+9,"Boxing: A cardio and strength exercise that improves endurance, hand-eye coordination, and builds upper-body strength.",Cardio,Advanced
+10,"Lunges: A lower-body exercise that targets the thighs, glutes, and calves.",Strength,Beginner
+11,"Deadlifts: A compound strength exercise targeting the back, legs, and core.",Strength,Advanced
+12,"Yoga: A flexibility and mindfulness exercise that helps with balance, strength, and relaxation.",Flexibility,Beginner
+13,"Cycling: A cardio exercise that targets leg muscles and improves cardiovascular fitness.",Cardio,Intermediate
+14,"Bench Press: A strength exercise targeting the chest, shoulders, and triceps.",Strength,Advanced
+15,"Mountain Climbers: A high-intensity cardio and strength exercise targeting core and leg muscles.",Cardio,Intermediate
+16,"Pull-ups: A bodyweight strength exercise that targets the back and biceps.",Strength,Advanced
+17,"Pilates: A core-focused exercise that helps with flexibility, strength, and balance.",Flexibility,Intermediate
+18,"Rowing: A full-body cardio and strength exercise that improves endurance and muscle tone.",Cardio,Intermediate
+19,"Kettlebell Swings: A dynamic exercise that targets the hips, legs, and core.",Strength,Intermediate
+20,"Sprints: A high-intensity cardio exercise that boosts speed, endurance, and leg strength.",Cardio,Advanced
+21,"Overhead Press: A strength exercise targeting the shoulders and triceps.",Strength,Advanced
+22,"Lat Pulldown: A strength exercise that targets the back muscles, particularly the lats.",Strength,Intermediate
+23,"Box Jumps: A plyometric exercise that improves leg power and cardiovascular endurance.",Strength,Intermediate
+24,"Leg Press: A machine-based exercise that targets the quadriceps, hamstrings, and glutes.",Strength,Intermediate
+25,"Dumbbell Curls: A strength exercise that isolates the biceps.",Strength,Beginner
+26,"Russian Twists: A core exercise that targets the obliques and improves rotational strength.",Strength,Beginner
+27,"Leg Raises: A core exercise that targets the lower abdominal muscles.",Strength,Beginner
+28,"Elliptical: A low-impact cardio exercise that targets the legs and improves cardiovascular health.",Cardio,Intermediate
+29,"Treadmill Walking: A low-intensity cardio exercise that improves heart health and leg endurance.",Cardio,Beginner
+30,"Skating: A cardio exercise that improves leg strength and balance.",Cardio,Intermediate
+31,"Climbing Stairs: A cardio exercise that strengthens the legs and glutes while improving heart health.",Cardio,Intermediate
+32,"Side Plank: A core exercise that targets the obliques and improves lateral stability.",Strength,Beginner
+33,"Battle Ropes: A high-intensity exercise that improves cardio and upper-body strength.",Strength,Intermediate
+34,"TRX Rows: A suspension training exercise that targets the back and arms.",Strength,Intermediate
+35,"Burpee to Pull-up: A compound exercise that improves cardio and full-body strength.",Strength,Advanced
+36,"Hip Thrusts: A strength exercise that targets the glutes and hamstrings.",Strength,Intermediate
+37,"Bodyweight Squats: A beginner-level strength exercise that targets the legs and glutes.",Strength,Beginner
+38,"Kickboxing: A high-intensity cardio and strength workout that improves coordination and endurance.",Cardio,Advanced
+39,"Stairmaster: A cardio machine that simulates stair climbing and improves leg strength and endurance.",Cardio,Intermediate
+40,"Jump Rope: A high-intensity cardio exercise that improves agility and cardiovascular endurance.",Cardio,Intermediate
+41,"Push-up to Plank: A core and upper-body strength exercise.",Strength,Intermediate
+42,"Medicine Ball Slams: A dynamic strength and cardio exercise targeting the core and upper body.",Strength,Intermediate
+43,"High Knees: A cardio exercise that improves leg strength and cardiovascular fitness.",Cardio,Beginner
+44,"Weighted Lunges: A strength exercise that targets the legs and glutes with added resistance.",Strength,Intermediate
+45,"Single-Leg Deadlift: A balance and strength exercise that targets the hamstrings and glutes.",Strength,Advanced
+46,"Barbell Rows: A strength exercise that targets the upper and lower back.",Strength,Intermediate
+47,"Jump Squats: A plyometric exercise that improves leg strength and explosive power.",Strength,Advanced
+48,"Incline Bench Press: A chest-focused strength exercise.",Strength,Intermediate
+49,"Plyo Push-ups: A high-intensity strength exercise that builds explosive power in the upper body.",Strength,Advanced
+50,"Walking Lunges: A dynamic leg exercise that improves balance and strength.",Strength,Beginner
+51,"Core Rotations: A core exercise that improves strength and flexibility in the torso.",Flexibility,Beginner
+52,"Skater Jumps: A plyometric cardio exercise that improves leg power and agility.",Cardio,Intermediate
+53,"Farmers Walk: A strength exercise that targets the grip, core, and legs.",Strength,Intermediate
+54,"Windshield Wipers: A core exercise that targets the obliques and lower abdominal muscles.",Strength,Advanced
+55,"Bear Crawl: A full-body exercise that improves mobility, strength, and coordination.",Strength,Beginner
+56,"Resistance Band Rows: A strength exercise that targets the back muscles using bands.",Strength,Beginner
+57,"Jumping Lunges: A plyometric exercise that targets the legs and improves balance.",Strength,Advanced
+58,"Wall Sit: A lower-body endurance exercise that strengthens the thighs and glutes.",Strength,Beginner
+59,"Kettlebell Deadlifts: A lower-body strength exercise that targets the hamstrings and glutes.",Strength,Beginner
+60,"Seated Cable Rows: A strength exercise that targets the back muscles.",Strength,Intermediate
+61,"Speed Skaters: A cardio and agility exercise that improves leg strength and endurance.",Cardio,Intermediate
+62,"Dips: A strength exercise that targets the triceps and shoulders.",Strength,Intermediate
+63,"Ab Wheel Rollouts: A core exercise that targets the entire abdominal region.",Strength,Advanced
+64,"Reverse Crunches: A core exercise that targets the lower abs.",Strength,Beginner
+65,"Incline Push-ups: A beginner-friendly push-up variation that reduces difficulty.",Strength,Beginner
+66,"Kettlebell Snatches: A dynamic strength exercise that targets the entire body.",Strength,Advanced
+67,"Barbell Squats: A strength exercise that targets the legs and glutes.",Strength,Advanced
+68,"Inverted Rows: A bodyweight exercise that targets the upper back and arms.",Strength,Beginner
+69,"Tuck Jumps: A high-intensity plyometric exercise that builds explosive leg power.",Strength,Advanced
+70,"Lat Raises: A shoulder-focused strength exercise.",Strength,Intermediate
+71,"Jump Squats: A plyometric exercise that builds explosive leg strength.",Strength,Intermediate
+72,"Turkish Get-Up: A complex strength exercise that targets the whole body.",Strength,Advanced
+73,"Step-Ups: A leg-focused strength exercise that improves balance and coordination.",Strength,Beginner
+74,"Scissor Kicks: A core exercise that targets the lower abs.",Strength,Beginner
+75,"Bicep Curls: A strength exercise that isolates the biceps.",Strength,Beginner
+76,"Pistol Squats: A challenging single-leg strength exercise that targets the glutes and quads.",Strength,Advanced
+77,"Calf Raises: A strength exercise that isolates the calf muscles.",Strength,Beginner
+78,"Band Pull-Aparts: A shoulder and upper-back exercise using resistance bands.",Strength,Beginner
+79,"Glute Bridges: A lower-body strength exercise that targets the glutes and hamstrings.",Strength,Beginner
+80,"Thrusters: A full-body strength exercise combining a squat and an overhead press.",Strength,Intermediate
+81,"Chest Flyes: A strength exercise that targets the chest using dumbbells.",Strength,Intermediate
+82,"Single-Leg Squats: A lower-body strength exercise that improves balance and glute activation.",Strength,Intermediate
+83,"Battle Ropes Waves: A full-body exercise that improves upper-body endurance and cardiovascular fitness.",Strength,Intermediate
+84,"Push-Press: A strength exercise that combines a shoulder press with leg drive.",Strength,Advanced
+85,"Lateral Lunges: A leg exercise that improves lateral movement and flexibility.",Strength,Beginner
+86,"Ab Rollouts: A core exercise using an ab wheel or barbell for resistance.",Strength,Advanced
+87,"Leg Curls: A machine-based strength exercise targeting the hamstrings.",Strength,Intermediate
+88,"Stepmill: A cardio machine that simulates stair climbing for leg strength and endurance.",Cardio,Intermediate
+89,"Medicine Ball Toss: A dynamic exercise that builds explosive power in the core and upper body.",Strength,Intermediate
+90,"Standing Calf Raises: A leg exercise that targets the calf muscles.",Strength,Beginner
+91,"Push-up Jacks: A cardio and strength combination exercise that targets the upper body and legs.",Strength,Intermediate
+92,"Cable Kickbacks: A lower-body exercise that targets the glutes.",Strength,Intermediate
+93,"Wall Push-ups: A beginner variation of push-ups using a wall for support.",Strength,Beginner
+94,"Kettlebell Clean and Press: A full-body strength exercise that improves coordination and power.",Strength,Advanced
+95,"Plyo Lunges: A plyometric leg exercise that improves explosive strength.",Strength,Advanced
+96,"Oblique Crunches: A core exercise that targets the oblique muscles.",Strength,Beginner
+97,"Leg Extension: A machine-based leg exercise targeting the quadriceps.",Strength,Intermediate
+98,"Fire Hydrants: A glute-focused exercise that improves hip mobility.",Strength,Beginner
+99,"Cable Crossovers: A chest-focused strength exercise using cables.",Strength,Intermediate
+100,"Wide-Grip Pull-ups: A back-focused strength exercise that targets the lats.",Strength,Advanced
+101,"Jump Lunges: A plyometric exercise that improves explosive leg strength.",Strength,Advanced
+102,"Push-up Variations: A strength exercise with modified push-up forms to target different muscles.",Strength,Intermediate
+103,"Incline Dumbbell Press: A chest exercise that targets the upper pectoral muscles.",Strength,Intermediate
+104,"Decline Push-ups: A challenging push-up variation to target upper chest and shoulders.",Strength,Intermediate
+105,"Handstand Push-ups: A bodyweight strength exercise that targets shoulders and arms.",Strength,Advanced
+106,"Kettlebell Goblet Squat: A full-body strength exercise focusing on the legs and core.",Strength,Intermediate
+107,"Resistance Band Bicep Curls: A strength exercise that isolates the biceps using bands.",Strength,Beginner
+108,"Prone Cobras: A back exercise that strengthens the posterior chain.",Flexibility,Beginner
+109,"Lateral Band Walks: A leg exercise that strengthens the outer hips and thighs.",Strength,Intermediate
+110,"Decline Sit-ups: A core exercise that targets the lower abs.",Strength,Intermediate
+111,"Mountain Climbers with Twist: A cardio and core exercise that targets obliques and increases heart rate.",Cardio,Intermediate
+112,"Overhead Squats: A full-body strength exercise that improves mobility and coordination.",Strength,Advanced
+113,"Dead Hangs: A grip-strengthening exercise from a bar.",Strength,Beginner
+114,"Flutter Kicks: A core exercise that targets the lower abs.",Strength,Beginner
+115,"Banded Pull-Throughs: A posterior chain exercise targeting hamstrings and glutes.",Strength,Intermediate
+116,"Cable Crunches: A core exercise using a cable machine to target the abs.",Strength,Intermediate
+117,"Lying Leg Curls: A machine-based hamstring exercise.",Strength,Intermediate
+118,"Single-Arm Dumbbell Rows: A back exercise that targets the lats.",Strength,Intermediate
+119,"Skull Crushers: A strength exercise that isolates the triceps using a barbell or dumbbells.",Strength,Intermediate
+120,"Arnold Press: A shoulder press variation that targets all three deltoid heads.",Strength,Intermediate
+121,"Suitcase Carry: A unilateral exercise that targets grip strength and core stability.",Strength,Intermediate
+122,"T-Bar Rows: A strength exercise that targets the back, especially the middle and lower traps.",Strength,Intermediate
+123,"Reverse Flyes: A shoulder exercise that targets the rear delts.",Strength,Beginner
+124,"Zercher Squats: A leg exercise performed with the barbell in front of the chest.",Strength,Advanced
+125,"Cable Lateral Raises: A shoulder isolation exercise that targets the middle delts.",Strength,Intermediate
+126,"Seated Overhead Press: A shoulder exercise that isolates the deltoids.",Strength,Intermediate
+127,"Step Mill Intervals: A high-intensity cardio workout on the step mill.",Cardio,Advanced
+128,"Lateral Box Jumps: A plyometric exercise that improves explosive power and balance.",Strength,Advanced
+129,"Landmine Press: A strength exercise that targets the shoulders and core.",Strength,Intermediate
+130,"Reverse Lunge with Twist: A strength and mobility exercise that targets the legs and core.",Strength,Intermediate
+131,"V-Ups: A core exercise that targets the entire abdominal region.",Strength,Advanced
+132,"Tricep Dips: A strength exercise that targets the triceps and chest.",Strength,Intermediate
+133,"Barbell Bench Press: A strength exercise that targets the chest, shoulders, and triceps.",Strength,Advanced
+134,"Renegade Rows: A compound exercise that targets the back and core.",Strength,Advanced
+135,"Bear Squats: A full-body exercise that improves mobility and core strength.",Strength,Beginner
+136,"Goblet Squats: A strength exercise using a kettlebell to improve leg and core strength.",Strength,Beginner
+137,"Dumbbell Overhead Triceps Extensions: A strength exercise that isolates the triceps.",Strength,Intermediate
+138,"Sumo Deadlifts: A strength exercise targeting the legs and glutes.",Strength,Intermediate
+139,"Sled Pushes: A full-body cardio and strength exercise.",Strength,Advanced
+140,"Jump Rope Intervals: A high-intensity cardio exercise that improves agility and cardiovascular fitness.",Cardio,Intermediate
+141,"Split Squats: A unilateral leg exercise that targets the quads and glutes.",Strength,Intermediate
+142,"Weighted Step-Ups: A strength exercise that targets the legs and glutes.",Strength,Intermediate
+143,"Plyo Push-up with Clap: A plyometric upper-body exercise.",Strength,Advanced
+144,"Glute Ham Raises: A strength exercise targeting the hamstrings and glutes.",Strength,Advanced
+145,"Weighted Russian Twists: A core exercise that targets the obliques.",Strength,Intermediate
+146,"Reverse Lunges: A strength exercise that targets the quads and glutes.",Strength,Intermediate
+147,"Pike Push-ups: A bodyweight exercise that targets the shoulders and core.",Strength,Advanced
+148,"TRX Mountain Climbers: A bodyweight cardio and core exercise using suspension straps.",Cardio,Intermediate
+149,"Overhead Walking Lunges: A full-body exercise that targets legs, core, and shoulders.",Strength,Advanced
+150,"Side-Lying Leg Raises: A leg and glute exercise.",Strength,Beginner
+151,"Cable Woodchoppers: A rotational core exercise targeting the obliques.",Strength,Intermediate
+152,"Bench Jump Overs: A plyometric cardio exercise that improves agility.",Cardio,Intermediate
+153,"Push-up to Superman: A full-body exercise that combines upper-body strength with core stability.",Strength,Advanced
+154,"Dumbbell Bench Press: A chest exercise that targets the upper body.",Strength,Intermediate
+155,"Incline Push-ups with Feet Elevated: A more challenging push-up variation.",Strength,Intermediate
+156,"Hanging Leg Raises: A core exercise that targets the lower abs.",Strength,Advanced
+157,"Spider Crawls: A core and upper body strength exercise.",Strength,Beginner
+158,"Pendulum Lunges: A dynamic leg exercise that improves balance and coordination.",Strength,Intermediate
+159,"Reverse Snow Angels: A back exercise that targets the upper body.",Strength,Beginner
+160,"Alternating Dumbbell Snatches: A full-body exercise that improves power and coordination.",Strength,Advanced
+161,"Weighted Step Jumps: A plyometric exercise that builds leg power.",Strength,Advanced
+162,"Side Step Squats: A leg and glute exercise.",Strength,Beginner
+163,"Jumping Jacks with Resistance Bands: A high-intensity cardio and strength exercise.",Cardio,Intermediate
+164,"One-Legged Deadlift: A unilateral leg exercise that improves balance and strength.",Strength,Intermediate
+165,"Sandbag Cleans: A dynamic strength exercise that targets the whole body.",Strength,Advanced
+166,"Single-Leg Hip Thrusts: A glute exercise that improves stability and strength.",Strength,Intermediate
+167,"Plank with Shoulder Taps: A core and upper body stability exercise.",Strength,Intermediate
+168,"T-Bar Deadlifts: A strength exercise that targets the lower back and legs.",Strength,Intermediate
+169,"Lateral Shuffle to Sprint: A cardio drill that improves agility and speed.",Cardio,Advanced
+170,"Resistance Band Chest Press: A strength exercise targeting the chest.",Strength,Beginner
+171,"Cossack Squats: A leg exercise that improves flexibility and strength.",Strength,Advanced
+172,"Squat Thrusts: A dynamic exercise that targets the whole body.",Cardio,Intermediate
+173,"Lateral Raises with Bands: A shoulder exercise using resistance bands.",Strength,Beginner
+174,"Single-Leg Box Squats: A leg exercise that improves balance and unilateral strength.",Strength,Intermediate
+175,"Plyometric Lateral Lunges: A dynamic leg exercise.",Strength,Advanced
+176,"Goblet Reverse Lunge: A lower-body strength exercise.",Strength,Beginner
+177,"Treadmill Sprints: A high-intensity cardio exercise that improves endurance and speed.",Cardio,Advanced
+178,"Lunge and Curl: A full-body exercise targeting legs and arms.",Strength,Intermediate
+179,"One-Arm Kettlebell Swings: A full-body exercise.",Strength,Advanced
+180,"Broad Jumps: A plyometric leg exercise that improves power.",Strength,Intermediate
+181,"TRX Chest Press: A suspension-based upper-body exercise.",Strength,Intermediate
+182,"Hanging Windshield Wipers: A core exercise targeting the obliques.",Strength,Advanced
+183,"Sledgehammer Swings: A dynamic strength and cardio exercise.",Strength,Advanced
+184,"Single-Arm Rows with Bands: A back exercise using resistance bands.",Strength,Beginner
+185,"Squat and Press: A full-body strength exercise.",Strength,Intermediate
+186,"Tire Flips: A strength and cardio exercise using a large tire.",Strength,Advanced
+187,"Sprint Intervals: A high-intensity cardio workout.",Cardio,Advanced
+188,"Jumping Side Lunges: A dynamic leg exercise.",Strength,Advanced
+189,"Boxer Stance Shadow Boxing: A cardio and agility exercise.",Cardio,Beginner
+190,"Back Extensions: A lower-back exercise that targets the posterior chain.",Strength,Beginner
+191,"Front Squats: A compound strength exercise that targets the quads.",Strength,Advanced
+192,"Step Jump Squats: A plyometric leg exercise.",Strength,Intermediate
+193,"Medicine Ball Woodchops: A core and upper body exercise.",Strength,Intermediate
+194,"Dead Bug: A core stability exercise.",Strength,Beginner
+195,"Diagonal Lunges: A leg exercise that targets multiple angles.",Strength,Intermediate
+196,"Overhead Kettlebell Squat: A full-body strength exercise.",Strength,Advanced
+197,"Rope Climbs: A full-body strength exercise.",Strength,Advanced
+198,"Barbell Clean and Press: A full-body exercise that builds strength and power.",Strength,Advanced
+199,"Side Lunges with Medicine Ball Twist: A core and leg exercise.",Strength,Intermediate
+200,"Kettlebell Push Press: A shoulder and leg strength exercise.",Strength,Advanced
+201,"Running: A simple and effective cardio exercise to improve overall endurance.",Cardio,Beginner
+202,"Rowing Machine: A full-body cardio workout that targets legs, arms, and back.",Cardio,Intermediate
+203,"Jump Rope Intervals: A high-intensity cardio exercise to improve agility and cardiovascular fitness.",Cardio,Intermediate
+204,"High-Intensity Cycling: A fast-paced cardio workout on a stationary bike.",Cardio,Advanced
+205,"Mountain Climbers: A cardio exercise that also works your core and upper body.",Cardio,Intermediate
+206,"Battle Rope Slams: A cardio and strength hybrid exercise that increases heart rate.",Cardio,Intermediate
+207,"Box Jumps: A cardio and plyometric exercise to increase leg strength and explosiveness.",Cardio,Advanced
+208,"Speed Walking: A low-impact cardio exercise that can be done anywhere.",Cardio,Beginner
+209,"Hill Sprints: A cardio workout to improve leg strength and cardiovascular endurance.",Cardio,Advanced
+210,"Swimming: A full-body cardio exercise that is easy on the joints.",Cardio,Intermediate
+211,"Jump Squats: A plyometric cardio exercise that builds leg power and endurance.",Cardio,Advanced
+212,"Burpees: A full-body cardio exercise that raises heart rate while building strength.",Cardio,Intermediate
+213,"Jumping Jacks: A classic cardio move that raises heart rate and improves endurance.",Cardio,Beginner
+214,"Step Aerobics: A cardio workout involving stepping up and down to increase endurance.",Cardio,Beginner
+215,"Shadow Boxing: A boxing-inspired cardio exercise that improves coordination and endurance.",Cardio,Beginner
+216,"Kickboxing: A cardio workout that combines punching and kicking movements.",Cardio,Advanced
+217,"Running Stairs: A cardio workout to improve lower-body endurance.",Cardio,Advanced
+218,"Treadmill Intervals: A cardio workout that alternates between high and low intensity.",Cardio,Intermediate
+219,"Elliptical Intervals: A low-impact cardio workout with alternating intensities.",Cardio,Beginner
+220,"Rowing Sprints: High-intensity intervals on the rowing machine for cardio improvement.",Cardio,Intermediate
+221,"Skipping Rope: A fast-paced cardio exercise for improved coordination and endurance.",Cardio,Intermediate
+222,"Treadmill Hill Runs: A cardio exercise to build leg strength and endurance.",Cardio,Advanced
+223,"Dance Cardio: A fun, fast-paced workout to improve endurance and coordination.",Cardio,Beginner
+224,"Agility Ladder Drills: A cardio workout to improve foot speed and coordination.",Cardio,Advanced
+225,"Circuit Training: A combination of cardio and strength moves for improved endurance.",Cardio,Intermediate
+226,"Swimming Sprints: A high-intensity cardio workout in the pool.",Cardio,Advanced
+227,"Jump Rope Double Unders: An advanced jump rope move to challenge your endurance.",Cardio,Advanced
+228,"Running Intervals: Alternating between sprinting and walking to improve cardiovascular health.",Cardio,Intermediate
+229,"Plyometric Skater Jumps: A cardio move to improve agility and lower-body strength.",Cardio,Intermediate
+230,"Cycling Intervals: High-intensity intervals on a bike to improve cardiovascular endurance.",Cardio,Intermediate
+231,"Rowing Pyramid: A structured rowing workout that increases cardio endurance.",Cardio,Advanced
+232,"HIIT Sprint Intervals: Alternating between sprinting and resting for maximum calorie burn.",Cardio,Advanced
+233,"Burpee to Tuck Jump: A full-body cardio workout to build explosive power.",Cardio,Advanced
+234,"Boxer Shuffle: A low-intensity cardio exercise that helps improve footwork and agility.",Cardio,Beginner
+235,"Rowing Pyramid Intervals: A cardio challenge on the rowing machine with varying intensities.",Cardio,Advanced
+236,"Battle Rope Waves: A cardio and strength exercise that targets the upper body.",Cardio,Intermediate
+237,"Fast-Paced Cycling: A moderate-intensity cycling workout for overall endurance.",Cardio,Beginner
+238,"Power Walking: A low-intensity cardio workout to improve stamina and leg endurance.",Cardio,Beginner
+239,"Lateral Hops: A plyometric cardio exercise that challenges balance and endurance.",Cardio,Intermediate
+240,"Jump Lunges: A high-intensity, plyometric cardio exercise for leg strength and endurance.",Cardio,Advanced
+241,"Running on Sand: A challenging cardio workout to build lower-body strength.",Cardio,Advanced
+242,"Jump Rope with Weighted Ropes: An advanced jump rope workout for cardio and strength.",Cardio,Advanced
+243,"Skater Plyometrics: A dynamic cardio workout focusing on lateral movements.",Cardio,Intermediate
+244,"High Knee Runs: A cardio exercise that improves leg strength and agility.",Cardio,Intermediate
+245,"Kettlebell Swings: A cardio and strength exercise that targets the whole body.",Cardio,Intermediate
+246,"Running Drills: A set of drills to improve speed and cardiovascular endurance.",Cardio,Intermediate
+247,"Cross-Country Skiing: A full-body cardio workout that improves stamina and strength.",Cardio,Advanced
+248,"Rowing Intervals: A structured interval workout to improve endurance on the rowing machine.",Cardio,Intermediate
+249,"Cardio Boxing: A fast-paced cardio workout to improve endurance and coordination.",Cardio,Advanced
+250,"Plank to Push-up: A cardio and core stability exercise to challenge endurance.",Cardio,Intermediate
+251,"Tai Chi: A low-impact flexibility exercise that improves balance and relaxation.",Flexibility,Beginner
+252,"Yoga Flow: A continuous series of yoga poses to improve flexibility and mobility.",Flexibility,Intermediate
+253,"Dynamic Stretches: A flexibility exercise that improves range of motion.",Flexibility,Beginner
+254,"Standing Toe Touch: A flexibility move to stretch hamstrings and lower back.",Flexibility,Beginner
+255,"Seated Forward Bend: A yoga pose to stretch the back and hamstrings.",Flexibility,Beginner
+256,"Cat-Cow Stretch: A yoga pose to stretch the spine and improve flexibility.",Flexibility,Beginner
+257,"Child’s Pose: A yoga pose that stretches the back, shoulders, and hips.",Flexibility,Beginner
+258,"Leg Swings: A dynamic stretch to improve hip mobility.",Flexibility,Beginner
+259,"Standing Quad Stretch: A stretch to improve flexibility in the quadriceps.",Flexibility,Beginner
+260,"Side-Lying Leg Stretch: A flexibility exercise targeting the hips and legs.",Flexibility,Beginner
+261,"Butterfly Stretch: A flexibility exercise to improve hip and groin flexibility.",Flexibility,Beginner
+262,"Wall Calf Stretch: A flexibility move to stretch the calf muscles.",Flexibility,Beginner
+263,"Chest Opener Stretch: A flexibility exercise to improve posture and open the chest.",Flexibility,Beginner
+264,"Standing Hamstring Stretch: A flexibility move to improve hamstring mobility.",Flexibility,Beginner
+265,"Neck Rolls: A flexibility move to relieve tension in the neck.",Flexibility,Beginner
+266,"Kneeling Quad Stretch: A deeper quad stretch to improve leg flexibility.",Flexibility,Intermediate
+267,"Seated Straddle Stretch: A flexibility move that targets the hamstrings and groin.",Flexibility,Beginner
+268,"Downward Dog: A yoga pose that stretches the back, hamstrings, and calves.",Flexibility,Beginner
+269,"Spinal Twist: A yoga pose that improves flexibility and releases tension in the spine.",Flexibility,Beginner
+270,"Cobra Pose: A yoga pose that stretches the chest and strengthens the back.",Flexibility,Beginner
+271,"Hip Flexor Stretch: A dynamic stretch to improve hip mobility and flexibility.",Flexibility,Intermediate
+272,"Low Lunge: A yoga pose that stretches the hips, hamstrings, and quads.",Flexibility,Intermediate
+273,"Bridge Pose: A yoga pose that stretches the chest and improves back flexibility.",Flexibility,Beginner
+274,"Seated Shoulder Stretch: A flexibility exercise to relieve tension in the shoulders.",Flexibility,Beginner
+275,"Arm Circles: A dynamic stretch to improve shoulder mobility.",Flexibility,Beginner
+276,"Wrist Circles: A flexibility move to improve wrist mobility and flexibility.",Flexibility,Beginner
+277,"Happy Baby Pose: A yoga pose that stretches the lower back and hips.",Flexibility,Beginner
+278,"Runner’s Lunge: A deep stretch to improve flexibility in the hips and hamstrings.",Flexibility,Intermediate
+279,"Hip Opener Stretch: A flexibility exercise to improve hip mobility and flexibility.",Flexibility,Intermediate
+280,"Quad Rocking Stretch: A dynamic stretch that improves flexibility and mobility in the legs.",Flexibility,Beginner
+281,"Sphinx Pose: A yoga pose that stretches the lower back and improves spine flexibility.",Flexibility,Beginner
+282,"Shoulder Bridge: A yoga pose that stretches the chest and shoulders.",Flexibility,Beginner
+283,"Side Stretch: A flexibility exercise to improve mobility in the obliques.",Flexibility,Beginner
+284,"Ankle Circles: A flexibility exercise to improve ankle mobility.",Flexibility,Beginner
+285,"Leg Stretch with Band: A flexibility exercise using a resistance band to improve hamstring mobility.",Flexibility,Intermediate
+286,"Figure Four Stretch: A flexibility exercise to improve hip and glute mobility.",Flexibility,Beginner
+287,"Dynamic Arm Swings: A dynamic stretch to warm up the shoulders and upper body.",Flexibility,Beginner
+288,"Chest Stretch with Band: A flexibility exercise using a resistance band to stretch the chest.",Flexibility,Intermediate
+289,"Pigeon Pose: A yoga pose that improves hip flexibility and mobility.",Flexibility,Intermediate
+290,"Triangle Pose: A yoga pose that improves flexibility in the legs and spine.",Flexibility,Beginner
+291,"Chair Pose: A yoga pose that strengthens the legs and improves flexibility.",Flexibility,Beginner
+292,"Reclined Spinal Twist: A yoga pose that improves flexibility in the spine.",Flexibility,Beginner
+293,"Half Forward Fold: A yoga pose that stretches the hamstrings and calves.",Flexibility,Beginner
+294,"Seated Side Bend: A flexibility exercise to improve mobility in the obliques and shoulders.",Flexibility,Beginner
+295,"Hamstring Stretch with Strap: A flexibility exercise to stretch the hamstrings using a strap.",Flexibility,Intermediate
+296,"Thoracic Spine Twist: A dynamic stretch to improve mobility in the upper back.",Flexibility,Intermediate
+297,"Toe Touch and Reach: A dynamic stretch to improve flexibility in the legs and arms.",Flexibility,Beginner
+298,"Crescent Lunge: A yoga pose to improve flexibility in the legs and hips.",Flexibility,Intermediate
+299,"Camel Pose: A yoga pose to improve flexibility in the chest and shoulders.",Flexibility,Advanced
+300,"Bridge Pose with Band: A flexibility exercise to stretch the chest using a resistance band.",Flexibility,Intermediate
+301,"Rowing Machine Intervals: Alternating between fast and slow strokes for a full-body cardio workout.",Cardio,Intermediate
+302,"Cycling Outdoors: A low-impact cardio exercise that strengthens legs and improves endurance.",Cardio,Beginner
+303,"Jumping Rope with High Knees: A variation of jump rope that engages the core and legs.",Cardio,Advanced
+304,"Sprint Drills: Short bursts of high-intensity running to build speed and endurance.",Cardio,Advanced
+305,"Boxing Punching Bag: A cardio exercise that improves hand-eye coordination and stamina.",Cardio,Intermediate
+306,"Zumba: A dance-based cardio workout that improves endurance and coordination.",Cardio,Beginner
+307,"Rowing Sprints: A cardio workout focusing on short, intense bursts of rowing.",Cardio,Advanced
+308,"Elliptical Sprints: Short bursts of high-intensity pedaling to boost cardiovascular fitness.",Cardio,Intermediate
+309,"Plyometric Push-ups: An explosive upper-body cardio workout that builds power and endurance.",Cardio,Advanced
+310,"Spin Class: A high-intensity cycling workout designed to improve stamina.",Cardio,Intermediate
+311,"Jump Squat to Box Jump: A plyometric cardio move to build explosive power.",Cardio,Advanced
+312,"Bear Crawls: A cardio and full-body exercise that improves strength and agility.",Cardio,Beginner
+313,"Lateral Bounds: A cardio exercise that improves lateral movement and leg strength.",Cardio,Intermediate
+314,"Step-ups with Knee Raise: A cardio move that increases heart rate while strengthening the legs.",Cardio,Intermediate
+315,"Skaters with Reach: A cardio move that improves balance and endurance while engaging the core.",Cardio,Intermediate
+316,"Hill Climbs: Running uphill to improve leg strength and cardiovascular endurance.",Cardio,Advanced
+317,"Jumping Tuck Squats: A cardio move that enhances leg power and overall endurance.",Cardio,Advanced
+318,"Running Intervals on Track: Alternating between sprints and jogs for an intense cardio workout.",Cardio,Intermediate
+319,"Cardio Kickboxing: A full-body cardio workout combining punches and kicks.",Cardio,Intermediate
+320,"Speed Skaters: A lateral cardio move to improve agility and endurance.",Cardio,Intermediate
+321,"Jogging in Place: A simple cardio workout to keep the heart rate elevated.",Cardio,Beginner
+322,"High-Intensity Interval Cycling: Alternating between fast and slow cycling for a full cardio workout.",Cardio,Advanced
+323,"Power Knees: A fast-paced cardio exercise that strengthens the core and legs.",Cardio,Beginner
+324,"Jumping Lunges with Arm Reach: A plyometric move that engages the whole body.",Cardio,Advanced
+325,"Agility Ladder Hops: A cardio move that improves agility and cardiovascular endurance.",Cardio,Intermediate
+326,"Treadmill Hill Climbs: A cardio workout on an incline to strengthen legs and build endurance.",Cardio,Advanced
+327,"Bicycle Crunches: A cardio and core workout that engages the abs and legs.",Cardio,Beginner
+328,"Wind Sprints: A fast-paced running drill that improves speed and endurance.",Cardio,Advanced
+329,"Ski Erg: A full-body cardio workout that mimics the motions of cross-country skiing.",Cardio,Intermediate
+330,"Swimming Freestyle: A full-body cardio exercise that improves endurance.",Cardio,Beginner
+331,"Stair Running: Running stairs to build leg strength and cardiovascular endurance.",Cardio,Advanced
+332,"Jump Rope Double Unders: A high-intensity cardio move to boost endurance and coordination.",Cardio,Advanced
+333,"Rowing on Water: A full-body cardio exercise that improves endurance and leg strength.",Cardio,Intermediate
+334,"Jump Rope Crossover: A cardio move that enhances coordination and cardiovascular fitness.",Cardio,Advanced
+335,"Cardio Dance: A dance-based cardio workout that improves endurance.",Cardio,Beginner
+336,"Swimming Breaststroke: A full-body cardio exercise that strengthens the chest, arms, and legs.",Cardio,Beginner
+337,"Jumping Jack Burpees: A cardio and strength combo exercise to improve endurance and agility.",Cardio,Advanced
+338,"Jogging with Intervals: Alternating jogging with fast walking to improve cardiovascular health.",Cardio,Beginner
+339,"Walking Lunges with Rotation: A cardio exercise that improves leg strength and balance.",Cardio,Intermediate
+340,"Sprint Cycling: A high-intensity cycling workout that improves speed and cardiovascular health.",Cardio,Advanced
+341,"Sled Drags: A full-body cardio workout that builds strength and endurance.",Cardio,Advanced
+342,"Rope Climbing Intervals: An advanced cardio move that strengthens the upper body.",Cardio,Advanced
+343,"Mountain Running: An intense cardio workout that builds endurance and leg strength.",Cardio,Advanced
+344,"High Knee Runs with Arm Circles: A cardio move that improves coordination and cardiovascular endurance.",Cardio,Intermediate
+345,"Treadmill Sprint Intervals: A high-intensity interval training cardio workout.",Cardio,Advanced
+346,"Resistance Band Running: A cardio and strength exercise that increases speed and leg power.",Cardio,Intermediate
+347,"Broad Jumps with Shuffle: A plyometric cardio move that improves power and endurance.",Cardio,Advanced
+348,"Speed Walking with Arm Swings: A low-impact cardio move to improve heart health.",Cardio,Beginner
+349,"Cycling on Hilly Terrain: A cardio workout that builds leg strength and cardiovascular endurance.",Cardio,Intermediate
+350,"Aquatic Jogging: A water-based cardio exercise that is low-impact and improves endurance.",Cardio,Beginner

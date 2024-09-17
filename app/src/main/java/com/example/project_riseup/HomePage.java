@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +18,6 @@ public class HomePage extends AppCompatActivity {
     TextView greetingText;
     UserViewModel userViewModel;
     Button profilebutton;
-    long userId=1;
     ImageView profileviewphoto;
     long userId;
 
@@ -37,6 +37,7 @@ public class HomePage extends AppCompatActivity {
 
         // Set the home button as selected by default
         homeButton.setSelected(true);
+
 
         // Initialize the ImageView for profile photo (Ensure this is in your XML layout)
         profileviewphoto = findViewById(R.id.profileImage);

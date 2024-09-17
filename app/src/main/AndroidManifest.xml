@@ -20,6 +20,9 @@
             android:name=".FavActivites"
             android:exported="false" />
         <activity
+            android:name=".HydrationActivity"
+            android:exported="false" />
+        <activity
             android:name=".privacy"
             android:exported="false" />
         <activity

@@ -2,6 +2,7 @@ package com.example.project_riseup;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -55,8 +56,8 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
         progressBar.setMax(stepCountTarget);
         stepCountTargetTextview.setText("Step Goal: " + stepCountTarget);
 
-        // Load the initial step count (if exists) when the app starts
-        loadInitialStepCount();
+        // Check if it's a new day and load the initial step count
+        checkForNewDayAndLoadStepCount();
 
         // Open details activity when "details" button is clicked
         details.setOnClickListener(v -> {
@@ -110,17 +111,30 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
     }
 
     private void saveInitialStepCount() {
-        // Save the initial step count to SharedPreferences
+        // Save the initial step count and the date to SharedPreferences
         getSharedPreferences("StepPrefs", MODE_PRIVATE)
                 .edit()
                 .putInt("initialStepCount", initialStepCount)
+                .putLong("lastSavedDate", getTodayDate().getTime()) // Save today's date
                 .apply();
     }
 
-    private void loadInitialStepCount() {
-        // Load the initial step count from SharedPreferences
-        initialStepCount = getSharedPreferences("StepPrefs", MODE_PRIVATE)
-                .getInt("initialStepCount", -1);
+    private void checkForNewDayAndLoadStepCount() {
+        // Get the last saved date from SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("StepPrefs", MODE_PRIVATE);
+        long lastSavedDate = prefs.getLong("lastSavedDate", -1);
+
+        // Get today's date
+        long todayDate = getTodayDate().getTime();
+
+        // If the last saved date is different from today, it's a new day
+        if (lastSavedDate != todayDate) {
+            // Reset the initialStepCount for the new day
+            initialStepCount = -1; // Forces reset of the initial step count when the new day starts
+        } else {
+            // Load the previous initial step count for the same day
+            initialStepCount = prefs.getInt("initialStepCount", -1);
+        }
     }
 
     private Date getTodayDate() {

@@ -46,12 +46,12 @@ public class DetailsActivity extends AppCompatActivity {
     private void fetchStepsDataAndDisplayChart() {
         new Thread(() -> {
             // Get today's date (start of today)
-            Date today = getTodayDate();
+            Date today = getStartOfDay(new Date());
 
             // Go back 6 days (total 7 days including today)
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DAY_OF_YEAR, -6);
-            Date lastWeek = calendar.getTime();
+            Date lastWeek = getStartOfDay(calendar.getTime());
 
             // Fetch steps data from last week to today
             List<Steps> stepsList = database.stepsDao().findStepsByDateRange(lastWeek, today);
@@ -76,19 +76,20 @@ public class DetailsActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
 
         // Loop over the last 7 days
-        for (int i = 0; i < 7; i++) {
+        for (int i = 6; i >= 0; i--) {
             calendar.setTime(new Date());
-            calendar.add(Calendar.DATE, -i);  // Move one day back
-            Date day = calendar.getTime();
-            String dateLabel = sdf.format(day);
+            calendar.add(Calendar.DATE, -i);  // Move back in time
+            Date day = getStartOfDay(calendar.getTime()); // Ensure start of day
+            String dateLabel = sdf.format(day); // Format date as label
             labels.add(dateLabel);  // Use formatted date as a label
 
-            // Default step count to 0
+            // Default step count to 0 if no data available for this day
             int steps = 0;
 
             // Check if we have steps for this day
             for (Steps step : stepsList) {
-                if (sdf.format(step.getDate()).equals(dateLabel)) {
+                Date stepsDate = getStartOfDay(step.getDate());  // Ensure start of day
+                if (sdf.format(stepsDate).equals(sdf.format(day))) {
                     steps = step.getStepsTaken();
                     Log.d("DetailsActivity", "Steps for " + dateLabel + ": " + steps);  // Log steps data
                     break;
@@ -96,7 +97,7 @@ public class DetailsActivity extends AppCompatActivity {
             }
 
             // Add the steps data to the chart
-            barEntries.add(new BarEntry(i, steps));
+            barEntries.add(new BarEntry(6 - i, steps));  // Fill the bar entries
         }
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "Steps Count");
@@ -117,18 +118,22 @@ public class DetailsActivity extends AppCompatActivity {
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
         xAxis.setGranularity(1f);  // Only show whole numbers on the X-axis
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelCount(labels.size());
 
         // Ensure Y-axis starts from 0
         barChart.getAxisLeft().setAxisMinimum(0f);
         barChart.getAxisRight().setEnabled(false);  // Disable right Y-axis
 
+        // Disable description label
+        barChart.getDescription().setEnabled(false);
+
         // Refresh the chart
         barChart.invalidate();
     }
 
-    private Date getTodayDate() {
+    private Date getStartOfDay(Date date) {
         Calendar calendar = Calendar.getInstance();
-        // Set time to start of the day
+        calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);

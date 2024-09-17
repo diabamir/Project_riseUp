@@ -161,6 +161,7 @@ package com.example.project_riseup;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -177,13 +178,23 @@ import java.util.Date;
 
 public class HomePage extends AppCompatActivity {
     ImageButton addWater, homeButton, groupsButton, calendarButton, profileButton;
-    TextView greetingText, moveDailyValue;
+    TextView greetingText, reminderText;
+    TextView moveDailyValue;
     UserViewModel userViewModel;
+    Button profilebutton;
     ImageView profileviewphoto;
     long userId;
     private float underCupAmount = 100; // Amount added per button press
 
-
+    Handler handler = new Handler();
+    int currentQuoteIndex = 0;
+    String[] quotes = {
+            "Rise Up! Every step fuels your strength. Hydrate, focus, conquer!",
+            "Stay hydrated, stay healthy!",
+            "Keep moving and stay active.",
+            "Consistency builds strength!",
+            "Take a break, breathe, and refresh."
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,6 +208,7 @@ public class HomePage extends AppCompatActivity {
         profileButton = findViewById(R.id.profileImageButton);
         addWater = findViewById(R.id.addWater);
         greetingText = findViewById(R.id.greetingText);
+        reminderText = findViewById(R.id.reminderText); // Add the reminderText TextView
         profileviewphoto = findViewById(R.id.profileImage);
         moveDailyValue = findViewById(R.id.moveDailyValue);
 
@@ -204,17 +216,23 @@ public class HomePage extends AppCompatActivity {
         // Set the home button as selected by default
         homeButton.setSelected(true);
 
+        // Initialize the ImageView for profile photo
+        profileviewphoto = findViewById(R.id.profileImage);
+
         // Retrieve the user ID from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
         userId = sharedPreferences.getLong("USER_ID", -1);
 
         if (userId != -1) {
+            // Initialize ViewModel and fetch user data
             userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
             new Thread(() -> {
                 User user = userViewModel.getUserById(userId);
                 runOnUiThread(() -> {
                     if (user != null) {
                         greetingText.setText("Hello, " + user.getFirstName() + "!");
+
+                        // Set the appropriate profile photo based on gender
                         if (user.getGender().equalsIgnoreCase("female")) {
                             profileviewphoto.setImageResource(R.drawable.womanprofile);
                         } else if (user.getGender().equalsIgnoreCase("male")) {
@@ -283,6 +301,9 @@ public class HomePage extends AppCompatActivity {
         //calendarButton.setOnClickListener(this::onCalendarClicked);
         profileButton.setOnClickListener(this::onProfileClicked);
 
+        // Start updating the quotes every 30 seconds
+        startQuoteRotation();
+
 
         // Initialize the ConstraintLayout (hydration card)
         CardView hydrationCard = findViewById(R.id.cardStayHydrated);
@@ -343,7 +364,30 @@ public class HomePage extends AppCompatActivity {
         editor.apply();
     }
 
+    private void startQuoteRotation() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Update the TextView with the next quote
+                reminderText.setText(quotes[currentQuoteIndex]);
 
+                // Move to the next quote in the list
+                currentQuoteIndex++;
+                if (currentQuoteIndex == quotes.length) {
+                    currentQuoteIndex = 0; // Reset to the first quote if we reach the end of the list
+                }
+
+                // Repeat this task every 30 seconds (30000 milliseconds)
+                handler.postDelayed(this, 30000);
+            }
+        }, 0); // Start immediately
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null); // Stop the handler when the activity is destroyed
+    }
 
 
     private void loadUserAndSteps() {
@@ -393,11 +437,13 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void onHomeClicked(View view) {
+        // No need to start the HomeActivity again, just update button state
         updateButtonStates(homeButton);
     }
 
     public void onGroupsClicked(View view) {
         updateButtonStates(groupsButton);
+
         Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra("USER_ID", userId);
         startActivity(intent);
@@ -410,11 +456,15 @@ public class HomePage extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Method to update the selected state of the buttons
     private void updateButtonStates(ImageButton selectedButton) {
+        // Deselect all buttons
         homeButton.setSelected(false);
         groupsButton.setSelected(false);
         calendarButton.setSelected(false);
         profileButton.setSelected(false);
+
+        // Set the selected button to true
         selectedButton.setSelected(true);
     }
 }

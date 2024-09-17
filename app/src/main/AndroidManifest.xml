@@ -93,7 +93,7 @@
         </activity>
 
         <activity android:name=".ExerciseActivity" android:exported="false" />
-
+        <activity android:name=".mealActivity" android:exported="false" />
 
         <!-- Main Launch Activity Declaration -->
         <activity

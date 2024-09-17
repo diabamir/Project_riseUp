@@ -1,0 +1,201 @@
+id,mealName,ingredient1,ingredient2,ingredient3,ingredient4,quantity1,quantity2,quantity3,quantity4
+1,Spaghetti Bolognese,Tofu,Pork Ribs,Hummus,Salsa,100g,300g,50g,50g
+2,Chicken Alfredo,Bell Peppers,Spinach,Potatoes,Chicken Thighs,80g,30g,200g,250g
+3,Beef Stroganoff,BBQ Sauce,Carrots,Arborio Rice,English Muffins,100g,80g,200g,2 pieces
+4,Chicken Caesar Salad,Potatoes,Coleslaw,English Muffins,Sour Cream,200g,50g,2 pieces,30g
+5,Vegetable Stir Fry,Cucumbers,Butter,Onions,Tomato Sauce,50g,20g,50g,150g
+6,Grilled Cheese Sandwich,Olives,Celery,Garlic,BBQ Sauce,20g,50g,5g,100g
+7,Tacos,Chicken Thighs,Taco Shells,Pita Bread,Beef Mince,250g,3 pieces,1 piece,200g
+8,Margherita Pizza,Potatoes,Vegetable Broth,Hollandaise Sauce,Hummus,200g,500ml,50g,50g
+9,Beef Tacos,Pizza Dough,White Wine,Bread,Chicken Breast,200g,100ml,2 slices,200g
+10,Chicken Fajitas,Flour,Cumin,Butter,Cheddar Cheese,100g,5g,20g,50g
+11,Lentil Soup,Tofu,Alfredo Sauce,Basil,Spinach,100g,120g,5g,30g
+12,Mushroom Risotto,Tomato,Croutons,Tomatoes,Pork Ribs,50g,30g,100g,300g
+13,Pancakes,Peas,Chicken Breast,Ricotta,Lettuce,50g,200g,100g,100g
+14,Eggs Benedict,Chicken Breast,White Wine,Broccoli,Salsa,200g,100ml,150g,50g
+15,Greek Salad,Coleslaw,Garlic,Tartar Sauce,Cucumbers,50g,5g,50g,50g
+16,Lasagna,Garlic,Cod,Ham,Croutons,5g,150g,100g,30g
+17,Fish and Chips,Mushrooms,Falafel,Eggs,Onions,150g,100g,2 pieces,50g
+18,BBQ Ribs,Celery,Broccoli,Carrot,Basil,50g,150g,50g,5g
+19,Pulled Pork Sandwich,Onions,Cucumbers,Basil,Cheddar Cheese,50g,50g,5g,50g
+20,Falafel Wrap,Pizza Dough,Chicken Breast,Feta Cheese,Spinach,200g,200g,50g,30g
+21,Shakshuka,Ricotta,Bell Peppers,Sour Cream,Hummus,100g,80g,30g,50g
+22,Chicken Tikka Masala,Eggs,Carrot,Falafel,Basil,2 pieces,50g,100g,5g
+23,Butter Chicken,Tahini,Alfredo Sauce,Salsa,Ground Beef,30g,120g,50g,250g
+24,Pad Thai,Pizza Dough,Sugar,Mozzarella,Hummus,200g,20g,100g,50g
+25,Pho,Pita Bread,Bread,BBQ Sauce,Pasta,1 piece,2 slices,100g,150g
+26,Tom Yum Soup,Onions,Celery,Hummus,Basil,50g,50g,50g,5g
+27,Vegetarian Chili,Caesar Dressing,Beef,Mushrooms,Salsa,50g,300g,150g,50g
+28,Burrito Bowl,Tomato Sauce,Spinach,Pork Ribs,Hollandaise Sauce,150g,30g,300g,50g
+29,Chicken Quesadilla,Tartar Sauce,Onions,Pasta,Spaghetti,50g,50g,150g,200g
+30,Caprese Salad,Beef Mince,Ham,Onions,Garlic,200g,100g,50g,5g
+31,Eggplant Parmesan,Peas,Red Lentils,Butter,Milk,50g,150g,20g,150ml
+32,French Onion Soup,Pizza Dough,Spaghetti,Cumin,Tahini,200g,200g,5g,30g
+33,Beef Burger,Carrots,Feta Cheese,Coleslaw,Potatoes,80g,50g,50g,200g
+34,Vegan Burger,Feta Cheese,Bell Peppers,Mozzarella,Cumin,50g,80g,100g,5g
+35,Clam Chowder,Red Lentils,Pizza Dough,Basil,Tartar Sauce,150g,200g,5g,50g
+36,Shrimp Scampi,Tomato,Alfredo Sauce,Salsa,Croutons,50g,120g,50g,30g
+37,Fettuccine Alfredo,Carrot,Celery,Pasta,Hollandaise Sauce,50g,50g,150g,50g
+38,Moussaka,BBQ Sauce,Spinach,Chicken Breast,Tomato,100g,30g,200g,50g
+39,Kebab,Flour,Onions,Cheddar Cheese,Peas,100g,50g,50g,50g
+40,Chicken Souvlaki,Grated Cheese,English Muffins,Tahini,Feta Cheese,30g,2 pieces,30g,50g
+41,Beef Burrito,Spaghetti,Potatoes,Broccoli,Ham,200g,200g,150g,100g
+42,Fish Tacos,Peas,Grated Cheese,Cheese,Mozzarella,50g,30g,50g,100g
+43,Grilled Salmon,Butter,Fajita Seasoning,English Muffins,Carrot,20g,10g,2 pieces,50g
+44,Stuffed Bell Peppers,Fajita Seasoning,Red Lentils,Ham,Coleslaw,10g,150g,100g,50g
+45,Cobb Salad,Hummus,Mozzarella,Cheddar Cheese,Soy Sauce,50g,100g,50g,30g
+46,Chicken Shawarma,Tomatoes,Croutons,Pasta,Cheddar Cheese,100g,30g,150g,50g
+47,Teriyaki Chicken,Coleslaw,Pizza Dough,Carrot,Tomato,50g,200g,50g,50g
+48,Sushi Rolls,Ham,Pita Bread,Grated Cheese,Celery,100g,1 piece,30g,50g
+49,Bibimbap,Ricotta,Taco Shells,Pizza Dough,Pasta,100g,3 pieces,200g,150g
+50,Mac and Cheese,Cheese,Beef,Chicken Thighs,Bread,50g,300g,250g,2 slices
+51,Ratatouille,Pasta,Lasagna Sheets,Cumin,Tomato,150g,200g,5g,50g
+52,Stuffed Mushrooms,Parmesan,Alfredo Sauce,Tofu,Tomato Paste,30g,120g,100g,100g
+53,Shepherd's Pie,Ground Beef,Potatoes,Carrots,Peas,250g,200g,80g,50g
+54,Beef Stew,Beef,Potatoes,Onions,Carrots,300g,200g,50g,80g
+55,Fried Chicken,Chicken Thighs,Flour,Milk,Butter,250g,100g,150ml,20g
+56,Cream of Mushroom Soup,Mushrooms,Milk,Garlic,Onions,150g,150ml,5g,50g
+57,Chicken Noodle Soup,Chicken Breast,Carrots,Noodles,Celery,200g,50g,150g,50g
+58,Baked Ziti,Ziti Pasta,Tomato Sauce,Mozzarella,Parmesan,150g,150g,100g,30g
+59,Chili con Carne,Ground Beef,Red Kidney Beans,Tomatoes,Onions,250g,150g,100g,50g
+60,Tuna Salad,Tuna,Lettuce,Mayonnaise,Cucumbers,150g,100g,50g,50g
+61,Chicken Pot Pie,Chicken Breast,Carrots,Peas,Pie Crust,200g,50g,50g,1 piece
+62,Beef Wellington,Beef Tenderloin,Mushrooms,Puff Pastry,Onions,300g,150g,1 sheet,50g
+63,Enchiladas,Chicken Thighs,Taco Sauce,Tortillas,Cheddar Cheese,250g,100g,2 pieces,50g
+64,Gazpacho,Tomatoes,Cucumbers,Garlic,Onions,150g,100g,5g,50g
+65,Carbonara,Pasta,Guanciale,Eggs,Parmesan,150g,100g,2 pieces,30g
+66,Buffalo Wings,Chicken Wings,BBQ Sauce,Butter,Garlic,250g,100g,20g,5g
+67,Chicken Schnitzel,Chicken Breast,Bread Crumbs,Flour,Eggs,200g,50g,100g,1 piece
+68,Moussaka,Ground Beef,Potatoes,Tomatoes,Onions,250g,200g,100g,50g
+69,French Toast,Bread,Eggs,Milk,Sugar,2 slices,2 pieces,100ml,20g
+70,Chicken Piccata,Chicken Breast,White Wine,Lemon,Capers,200g,100ml,1 piece,10g
+71,Lamb Curry,Lamb,Onions,Garlic,Cumin,300g,50g,5g,5g
+72,Pumpkin Soup,Pumpkin,Onions,Garlic,Vegetable Broth,200g,50g,5g,500ml
+73,Fish Curry,Fish,Tomatoes,Coconut Milk,Curry Powder,200g,100g,150ml,5g
+74,Lamb Chops,Lamb,Garlic,Rosemary,Olive Oil,300g,5g,5g,10ml
+75,Ramen,Noodles,Pork Belly,Eggs,Broth,150g,200g,2 pieces,500ml
+76,Beef Tacos,Beef Mince,Taco Shells,Cheddar Cheese,Sour Cream,250g,3 pieces,50g,30g
+77,Chicken Parmesan,Chicken Breast,Tomato Sauce,Mozzarella,Parmesan,200g,150g,100g,30g
+78,Vegetable Curry,Potatoes,Carrots,Peas,Coconut Milk,200g,80g,50g,150ml
+79,BBQ Chicken,Pizza Dough,BBQ Sauce,Chicken Thighs,Mozzarella,200g,100g,250g,100g
+80,Chow Mein,Noodles,Chicken Breast,Broccoli,Soy Sauce,150g,200g,100g,30ml
+81,Pasta Primavera,Pasta,Tomatoes,Zucchini,Parmesan,150g,100g,80g,30g
+82,Tuna Casserole,Tuna,Pasta,Mushrooms,Sour Cream,200g,150g,100g,50g
+83,Shrimp Fried Rice,Rice,Shrimp,Peas,Carrots,150g,200g,50g,80g
+84,Vegetarian Lasagna,Lasagna Sheets,Tomato Sauce,Spinach,Mozzarella,200g,150g,100g,100g
+85,Falafel Salad,Falafel,Cucumbers,Tomatoes,Hummus,150g,50g,50g,30g
+86,Chicken Curry,Chicken Breast,Tomatoes,Onions,Curry Powder,200g,100g,50g,5g
+87,Salmon Teriyaki,Salmon,Teriyaki Sauce,Broccoli,Rice,200g,50ml,100g,150g
+88,Spaghetti Carbonara,Spaghetti,Bacon,Eggs,Parmesan,200g,100g,2 pieces,30g
+89,Thai Green Curry,Chicken Thighs,Coconut Milk,Green Curry Paste,Bell Peppers,200g,150ml,5g,80g
+90,Caesar Salad,Lettuce,Croutons,Parmesan,Caesar Dressing,100g,30g,30g,50g
+91,Tacos al Pastor,Pork,Onions,Pineapple,Taco Shells,250g,50g,50g,3 pieces
+92,Tomato Soup,Tomatoes,Onions,Garlic,Vegetable Broth,150g,50g,5g,500ml
+93,Beef Burrito,Ground Beef,Tortillas,Sour Cream,Cheddar Cheese,250g,2 pieces,50g,50g
+94,Samosa,Potatoes,Peas,Cumin,Pastry Sheets,150g,50g,5g,2 pieces
+95,Miso Soup,Miso Paste,Tofu,Seaweed,Scallions,50g,100g,20g,10g
+96,Sausage Roll,Pork Sausage,Puff Pastry,Eggs,Onions,150g,1 sheet,1 piece,50g
+97,Gnocchi,Pasta,Potatoes,Tomato Sauce,Parmesan,150g,200g,150g,30g
+98,Chicken Katsu,Chicken Breast,Bread Crumbs,Flour,Eggs,200g,50g,100g,1 piece
+99,Steak Frites,Beef Steak,Potatoes,Butter,Garlic,250g,200g,20g,5g
+100,Falafel Wrap,Falafel,Pita Bread,Lettuce,Tomatoes,150g,1 piece,50g,50g
+101,Shawarma Wrap,Chicken Breast,Garlic,Yogurt,Pita Bread,200g,5g,50g,1 piece
+102,Cheese Pizza,Pizza Dough,Tomato Sauce,Mozzarella,Basil,200g,150g,100g,5g
+103,Beef Empanadas,Ground Beef,Onions,Cumin,Pastry Dough,250g,50g,5g,2 pieces
+104,Garlic Bread,Bread,Garlic,Butter,Parmesan,2 slices,5g,20g,30g
+105,Fish and Chips,Fish,Potatoes,Tartar Sauce,Peas,200g,200g,50g,50g
+106,Chicken Wrap,Chicken Breast,Lettuce,Tomatoes,Mayonnaise,200g,50g,50g,30g
+107,Steak Sandwich,Beef Steak,Bread,Onions,Cheddar Cheese,250g,2 slices,50g,50g
+108,Tofu Stir Fry,Tofu,Broccoli,Carrots,Soy Sauce,150g,100g,50g,30ml
+109,Vegan Tacos,Tofu,Taco Shells,Avocado,Onions,150g,3 pieces,50g,50g
+110,Pad Krapow,Chicken Mince,Basil,Garlic,Soy Sauce,200g,5g,5g,30ml
+111,Pasta Salad,Pasta,Tomatoes,Cucumbers,Feta Cheese,150g,50g,50g,50g
+112,Chicken Ramen,Chicken Breast,Noodles,Eggs,Broth,200g,150g,2 pieces,500ml
+113,Beef Pho,Beef,Noodles,Onions,Broth,200g,150g,50g,500ml
+114,Peking Duck,Duck,Hoisin Sauce,Spring Onions,Pancakes,200g,50ml,50g,2 pieces
+115,Vegetarian Pizza,Pizza Dough,Tomato Sauce,Bell Peppers,Mushrooms,200g,150g,80g,150g
+116,Chicken Burrito,Chicken Breast,Tortillas,Rice,Black Beans,200g,2 pieces,150g,100g
+117,Seafood Paella,Rice,Shrimp,Clams,Peas,150g,200g,100g,50g
+118,Tomato Bruschetta,Bread,Tomatoes,Basil,Olive Oil,2 slices,50g,5g,10ml
+119,Quiche Lorraine,Pastry Sheets,Eggs,Bacon,Cream,2 sheets,2 pieces,100g,150ml
+120,Creamy Pesto Pasta,Pasta,Pesto Sauce,Parmesan,Garlic,150g,50g,30g,5g
+121,Tuna Sandwich,Tuna,Mayo,Bread,Lettuce,150g,30g,2 slices,50g
+122,Vegetarian Tacos,Tofu,Taco Shells,Avocado,Lettuce,150g,3 pieces,50g,50g
+123,Crispy Duck,Duck,Garlic,Ginger,Scallions,200g,5g,5g,50g
+124,Cuban Sandwich,Pork,Pickles,Mustard,Bread,250g,30g,20g,2 slices
+125,Chimichurri Steak,Beef Steak,Garlic,Parsley,Olive Oil,250g,5g,5g,10ml
+126,Chicken Shawarma,Pita Bread,Chicken Thighs,Garlic,Yogurt,1 piece,200g,5g,50g
+127,Fettuccine Alfredo,Fettuccine,Pasta,Parmesan,Alfredo Sauce,150g,100g,30g,100g
+128,Spaghetti Meatballs,Spaghetti,Ground Beef,Tomato Sauce,Parmesan,150g,250g,100g,30g
+129,Banana Pancakes,Bananas,Eggs,Flour,Milk,2 pieces,2 pieces,100g,150ml
+130,Spring Rolls,Cabbage,Carrots,Garlic,Soy Sauce,100g,50g,5g,30ml
+131,Chicken Salad,Chicken Breast,Lettuce,Tomatoes,Cucumbers,200g,100g,50g,50g
+132,Avocado Toast,Bread,Avocado,Garlic,Lemon,2 slices,1 piece,5g,1 piece
+133,Vegetable Soup,Carrots,Onions,Garlic,Vegetable Broth,80g,50g,5g,500ml
+134,Chicken Alfredo,Chicken Breast,Alfredo Sauce,Fettuccine,Parmesan,200g,100g,150g,30g
+135,BBQ Pulled Pork,Pork,BBQ Sauce,Bread,Coleslaw,250g,100g,2 slices,50g
+136,Beef Stir Fry,Beef,Broccoli,Carrots,Soy Sauce,200g,100g,50g,30ml
+137,Spaghetti Marinara,Spaghetti,Tomato Sauce,Shrimp,Parmesan,150g,150g,200g,30g
+138,Chicken Fajitas,Chicken Thighs,Bell Peppers,Onions,Fajita Seasoning,200g,80g,50g,5g
+139,Shrimp Tacos,Shrimp,Taco Shells,Sour Cream,Cabbage,200g,3 pieces,30g,100g
+140,Mediterranean Salad,Lettuce,Olives,Cucumbers,Feta Cheese,100g,30g,50g,50g
+141,Beef Stroganoff,Beef,Onions,Mushrooms,Sour Cream,250g,50g,100g,100g
+142,Chicken Wrap,Chicken Breast,Lettuce,Tomatoes,Mayonnaise,200g,50g,50g,30g
+143,Stuffed Peppers,Bell Peppers,Ground Beef,Rice,Cheddar Cheese,80g,250g,100g,50g
+144,Margarita Pizza,Pizza Dough,Tomato Sauce,Mozzarella,Basil,200g,150g,100g,5g
+145,Chickpea Curry,Chickpeas,Coconut Milk,Tomatoes,Onions,150g,150ml,100g,50g
+146,Beef Bourguignon,Beef,Red Wine,Carrots,Mushrooms,250g,100ml,80g,100g
+147,Broccoli Soup,Broccoli,Onions,Garlic,Vegetable Broth,150g,50g,5g,500ml
+148,Sausage Pasta,Sausage,Pasta,Tomato Sauce,Parmesan,200g,150g,150g,30g
+149,Spinach Pie,Spinach,Feta Cheese,Pastry Dough,Onions,150g,100g,1 sheet,50g
+150,Fish Curry,Fish,Coconut Milk,Tomatoes,Curry Powder,200g,150ml,100g,5g
+151,Cornbread,Flour,Cornmeal,Milk,Sugar,150g,150g,150ml,30g
+152,Chicken Stir Fry,Chicken Breast,Broccoli,Carrots,Soy Sauce,200g,100g,50g,30ml
+153,Stuffed Zucchini,Zucchini,Ground Beef,Rice,Tomato Sauce,150g,200g,100g,100g
+154,Miso Ramen,Noodles,Tofu,Miso Paste,Scallions,150g,100g,50g,20g
+155,Chili Dogs,Sausage,Bread,Chili,Cheddar Cheese,2 pieces,2 slices,150g,50g
+156,Spinach Frittata,Spinach,Eggs,Cheddar Cheese,Milk,150g,3 pieces,50g,100ml
+157,Chicken Soup,Chicken Breast,Carrots,Celery,Noodles,200g,50g,50g,150g
+158,Pasta Carbonara,Pasta,Bacon,Eggs,Parmesan,150g,100g,2 pieces,30g
+159,Stuffed Tomatoes,Tomatoes,Ground Beef,Rice,Parmesan,100g,250g,100g,30g
+160,Salmon Avocado Salad,Salmon,Avocado,Lettuce,Cucumbers,200g,1 piece,100g,50g
+161,Mushroom Burger,Mushrooms,Bread,Onions,Cheddar Cheese,150g,2 slices,50g,50g
+162,Potato Salad,Potatoes,Mayonnaise,Onions,Celery,200g,50g,50g,50g
+163,Cabbage Soup,Cabbage,Carrots,Onions,Vegetable Broth,150g,80g,50g,500ml
+164,Seafood Pasta,Pasta,Shrimp,Clams,Tomato Sauce,150g,200g,100g,150g
+165,Lamb Stew,Lamb,Potatoes,Carrots,Onions,300g,200g,80g,50g
+166,Chicken Cordon Bleu,Chicken Breast,Ham,Cheddar Cheese,Bread Crumbs,200g,50g,50g,50g
+167,Chickpea Salad,Chickpeas,Lettuce,Tomatoes,Cucumbers,150g,100g,50g,50g
+168,Beef Nachos,Ground Beef,Tortilla Chips,Cheddar Cheese,Sour Cream,250g,50g,50g,30g
+169,Spaghetti Bolognese,Ground Beef,Tomato Sauce,Spaghetti,Parmesan,250g,150g,200g,30g
+170,Fish Tacos,Fish,Taco Shells,Cabbage,Sour Cream,200g,3 pieces,100g,30g
+171,Vegetarian Pasta,Pasta,Tomatoes,Zucchini,Feta Cheese,150g,100g,80g,50g
+172,Turkey Sandwich,Turkey,Bread,Mayonnaise,Lettuce,200g,2 slices,30g,50g
+173,Creamy Tomato Soup,Tomatoes,Cream,Garlic,Onions,150g,50ml,5g,50g
+174,Banana Bread,Bananas,Flour,Sugar,Eggs,2 pieces,150g,100g,2 pieces
+175,Chicken Satay,Chicken Thighs,Peanut Sauce,Cucumber,Pita Bread,200g,50ml,50g,1 piece
+176,Tomato Risotto,Arborio Rice,Tomatoes,Garlic,Parmesan,150g,100g,5g,30g
+177,Mushroom Soup,Mushrooms,Onions,Garlic,Vegetable Broth,150g,50g,5g,500ml
+178,Baked Potato,Potato,Sour Cream,Cheddar Cheese,Bacon,200g,50g,50g,50g
+179,Steak Fajitas,Beef Steak,Bell Peppers,Onions,Fajita Seasoning,250g,80g,50g,5g
+180,Spaghetti Carbonara,Spaghetti,Bacon,Eggs,Parmesan,150g,100g,2 pieces,30g
+181,Chicken Caesar Wrap,Chicken Breast,Lettuce,Croutons,Caesar Dressing,200g,50g,30g,50g
+182,Beef Tacos,Ground Beef,Taco Shells,Cheddar Cheese,Sour Cream,250g,3 pieces,50g,30g
+183,Seafood Salad,Shrimp,Lettuce,Avocado,Lemon,200g,100g,50g,1 piece
+184,Pork Chops,Pork Chops,Garlic,Rosemary,Olive Oil,200g,5g,5g,10ml
+185,Cottage Pie,Ground Beef,Potatoes,Carrots,Onions,250g,200g,80g,50g
+186,Chicken Skewers,Chicken Thighs,Bell Peppers,Onions,Fajita Seasoning,200g,80g,50g,5g
+187,Mexican Rice,Rice,Tomato Sauce,Cumin,Garlic,150g,100g,5g,5g
+188,Lentil Stew,Lentils,Carrots,Onions,Garlic,150g,80g,50g,5g
+189,Chicken Sandwich,Chicken Breast,Bread,Lettuce,Mayonnaise,200g,2 slices,50g,30g
+190,Fried Rice,Rice,Peas,Carrots,Soy Sauce,150g,50g,50g,30ml
+191,Salmon Sushi,Salmon,Rice,Seaweed,Soy Sauce,150g,100g,1 sheet,30ml
+192,Sweet Potato Fries,Sweet Potatoes,Olive Oil,Paprika,Salt,200g,10ml,5g,5g
+193,Chicken Noodle Soup,Chicken Breast,Noodles,Carrots,Celery,200g,150g,50g,50g
+194,Chickpea Curry,Chickpeas,Tomatoes,Onions,Coconut Milk,150g,100g,50g,150ml
+195,Cheeseburger,Ground Beef,Bread,Cheddar Cheese,Lettuce,250g,2 slices,50g,50g
+196,Shrimp Cocktail,Shrimp,Lemon,Garlic,Cocktail Sauce,200g,1 piece,5g,50ml
+197,Lamb Chops,Lamb,Garlic,Rosemary,Olive Oil,300g,5g,5g,10ml
+198,Pasta Marinara,Pasta,Tomato Sauce,Basil,Parmesan,150g,150g,5g,30g
+199,Stuffed Eggplant,Eggplant,Ground Beef,Tomato Sauce,Cheddar Cheese,150g,250g,100g,50g
+200,Chicken Nuggets,Chicken Breast,Bread Crumbs,Eggs,Flour,200g,50g,2 pieces,100g

@@ -1,4 +1,5 @@
 package com.example.project_riseup;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -39,7 +40,6 @@ public class StepCountingService extends Service implements SensorEventListener 
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
 
-        // Start the service in the foreground with a notification
         startForeground(1, createNotification());
     }
 
@@ -59,13 +59,13 @@ public class StepCountingService extends Service implements SensorEventListener 
         return new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Step Counter")
                 .setContentText("Counting your steps in the background.")
-                .setSmallIcon(R.drawable.running) // Make sure to add your own app icon here
+                .setSmallIcon(R.drawable.running)
                 .build();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return START_STICKY; // Ensures the service is restarted if the system kills it
+        return START_STICKY;
     }
 
     @Override
@@ -84,13 +84,9 @@ public class StepCountingService extends Service implements SensorEventListener 
     }
 
     private void saveStepsTaken() {
-        // Get today's date without time
         Date today = getTodayDate();
         Steps steps = new Steps(today, initialStepCount, stepsTaken);
-        new Thread(() -> {
-            database.stepsDao().insertOrUpdateStep(steps);
-            Log.d("StepCountingService", "Steps saved to DB: " + stepsTaken);
-        }).start();
+        new Thread(() -> database.stepsDao().insertOrUpdateStep(steps)).start();
     }
 
     private Date getTodayDate() {
@@ -116,7 +112,6 @@ public class StepCountingService extends Service implements SensorEventListener 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null; // This service is not bound
+        return null;
     }
 }
-

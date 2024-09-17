@@ -175,13 +175,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 public class HomePage extends AppCompatActivity {
-    ImageButton addWater, homeButton, groupsButton, calendarButton, profileButton;
-    TextView greetingText;
-    UserViewModel userViewModel;
+    ImageButton homeButton, groupsButton, calendarButton, profileButton;
     ImageButton profilebutton;
-    long userId;
     ImageView profileviewphoto;
     private float underCupAmount = 100; // Amount added per button press
+    private ImageButton addWater;
+    private TextView greetingText;
+    private Button profileButton;
+    private long userId;
+    private UserViewModel userViewModel;
 
     @SuppressLint({"MissingInflatedId", "CutPasteId"})
     @Override
@@ -215,6 +217,19 @@ public class HomePage extends AppCompatActivity {
 //        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
+        if (userId == -1) {
+            greetingText.setText("User ID not found in SharedPreferences");
+            return;
+        }
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        loadUserAndSteps();
+
+        profileButton.setOnClickListener(v -> {
+            Intent intentProfile = new Intent(HomePage.this, Profile.class);
+            intentProfile.putExtra("USER_ID", userId);
+            startActivity(intentProfile);
+        });
 
         // Handle addWater button click
         addWater.setOnClickListener(v -> {
@@ -286,6 +301,32 @@ public class HomePage extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat("HYDRATION_AMOUNT", hydrationAmount);
         editor.apply();
+    }
+        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, StepMain.class);
+            startActivity(intent);
+        });
+
+        addWater.setOnClickListener(v -> Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show());
+    }
+
+    private void loadUserAndSteps() {
+        // Load steps from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("StepCounterPrefs", MODE_PRIVATE);
+        int stepsTaken = sharedPreferences.getInt("stepsTaken", 0);
+
+
+        // Load user data asynchronously
+        new Thread(() -> {
+            User user = userViewModel.getUserById(userId);
+            runOnUiThread(() -> {
+                if (user != null) {
+                    greetingText.setText("Hello, " + user.getFirstName() + "!");
+                } else {
+                    greetingText.setText("User not found");
+                }
+            });
+        }).start();
     }
 
     // Methods to handle button clicks

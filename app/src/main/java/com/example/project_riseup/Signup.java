@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -567,6 +568,7 @@ public class Signup extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Toast.makeText(Signup.this, "User saved locally with ID: " + userId, Toast.LENGTH_SHORT).show();
 
+
                     // Pass the user ID to HomePage
                     Intent intent = new Intent(Signup.this, HomePage.class);
                     intent.putExtra("USER_ID", userId);  // Pass the generated user ID
@@ -604,8 +606,6 @@ public class Signup extends AppCompatActivity {
             });
         }).start();
     }
-
-
 
 
     // Move to the next step based on current step

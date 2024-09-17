@@ -7,9 +7,20 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Month Navigation and Display -->
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleStepsProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Steps Progress"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
 
-    <!-- Weekdays Header -->
+    <!-- Month Navigation and Display -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,6 +60,7 @@
             android:textSize="20sp" />
     </LinearLayout>
 
+    <!-- Weekdays Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,6 +94,7 @@
             android:textColor="@color/black"/>
 
         <!-- Add other weekday headers here -->
+
     </LinearLayout>
 
     <!-- Calendar RecyclerView -->
@@ -89,4 +102,5 @@
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>

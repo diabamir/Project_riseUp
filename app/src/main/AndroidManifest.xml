@@ -5,6 +5,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Required for step counter -->
+    <uses-feature android:name="android.hardware.sensor.stepcounter" android:required="true"/>
+    <uses-feature android:name="android.hardware.sensor.stepdetector" android:required="true"/>
+
+    <!-- Permissions required for activity recognition and foreground services -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_riseUp"
         tools:targetApi="31">
+
         <activity
             android:name=".FavActivites"
             android:exported="false" />
@@ -67,21 +77,44 @@
         <activity
             android:name=".MyScaleActivityWeight"
             android:exported="false" />
+        <!-- DetailsActivity Declaration -->
+        <activity
+            android:name=".DetailsActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="true">
+        </activity>
+
         <activity
             android:name=".MyScaleActivityHeight"
             android:exported="false" />
+
+        <!-- StepMain Activity Declaration -->
+        <activity android:name=".StepMain" android:exported="false">
+        </activity>
+
+        <!-- Main Launch Activity Declaration -->
         <activity
             android:name=".firstPageIcon"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-    </application>
 
+        <!-- StepCountingService Declaration -->
+        <service
+            android:name=".StepCountingService"
+            android:foregroundServiceType="location"
+            android:exported="false"
+            tools:ignore="ForegroundServicePermission"/>
+
+    </application>
 </manifest>

@@ -1,4 +1,5 @@
 package com.example.project_riseup;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

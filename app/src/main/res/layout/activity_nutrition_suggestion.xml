@@ -1,6 +1,16 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".NutritionSuggestion" android:orientation="vertical" android:gravity="center">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".NutritionSuggestion" android:orientation="vertical" android:background="@color/white" android:gravity="center">
     <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
-        <TextView android:id="@+id/title_choose" android:layout_width="400dp" android:layout_height="35dp" android:layout_marginBottom="16dp" android:gravity="center" android:text="Choose the products you like: " android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/title_choose"
+            android:layout_width="400dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Choose the products you like: "
+            android:textSize="20sp" />
+
         <com.google.android.material.card.MaterialCardView android:id="@+id/Veggies_card" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="15dp" android:clickable="true" android:elevation="15dp" app:cardCornerRadius="15dp">
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
                 <TextView android:id="@+id/Veggies_text" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Veggies" android:textSize="21sp" android:gravity="center" android:layout_marginBottom="16dp"/>

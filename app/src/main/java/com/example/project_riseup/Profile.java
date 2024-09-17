@@ -20,13 +20,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 public class Profile extends AppCompatActivity {
 
-    private Button editpro, privacy, logout;
+    private Button editpro, privacy, logout, myGroups;
     private TextView fullNameTextView, card1Header, card1Content, card2Header, card2Content;
     private UserViewModel userViewModel;
-    private long userId;  // Declare userId variable to store the passed userId
+    private long userId;
     private ImageView profileviewphoto;
-    private Button myGroups;
-    private ImageButton homeButton, groupsButton, calendarButton, profileButton; // Add the ImageButtons for navigation
+    private ImageButton homeButton, groupsButton, calendarButton, profileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,25 @@ public class Profile extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile);
 
-        // Initialize views
+        initializeViews();
+        setupNavigationButtons();
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userId = getIntent().getLongExtra("USER_ID", -1);
+
+        if (userId != -1) {
+            loadUserDataFromRoom(userId);
+        } else {
+            Toast.makeText(this, "User ID not found in Intent", Toast.LENGTH_SHORT).show();
+        }
+
+        editpro.setOnClickListener(view -> navigateToActivity(editProfile.class));
+        myGroups.setOnClickListener(view -> navigateToActivity(UserGroups.class));
+        logout.setOnClickListener(view -> navigateToActivity(SignIn.class));
+        privacy.setOnClickListener(view -> navigateToActivity(privacy.class));
+    }
+
+    private void initializeViews() {
         editpro = findViewById(R.id.editpro);
         privacy = findViewById(R.id.privacy);
         fullNameTextView = findViewById(R.id.fullName);
@@ -45,146 +62,69 @@ public class Profile extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         profileviewphoto = findViewById(R.id.profileview);
         myGroups = findViewById(R.id.myGroups);
-
-        // Initialize navigation bar buttons
         homeButton = findViewById(R.id.homeImageButton);
         groupsButton = findViewById(R.id.groupsImageButton);
         calendarButton = findViewById(R.id.calendarImageButton);
         profileButton = findViewById(R.id.profileImageButton);
 
-        // Set the profile button as selected
         profileButton.setSelected(true);
-
-        // Set up click listeners for navigation buttons
-        homeButton.setOnClickListener(this::onHomeClicked);
-        groupsButton.setOnClickListener(this::onGroupsClicked);
-        //calendarButton.setOnClickListener(this::onCalendarClicked);
-        profileButton.setOnClickListener(this::onProfileClicked);  // Already in profile, no need to navigate
-
-        // Handle edge-to-edge layout
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.profile), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // Initialize UserViewModel
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
-        // Get the userId passed via Intent
-        Intent intent = getIntent();
-        userId = intent.getLongExtra("USER_ID", -1);  // Default to -1 if not passed
-
-        if (userId != -1) {
-            // Load the user data from Room database using the passed user ID
-            loadUserDataFromRoom(userId);
-        } else {
-            Toast.makeText(this, "User ID not found in Intent", Toast.LENGTH_SHORT).show();
-        }
-
-        // Set up the edit profile button to navigate to EditProfileActivity
-        editpro.setOnClickListener(view -> {
-            Intent editIntent = new Intent(Profile.this, editProfile.class);
-            editIntent.putExtra("USER_ID", userId);  // Pass the user ID to the edit activity
-            startActivity(editIntent);  // Start the EditProfileActivity
-        });
-
-        myGroups.setOnClickListener(view -> {
-            Intent groupIntent = new Intent(Profile.this, UserGroups.class);
-            groupIntent.putExtra("USER_ID", userId);  // Pass the user ID to the edit activity
-            startActivity(groupIntent);  // Start the EditProfileActivity
-        });
-
-        // Set up the logout button to navigate to the SignIn activity
-        logout.setOnClickListener(view -> {
-            Intent signInIntent = new Intent(Profile.this, SignIn.class);
-            startActivity(signInIntent);
-        });
-
-        // Set up the privacy button to navigate to the privacy activity
-        privacy.setOnClickListener(view -> {
-            Intent privacyIntent = new Intent(Profile.this, privacy.class);
-            privacyIntent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
-            startActivity(privacyIntent);
-        });
     }
 
-    // Navigation button handlers
-    public void onHomeClicked(View view) {
-        updateButtonStates(homeButton);
-        Intent intent = new Intent(this, HomePage.class);
-        intent.putExtra("USER_ID", userId);  // Pass the user ID
+    private void setupNavigationButtons() {
+        homeButton.setOnClickListener(view -> navigateToActivity(HomePage.class));
+        groupsButton.setOnClickListener(view -> navigateToActivity(MapActivity.class));
+        calendarButton.setOnClickListener(view -> navigateToActivity(CalendarActivity.class));
+        profileButton.setOnClickListener(view -> updateButtonStates(profileButton));
+    }
+
+    private void navigateToActivity(Class<?> cls) {
+        Intent intent = new Intent(Profile.this, cls);
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
 
-    public void onGroupsClicked(View view) {
-        updateButtonStates(groupsButton);
-        Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("USER_ID", userId);  // Pass the user ID
-        startActivity(intent);
-    }
-
-    //public void onCalendarClicked(View view) {
-    //    updateButtonStates(calendarButton);
-   //     Intent intent = new Intent(this, CalendarActivity.class);
-     //   intent.putExtra("USER_ID", userId);  // Pass the user ID
-       // startActivity(intent);
-    //}
-
-    public void onProfileClicked(View view) {
-        updateButtonStates(profileButton);
-        // No need to navigate as we're already in the Profile activity
-    }
-
-    // Method to update the selected state of the buttons
     private void updateButtonStates(ImageButton selectedButton) {
-        // Deselect all buttons
         homeButton.setSelected(false);
         groupsButton.setSelected(false);
         calendarButton.setSelected(false);
         profileButton.setSelected(false);
-
-        // Set the selected button to true
         selectedButton.setSelected(true);
     }
 
-    // Method to load user data from the Room database
     private void loadUserDataFromRoom(long userId) {
-        // Fetch the user data synchronously from Room database using UserViewModel
         new Thread(() -> {
-            User user = userViewModel.getUserById(userId);  // Synchronous fetch from Room
-
+            User user = userViewModel.getUserById(userId);
             if (user != null) {
-                // Update the UI on the main thread
-                new Handler(Looper.getMainLooper()).post(() -> {
-                    // Set full name
-                    String fullName = user.getFirstName() + " " + user.getLastName();
-                    fullNameTextView.setText(fullName);
-
-                    // Format weight and height to show two decimal places
-                    String formattedWeight = String.format("%.2f", user.getWeight());
-                    String formattedHeight = String.format("%.2f", user.getHeight());
-
-                    // Set card1Header and card1Content for weight
-                    card1Header.setText("Weight");
-                    card1Content.setText(formattedWeight + " kg");
-
-                    // Set card2Header and card2Content for height
-                    card2Header.setText("Height");
-                    card2Content.setText(formattedHeight + " cm");
-
-                    // Check the gender and set the appropriate profile photo
-                    if (user.getGender().equalsIgnoreCase("female")) {
-                        profileviewphoto.setImageResource(R.drawable.womanprofile);  // Set female profile photo
-                    } else if (user.getGender().equalsIgnoreCase("male")) {
-                        profileviewphoto.setImageResource(R.drawable.manprofile);  // Set male profile photo
-                    } else {
-                        profileviewphoto.setImageResource(R.drawable.defaultprofile);  // Optional: set default profile photo if gender is unspecified
-                    }
-                });
+                runOnUiThread(() -> updateUIWithUserData(user));
             } else {
                 runOnUiThread(() -> Toast.makeText(Profile.this, "User not found in local database", Toast.LENGTH_SHORT).show());
             }
         }).start();
+    }
+
+    private void updateUIWithUserData(User user) {
+        String fullName = user.getFirstName() + " " + user.getLastName();
+        fullNameTextView.setText(fullName);
+
+        String formattedWeight = String.format("%.2f", user.getWeight());
+        String formattedHeight = String.format("%.2f", user.getHeight());
+
+        card1Header.setText("Weight");
+        card1Content.setText(formattedWeight + " kg");
+        card2Header.setText("Height");
+        card2Content.setText(formattedHeight + " cm");
+
+        if ("female".equalsIgnoreCase(user.getGender())) {
+            profileviewphoto.setImageResource(R.drawable.womanprofile);
+        } else if ("male".equalsIgnoreCase(user.getGender())) {
+            profileviewphoto.setImageResource(R.drawable.manprofile);
+        } else {
+            profileviewphoto.setImageResource(R.drawable.defaultprofile);
+        }
     }
 }

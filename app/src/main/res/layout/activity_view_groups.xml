@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- Add Group Button -->
     <Button
         android:id="@+id/btnAddGroup"
         android:layout_width="164dp"
@@ -13,33 +14,82 @@
         android:layout_marginStart="223dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="#8175F0"
         android:text="Add Group" />
 
-
+    <!-- Go to Map Button -->
     <Button
         android:id="@+id/btnForMap"
-        android:layout_width="78dp"
+        android:layout_width="87dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnAddGroup"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="67dp"
         android:layout_marginTop="-55dp"
-        android:layout_marginEnd="250dp"
+        android:layout_marginEnd="241dp"
         android:backgroundTint="#FFFFFF"
         android:contentDescription="Go to map"
         android:drawableLeft="@drawable/map_icon" />
 
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="430dp"
-        android:layout_height="876dp"
+        android:layout_width="394dp"
+        android:layout_height="458dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="79dp"
         android:layout_marginEnd="2dp" />
 
+    <!-- Bottom Bar -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/homeImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/home_button_state"
+            android:background="@color/white"
+            android:onClick="onHomeClicked" />
+
+        <ImageButton
+            android:id="@+id/groupsImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/groups_button_state"
+            android:onClick="onGroupsClicked" />
+
+        <ImageButton
+            android:id="@+id/calendarImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/calendar_button_state"
+            android:onClick="onCalendarClicked" />
+
+        <ImageButton
+            android:id="@+id/profileImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile_button_state"
+            android:background="@color/white"
+            android:onClick="onProfileClicked" />
+
+    </LinearLayout>
 
 </RelativeLayout>
-

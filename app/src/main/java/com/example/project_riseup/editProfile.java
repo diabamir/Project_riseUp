@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
-
 public class editProfile extends AppCompatActivity {
 
     private EditText editFname, editLname, editPhone, newPassword, confirmPassword, editweight, editheight;

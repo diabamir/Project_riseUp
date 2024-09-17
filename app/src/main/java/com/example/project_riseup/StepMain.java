@@ -31,7 +31,6 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
     private int stepCountTarget = 200;
     private TextView stepCountTargetTextview;
     private Button details;
-    private Button calendarButton;
 
     // Database instance
     private StepsDatabase database;
@@ -44,7 +43,6 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
         stepCounterText = findViewById(R.id.stepCounterText);
         distanceText = findViewById(R.id.distanceText1);
         details = findViewById(R.id.details);
-        calendarButton = findViewById(R.id.calendarButton);
         stepCountTargetTextview = findViewById(R.id.stepCountTargetTextview);
         progressBar = findViewById(R.id.progressBar);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -62,12 +60,6 @@ public class StepMain extends AppCompatActivity implements SensorEventListener {
         // Open details activity when "details" button is clicked
         details.setOnClickListener(v -> {
             Intent intent = new Intent(StepMain.this, DetailsActivity.class);
-            startActivity(intent);
-        });
-
-        // Open calendar activity when "calendarButton" is clicked
-        calendarButton.setOnClickListener(v -> {
-            Intent intent = new Intent(StepMain.this, CalendarActivity.class);
             startActivity(intent);
         });
     }

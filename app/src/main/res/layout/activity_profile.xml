@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="448dp"
-        android:layout_height="138dp"
+        android:layout_width="451dp"
+        android:layout_height="141dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -22,8 +22,8 @@
 
     <TextView
         android:id="@+id/welcomee"
-        android:layout_width="269dp"
-        android:layout_height="34dp"
+        android:layout_width="195dp"
+        android:layout_height="33dp"
         android:text="Good to see you!"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -53,8 +53,8 @@
 
     <LinearLayout
         android:id="@+id/cardLayout"
-        android:layout_width="445dp"
-        android:layout_height="122dp"
+        android:layout_width="441dp"
+        android:layout_height="150dp"
         android:orientation="horizontal"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -301,3 +301,4 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

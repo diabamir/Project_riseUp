@@ -95,6 +95,9 @@
         <activity android:name=".StepMain" android:exported="false">
         </activity>
 
+        <activity android:name=".ExerciseActivity" android:exported="false" />
+        <activity android:name=".mealActivity" android:exported="false" />
+
         <!-- Main Launch Activity Declaration -->
         <activity
             android:name=".firstPageIcon"

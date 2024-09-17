@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.textfield.TextInputLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:padding="16dp">
 
+    <!-- First LinearLayout with ImageView and TextView -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="244dp"
+        android:layout_height="88dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal">
@@ -26,68 +26,63 @@
         <TextView
             android:id="@+id/activityTextView"
             android:layout_width="159dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textColor="#000000"
             android:textSize="22sp"
             android:gravity="center" />
     </LinearLayout>
 
+    <!-- Second LinearLayout with location TextView -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="244dp"
+        android:layout_height="88dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/locationTextView"
-            android:layout_width="185dp"
-            android:layout_height="74dp"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textColor="#000000"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:gravity="center" />
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Description">
+    <!-- Description EditText -->
+    <EditText
+        android:id="@+id/Discribtion"
+        android:layout_width="384dp"
+        android:layout_height="90dp"
+        android:hint="Discribtion" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Discribtion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <!-- Limit Members Number EditText -->
+    <EditText
+        android:id="@+id/editTextLimitMembersNumber"
+        android:layout_width="384dp"
+        android:layout_height="88dp"
+        android:hint="Limit Members Number"
+        android:inputType="number" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Limit Members Number">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextLimitMembersNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
-
+    <!-- Choose Date TextView -->
     <TextView
         android:id="@+id/chooseDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Choose the date:"
+        android:textSize="16sp"
         android:textColor="#000000"
-        android:textSize="16sp" />
+        android:layout_marginBottom="8dp" />
 
+    <!-- DatePicker -->
     <DatePicker
         android:id="@+id/datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="145dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="383dp"
+        android:layout_height="111dp"
         android:calendarViewShown="false"
         android:datePickerMode="spinner" />
 
+    <!-- Choose Start Time TextView -->
     <TextView
         android:id="@+id/chooseStartTimeTextView"
         android:layout_width="wrap_content"
@@ -97,22 +92,24 @@
         android:textColor="#000000"
         android:layout_marginBottom="8dp" />
 
+    <!-- Start Time TimePicker -->
     <TimePicker
         android:id="@+id/starttimePicker"
-        android:layout_width="match_parent"
-        android:layout_height="133dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="385dp"
+        android:layout_height="118dp"
         android:timePickerMode="spinner" />
 
+    <!-- Choose End Time TextView -->
     <TextView
         android:id="@+id/chooseEndTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose the end time:"
-        android:textSize="16sp"
         android:textColor="#000000"
+        android:textSize="16sp"
         android:layout_marginBottom="8dp" />
 
+    <!-- End Time TimePicker -->
     <TimePicker
         android:id="@+id/endtimePicker"
         android:layout_width="match_parent"
@@ -120,6 +117,7 @@
         android:layout_marginBottom="16dp"
         android:timePickerMode="spinner" />
 
+    <!-- Add Group Button -->
     <Button
         android:id="@+id/buttonAdd"
         android:layout_width="242dp"
@@ -128,4 +126,52 @@
         android:backgroundTint="#8175F0"
         android:text="Add Group" />
 
-</com.google.android.material.textfield.TextInputLayout>
+    <!-- Bottom Bar LinearLayout -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="16dp">
+
+        <ImageButton
+            android:id="@+id/homeImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/home_button_state"
+            android:background="@color/white"
+            android:onClick="onHomeClicked" />
+
+        <ImageButton
+            android:id="@+id/groupsImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/groups_button_state"
+            android:onClick="onGroupsClicked" />
+
+        <ImageButton
+            android:id="@+id/calendarImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/calendar_button_state"
+            android:onClick="onCalendarClicked" />
+
+        <ImageButton
+            android:id="@+id/profileImageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile_button_state"
+            android:background="@color/white"
+            android:onClick="onProfileClicked" />
+    </LinearLayout>
+
+</LinearLayout>

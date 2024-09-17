@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#FFFFFF"
     android:padding="16dp">
 
     <!-- First LinearLayout with ImageView and TextView -->
@@ -103,22 +105,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose the end time:"
-        android:textSize="16sp"
         android:textColor="#000000"
+        android:textSize="16sp"
         android:layout_marginBottom="8dp" />
 
     <!-- End Time TimePicker -->
     <TimePicker
         android:id="@+id/endtimePicker"
-        android:layout_width="385dp"
-        android:layout_height="118dp"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginBottom="16dp"
         android:timePickerMode="spinner" />
 
     <!-- Add Group Button -->
     <Button
         android:id="@+id/buttonAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="242dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#8175F0"
         android:text="Add Group" />
 

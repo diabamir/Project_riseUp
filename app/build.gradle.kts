@@ -53,10 +53,7 @@ dependencies {
         // Firebase Crashlytics
         implementation(libs.firebase.crashlytics.buildtools)
 
-        // Gson library for JSON parsing
         implementation("com.google.code.gson:gson:2.8.9")
-
-        // RecyclerView dependency
         implementation("androidx.recyclerview:recyclerview:1.1.0")
 
         implementation ("com.squareup.retrofit2:retrofit:2.9.0")

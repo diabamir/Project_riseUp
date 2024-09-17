@@ -184,6 +184,7 @@ public class HomePage extends AppCompatActivity {
     Button profilebutton;
     ImageView profileviewphoto;
     long userId;
+    StepsHelper stepsHelper; // Declare a StepsHelper instance
     private float underCupAmount = 100; // Amount added per button press
 
     Handler handler = new Handler();
@@ -208,10 +209,17 @@ public class HomePage extends AppCompatActivity {
         profileButton = findViewById(R.id.profileImageButton);
         addWater = findViewById(R.id.addWater);
         greetingText = findViewById(R.id.greetingText);
+        moveDailyValue = findViewById(R.id.moveDailyValue); // This will show the steps
         reminderText = findViewById(R.id.reminderText); // Add the reminderText TextView
         profileviewphoto = findViewById(R.id.profileImage);
         moveDailyValue = findViewById(R.id.moveDailyValue);
 
+
+        // Initialize StepsHelper
+        stepsHelper = new StepsHelper(this); // Initialize StepsHelper
+
+        // Fetch today's steps and update the moveDailyValue TextView
+        stepsHelper.fetchTodaySteps(moveDailyValue); // Fetch today's steps
 
         // Set the home button as selected by default
         homeButton.setSelected(true);

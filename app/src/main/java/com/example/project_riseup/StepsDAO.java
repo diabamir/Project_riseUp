@@ -19,4 +19,6 @@ public interface StepsDAO {
 
     @Query("SELECT * FROM steps WHERE date(date) = date(:date)")
     Steps findStepsByDate(Date date);
+
+
 }

@@ -10,6 +10,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsCompat.Type;
+import androidx.lifecycle.LiveData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,12 +31,11 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class UserGroups extends AppCompatActivity {
 
-    private UserGroupApi userGroupApi;
-//    private long currentUserId = 1; // Replace with the actual user ID
-
+    private UserGroupJoinDao userGroupJoinDao;
+    private groupDAO groupDao;
+    private ImageButton homeButton,groupsButton,calendarButton,profileButton;
     private long currentUserId;
 
     @Override
@@ -42,175 +43,167 @@ public class UserGroups extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_groups);
 
-        // Get the userId passed via Intent
         Intent intent = getIntent();
-        currentUserId = intent.getLongExtra("USER_ID", -1);  // Default to -1 if not passed
+        currentUserId = intent.getLongExtra("USER_ID", -1);
 
+        // Initialize DAOs
+        userGroupJoinDao = UserGroupJoinDatabase.getInstance(this).UserGroupJoinDao();
+        groupDao = groupDataBase.getInstance(this).groupDao();
 
-        // Initialize the UserGroupApi instance from ApiClient
-        userGroupApi = ApiClient.getClient().create(UserGroupApi.class);
-
-        // Fetch and display both requested and joined groups
         fetchGroups();
 
-//        // Manually add test groups for display
-//        addTestGroups();
-
-        // Handle insets for proper padding
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Initialize buttons
+        homeButton = findViewById(R.id.homeImageButton);
+        groupsButton = findViewById(R.id.groupsImageButton);
+        calendarButton = findViewById(R.id.calendarImageButton);
+        profileButton = findViewById(R.id.profileImageButton);
+
+        // Set the home button as selected by default, since this is the HomeActivity
+        homeButton.setSelected(true);
+
+        // Set click listeners for each button
+        homeButton.setOnClickListener(this::onHomeClicked);
+        groupsButton.setOnClickListener(this::onGroupsClicked);
+//        calendarButton.setOnClickListener(this::onCalendarClicked);
+        profileButton.setOnClickListener(this::onProfileClicked);
+    }
+    // Methods to handle button clicks
+    public void onHomeClicked(View view) {
+        // No need to start the HomeActivity again, just update button state
+        updateButtonStates(homeButton)
+        ;
+    }
+
+    public void onGroupsClicked(View view) {
+        updateButtonStates(groupsButton);
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("USER_ID", currentUserId);
+        startActivity(intent);
+    }
+
+//    public void onCalendarClicked(View view) {
+//        updateButtonStates(calendarButton);
+//        Intent intent = new Intent(this, CalendarActivity.class);
+//        startActivity(intent);
+//    }
+
+    public void onProfileClicked(View view) {
+        updateButtonStates(profileButton);
+        Intent intent = new Intent(this, Profile.class);
+        intent.putExtra("USER_ID", currentUserId);
+        startActivity(intent);
+    }
+
+    // Method to update the selected state of the buttons
+    private void updateButtonStates(ImageButton selectedButton) {
+        // Deselect all buttons
+        homeButton.setSelected(false);
+        groupsButton.setSelected(false);
+        calendarButton.setSelected(false);
+        profileButton.setSelected(false);
+
+        // Set the selected button to true
+        selectedButton.setSelected(true);
     }
 
     private void fetchGroups() {
-        // Fetch requested groups
-        userGroupApi.getGroupsForUser(currentUserId, "requested").enqueue(new Callback<List<Group>>() {
-            @Override
-            public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    displayGroups(response.body(), R.id.linearLayoutJoinRequests);
+        userGroupJoinDao.getUserGroups(currentUserId).observe(this, userGroupJoins -> {
+            List<Group> groups = new ArrayList<>();
+            if (userGroupJoins != null) {
+                for (UserGroupJoin join : userGroupJoins) {
+                    // Only process the groups with "joined" status
+                    if ("joined".equals(join.getStatus())) {
+                        long groupId = join.getGroupId();
+
+                        // Fetch the group by its ID
+                        groupDao.getGroupById(groupId).observe(this, group -> {
+                            if (group != null) {
+                                groups.add(group);
+
+                                // Once all "joined" groups are fetched, display them
+                                if (groups.size() == userGroupJoins.size()) {
+                                    displayGroups(groups, R.id.linearLayoutJoinedGroups);
+                                }
+                            }
+                        });
+                    }
                 }
-            }
-
-            @Override
-            public void onFailure(Call<List<Group>> call, Throwable t) {
-                // Handle API call failure
-            }
-        });
-
-        // Fetch joined groups
-        userGroupApi.getGroupsForUser(currentUserId, "joined").enqueue(new Callback<List<Group>>() {
-            @Override
-            public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    displayGroups(response.body(), R.id.linearLayoutJoinedGroups);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Group>> call, Throwable t) {
-                // Handle API call failure
             }
         });
     }
 
-//    private void addTestGroups() {
-//        List<Group> joinedGroups = new ArrayList<>();
-//        List<Group> requestedGroups = new ArrayList<>();
-//
-//        // Create 2 test groups for "Joined"
-//        for (int i = 0; i < 2; i++) {
-//            joinedGroups.add(createTestGroup(i + 1, "Joined Group " + (i + 1)));
-//        }
-//
-//        // Create 3 test groups for "Requested"
-//        for (int i = 0; i < 3; i++) {
-//            requestedGroups.add(createTestGroup(i + 3, "Requested Group " + (i + 1)));
-//        }
-//
-//        // Display the test groups in their respective sections
-//        displayGroups(joinedGroups, R.id.linearLayoutJoinedGroups);
-//        displayGroups(requestedGroups, R.id.linearLayoutJoinRequests);
-//    }
 
-//    private Group createTestGroup(int id, String groupName) {
-//        // Create a sample group using the full constructor
-//        return new Group(
-//                id,                        // id
-//                groupName,                // workOut
-//                "Community Center",       // location
-//                "Session " + id,          // description
-//                "06:00",                  // startTime
-//                "07:00",                  // endTime
-//                new Date(),               // date
-//                123,                      // userAdminId
-//                null,                     // users
-//                10,                       // membersNumber
-//                5,                        // howManyJoin
-//                R.drawable.climbing      // imageGroup (replace with actual drawable resource)
-//        );
-//    }
+
+    private LiveData<Group> fetchGroupById(long groupId) {
+        // Fetch group as LiveData
+        return groupDao.getGroupById(groupId);
+    }
+
 
     private void displayGroups(List<Group> groups, int linearLayoutId) {
         LinearLayout linearLayout = findViewById(linearLayoutId);
         linearLayout.removeAllViews();
 
         for (Group group : groups) {
-            // Create a container layout for each group
             LinearLayout groupLayout = new LinearLayout(this);
             groupLayout.setOrientation(LinearLayout.HORIZONTAL);
             groupLayout.setPadding(16, 16, 16, 16);
 
-            // Create an ImageView for the group's image
             ImageView groupImageView = new ImageView(this);
-            groupImageView.setImageResource(group.getImageGroup()); // Assuming the drawable resource is set correctly
-            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(150, 150); // Set size as needed
+            groupImageView.setImageResource(group.getImageGroup());
+            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(150, 150);
             groupImageView.setLayoutParams(imageParams);
             groupImageView.setPadding(8, 8, 8, 8);
 
-            // Create a TextView for each group
             TextView groupTextView = new TextView(this);
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String date = group.getDate() != null ? dateFormat.format(group.getDate()) : "No birth date";
-            String startTime = group.getStartTime() != null ? group.getStartTime() : "No contact time";
-            String endTime = group.getEndTime() != null ? group.getEndTime() : "No contact time";
+            String date = group.getDate() != null ? dateFormat.format(group.getDate()) : "No date";
+            String startTime = group.getStartTime() != null ? group.getStartTime() : "No start time";
+            String endTime = group.getEndTime() != null ? group.getEndTime() : "No end time";
 
-            // Use SpannableString to format the text
             SpannableStringBuilder builder = new SpannableStringBuilder();
-
             appendBoldText(builder, "Id: ");
             builder.append(group.getId() + "\n");
-
             appendBoldText(builder, "Workout: ");
             builder.append(group.getWorkOut() + "\n");
-
             appendBoldText(builder, "Location: ");
             builder.append(group.getLocation() + "\n");
-
             appendBoldText(builder, "Description: ");
             builder.append(group.getDiscribtion() + "\n");
-
             appendBoldText(builder, "Date: ");
             builder.append(date + "\n");
-
             appendBoldText(builder, "Start time: ");
             builder.append(startTime + "\n");
-
             appendBoldText(builder, "End time: ");
             builder.append(endTime + "\n");
-
             appendBoldText(builder, "Members Number: ");
             builder.append(group.getMembersNumber() + "\n");
-
+            appendBoldText(builder, "Admin Number: ");
+            builder.append(group.getPhone() + "\n");
 
             groupTextView.setText(builder);
-            groupTextView.setPadding(16, 0, 16, 0);   // Add some padding for better visuals
-            groupTextView.setTextSize(16);            // Set text size
+            groupTextView.setPadding(16, 0, 16, 0);
+            groupTextView.setTextSize(16);
 
             Button actionButton = new Button(this);
-            actionButton.setBackgroundColor(Color.parseColor("#AC82E7")); // Example color code
+            actionButton.setBackgroundColor(Color.parseColor("#AC82E7"));
+            actionButton.setText("Remove Group");
+            actionButton.setOnClickListener(v -> unjoinGroup(group.getId()));
 
-            if (linearLayoutId == R.id.linearLayoutJoinedGroups) {
-                actionButton.setText("Unjoin");
-                actionButton.setOnClickListener(v -> unjoinGroup(group.getId()));
-            } else if (linearLayoutId == R.id.linearLayoutJoinRequests) {
-                actionButton.setText("Unrequest");
-                actionButton.setOnClickListener(v -> unrequestGroup(group.getId()));
-            }
-            // Add the ImageView and TextView to the group layout
             groupLayout.addView(groupImageView);
             groupLayout.addView(groupTextView);
             groupLayout.addView(actionButton);
 
-            // Add the group layout to the main linear layout
             linearLayout.addView(groupLayout);
         }
     }
 
-    // Helper method to append bold text to SpannableStringBuilder
     private void appendBoldText(SpannableStringBuilder builder, String text) {
         int start = builder.length();
         builder.append(text);
@@ -218,299 +211,17 @@ public class UserGroups extends AppCompatActivity {
     }
 
     private void unjoinGroup(long groupId) {
-        userGroupApi.updateUserStatusInGroup(currentUserId, groupId, null).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    // Handle successful unjoin, e.g., refresh the joined groups list
-                    fetchGroups(); // To refresh the list of groups
-                } else {
-                    // Handle failure
-                    Toast.makeText(UserGroups.this, "Failed to unjoin the group", Toast.LENGTH_SHORT).show();
-                }
-            }
+        new Thread(() -> {
+            // Delete the UserGroupJoin entry from the database
+            userGroupJoinDao.deleteUserGroupJoin(currentUserId, groupId);
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                // Handle failure
-                Toast.makeText(UserGroups.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            runOnUiThread(() -> {
+                // Immediately remove the group from the list by refetching the joined groups
+                fetchGroups();
+
+                // Show feedback to the user
+                Toast.makeText(UserGroups.this, "Successfully unjoined the group", Toast.LENGTH_SHORT).show();
+            });
+        }).start();
     }
-    private void unrequestGroup(long groupId) {
-        userGroupApi.updateUserStatusInGroup(currentUserId, groupId, null).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    // Handle successful unrequest, e.g., refresh the requested groups list
-                    fetchGroups(); // To refresh the list of groups
-                } else {
-                    // Handle failure
-                    Toast.makeText(UserGroups.this, "Failed to unrequest the group", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                // Handle failure
-                Toast.makeText(UserGroups.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
 }
-//package com.example.project_riseup;
-//
-//
-//import android.graphics.Color;
-//import android.graphics.Typeface;
-//import android.os.Bundle;
-//import android.text.Spannable;
-//import android.text.SpannableStringBuilder;
-//import android.text.style.StyleSpan;
-//import android.view.View;
-//import android.widget.Button;
-//import android.widget.ImageView;
-//import android.widget.LinearLayout;
-//import android.widget.TextView;
-//import android.widget.Toast;
-//
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.core.graphics.Insets;
-//import androidx.core.view.ViewCompat;
-//import androidx.core.view.WindowInsetsCompat;
-//import androidx.core.view.WindowInsetsCompat.Type;
-//
-//import java.text.SimpleDateFormat;
-//import java.util.ArrayList;
-//import java.util.Date;
-//import java.util.List;
-//
-//import retrofit2.Call;
-//import retrofit2.Callback;
-//import retrofit2.Response;
-//
-//public class UserGroups extends AppCompatActivity {
-//
-//    private UserGroupApi userGroupApi;
-//    private long currentUserId = 1; // Replace with the actual user ID
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_user_groups);
-//
-//        // Initialize the UserGroupApi instance from ApiClient
-//        userGroupApi = ApiClient.getClient().create(UserGroupApi.class);
-//
-//        // Fetch and display both requested and joined groups
-//        fetchGroups();
-//
-////        // Manually add test groups for display
-////        addTestGroups();
-//
-//        // Handle insets for proper padding
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
-//    }
-//
-//    private void fetchGroups() {
-//        // Fetch requested groups
-//        userGroupApi.getGroupsForUser(currentUserId, "requested").enqueue(new Callback<List<Group>>() {
-//            @Override
-//            public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//                    displayGroups(response.body(), R.id.linearLayoutJoinRequests);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Group>> call, Throwable t) {
-//                // Handle API call failure
-//            }
-//        });
-//
-//        // Fetch joined groups
-//        userGroupApi.getGroupsForUser(currentUserId, "joined").enqueue(new Callback<List<Group>>() {
-//            @Override
-//            public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//                    displayGroups(response.body(), R.id.linearLayoutJoinedGroups);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Group>> call, Throwable t) {
-//                // Handle API call failure
-//            }
-//        });
-//    }
-//
-////    private void addTestGroups() {
-////        List<Group> joinedGroups = new ArrayList<>();
-////        List<Group> requestedGroups = new ArrayList<>();
-////
-////        // Create 2 test groups for "Joined"
-////        for (int i = 0; i < 2; i++) {
-////            joinedGroups.add(createTestGroup(i + 1, "Joined Group " + (i + 1)));
-////        }
-////
-////        // Create 3 test groups for "Requested"
-////        for (int i = 0; i < 3; i++) {
-////            requestedGroups.add(createTestGroup(i + 3, "Requested Group " + (i + 1)));
-////        }
-////
-////        // Display the test groups in their respective sections
-////        displayGroups(joinedGroups, R.id.linearLayoutJoinedGroups);
-////        displayGroups(requestedGroups, R.id.linearLayoutJoinRequests);
-////    }
-//
-////    private Group createTestGroup(int id, String groupName) {
-////        // Create a sample group using the full constructor
-////        return new Group(
-////                id,                        // id
-////                groupName,                // workOut
-////                "Community Center",       // location
-////                "Session " + id,          // description
-////                "06:00",                  // startTime
-////                "07:00",                  // endTime
-////                new Date(),               // date
-////                123,                      // userAdminId
-////                null,                     // users
-////                10,                       // membersNumber
-////                5,                        // howManyJoin
-////                R.drawable.climbing      // imageGroup (replace with actual drawable resource)
-////        );
-////    }
-//
-//    private void displayGroups(List<Group> groups, int linearLayoutId) {
-//        LinearLayout linearLayout = findViewById(linearLayoutId);
-//        linearLayout.removeAllViews();
-//
-//        for (Group group : groups) {
-//            // Create a container layout for each group
-//            LinearLayout groupLayout = new LinearLayout(this);
-//            groupLayout.setOrientation(LinearLayout.HORIZONTAL);
-//            groupLayout.setPadding(16, 16, 16, 16);
-//
-//            // Create an ImageView for the group's image
-//            ImageView groupImageView = new ImageView(this);
-//            groupImageView.setImageResource(group.getImageGroup()); // Assuming the drawable resource is set correctly
-//            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(150, 150); // Set size as needed
-//            groupImageView.setLayoutParams(imageParams);
-//            groupImageView.setPadding(8, 8, 8, 8);
-//
-//            // Create a TextView for each group
-//            TextView groupTextView = new TextView(this);
-//
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//            String date = group.getDate() != null ? dateFormat.format(group.getDate()) : "No birth date";
-//            String startTime = group.getStartTime() != null ? group.getStartTime() : "No contact time";
-//            String endTime = group.getEndTime() != null ? group.getEndTime() : "No contact time";
-//
-//            // Use SpannableString to format the text
-//            SpannableStringBuilder builder = new SpannableStringBuilder();
-//
-//            appendBoldText(builder, "Id: ");
-//            builder.append(group.getId() + "\n");
-//
-//            appendBoldText(builder, "Workout: ");
-//            builder.append(group.getWorkOut() + "\n");
-//
-//            appendBoldText(builder, "Location: ");
-//            builder.append(group.getLocation() + "\n");
-//
-//            appendBoldText(builder, "Description: ");
-//            builder.append(group.getDiscribtion() + "\n");
-//
-//            appendBoldText(builder, "Date: ");
-//            builder.append(date + "\n");
-//
-//            appendBoldText(builder, "Start time: ");
-//            builder.append(startTime + "\n");
-//
-//            appendBoldText(builder, "End time: ");
-//            builder.append(endTime + "\n");
-//
-//            appendBoldText(builder, "Members Number: ");
-//            builder.append(group.getMembersNumber() + "\n");
-//
-//
-//            groupTextView.setText(builder);
-//            groupTextView.setPadding(16, 0, 16, 0);   // Add some padding for better visuals
-//            groupTextView.setTextSize(16);            // Set text size
-//
-//            Button actionButton = new Button(this);
-//            actionButton.setBackgroundColor(Color.parseColor("#AC82E7")); // Example color code
-//
-//            if (linearLayoutId == R.id.linearLayoutJoinedGroups) {
-//                actionButton.setText("Unjoin");
-//                actionButton.setOnClickListener(v -> unjoinGroup(group.getId()));
-//            } else if (linearLayoutId == R.id.linearLayoutJoinRequests) {
-//                actionButton.setText("Unrequest");
-//                actionButton.setOnClickListener(v -> unrequestGroup(group.getId()));
-//            }
-//            // Add the ImageView and TextView to the group layout
-//            groupLayout.addView(groupImageView);
-//            groupLayout.addView(groupTextView);
-//            groupLayout.addView(actionButton);
-//
-//            // Add the group layout to the main linear layout
-//            linearLayout.addView(groupLayout);
-//        }
-//    }
-//
-//    // Helper method to append bold text to SpannableStringBuilder
-//    private void appendBoldText(SpannableStringBuilder builder, String text) {
-//        int start = builder.length();
-//        builder.append(text);
-//        builder.setSpan(new StyleSpan(Typeface.BOLD), start, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//    }
-//
-//    private void unjoinGroup(long groupId) {
-//        userGroupApi.updateUserStatusInGroup(currentUserId, groupId, null).enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                if (response.isSuccessful()) {
-//                    // Handle successful unjoin, e.g., refresh the joined groups list
-//                    fetchGroups(); // To refresh the list of groups
-//                } else {
-//                    // Handle failure
-//                    Toast.makeText(UserGroups.this, "Failed to unjoin the group", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//                // Handle failure
-//                Toast.makeText(UserGroups.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-//    private void unrequestGroup(long groupId) {
-//        userGroupApi.updateUserStatusInGroup(currentUserId, groupId, null).enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                if (response.isSuccessful()) {
-//                    // Handle successful unrequest, e.g., refresh the requested groups list
-//                    fetchGroups(); // To refresh the list of groups
-//                } else {
-//                    // Handle failure
-//                    Toast.makeText(UserGroups.this, "Failed to unrequest the group", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//                // Handle failure
-//                Toast.makeText(UserGroups.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-//
-//
-//}

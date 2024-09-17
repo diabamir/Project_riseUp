@@ -12,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class privacy extends AppCompatActivity {
     Button approve;
+    long userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,7 @@ public class privacy extends AppCompatActivity {
         approve=findViewById(R.id.approve);
         approve.setOnClickListener(view -> {
             Intent intent=new Intent(privacy.this,Profile.class);
+            intent.putExtra("USER_ID", userId);  // Pass the user ID to Profile activity
             startActivity(intent);
         });
 

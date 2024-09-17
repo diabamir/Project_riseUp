@@ -1,8 +1,10 @@
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="8dp" app:cardCornerRadius="8dp" app:cardElevation="4dp">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"     android:background="#FFFFFF"
+    android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="8dp" app:cardCornerRadius="8dp" app:cardElevation="4dp">
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        >
         <!--  Person's First and Last Name  -->
         <TextView android:id="@+id/firstNameLastName"
             android:layout_width="wrap_content"
@@ -18,9 +20,11 @@
         <!--  Confirm and Remove Buttons  -->
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="end" android:orientation="horizontal" android:paddingTop="8dp">
             <!--  Confirm Button  -->
-            <com.google.android.material.button.MaterialButton android:id="@+id/confirmButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Confirm" app:icon="@drawable/image_630" app:iconTint="@android:color/holo_green_light"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/confirmButton" android:layout_width="wrap_content"             android:backgroundTint="#8175F0"
+                android:layout_height="wrap_content" android:text="Confirm" app:icon="@drawable/image_630" app:iconTint="@android:color/holo_green_light"/>
             <!--  Remove Button  -->
-            <com.google.android.material.button.MaterialButton android:id="@+id/removeButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remove" app:icon="@drawable/image_627" app:iconTint="@color/red"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/removeButton" android:layout_width="wrap_content"             android:backgroundTint="#8175F0"
+                android:layout_height="wrap_content" android:text="Remove" app:icon="@drawable/image_627" app:iconTint="@color/red"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

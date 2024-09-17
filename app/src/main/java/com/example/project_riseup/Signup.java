@@ -634,5 +634,6 @@ public class Signup extends AppCompatActivity {
                 completeSignUp();
                 break;
         }
+
     }
 }

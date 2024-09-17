@@ -21,6 +21,7 @@ public class HomePage extends AppCompatActivity {
     UserViewModel userViewModel;
     ImageView profileviewphoto;
     long userId;
+    StepsHelper stepsHelper; // Declare a StepsHelper instance
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +35,14 @@ public class HomePage extends AppCompatActivity {
         profileButton = findViewById(R.id.profileImageButton);
         addWater = findViewById(R.id.addWater);
         greetingText = findViewById(R.id.greetingText);
-        moveDailyValue = findViewById(R.id.moveDailyValue);
+        moveDailyValue = findViewById(R.id.moveDailyValue); // This will show the steps
         profileviewphoto = findViewById(R.id.profileImage);
+
+        // Initialize StepsHelper
+        stepsHelper = new StepsHelper(this); // Initialize StepsHelper
+
+        // Fetch today's steps and update the moveDailyValue TextView
+        stepsHelper.fetchTodaySteps(moveDailyValue); // Fetch today's steps
 
         // Set the home button as selected by default
         homeButton.setSelected(true);
@@ -67,9 +74,6 @@ public class HomePage extends AppCompatActivity {
             greetingText.setText("User ID not found in SharedPreferences");
         }
 
-        // Fetch steps for today and update the TextView
-        fetchStepsForToday();
-
         // Set click listeners for CardViews and buttons
         findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, StepMain.class)));
         findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
@@ -82,33 +86,6 @@ public class HomePage extends AppCompatActivity {
         groupsButton.setOnClickListener(this::onGroupsClicked);
         profileButton.setOnClickListener(this::onProfileClicked);
         calendarButton.setOnClickListener(v -> startActivity(new Intent(HomePage.this, CalendarActivity.class)));
-    }
-
-    private void fetchStepsForToday() {
-        StepsDatabase database = StepsDatabase.getInstance(this);
-        Date today = getTodayDate(); // Get today's date (at midnight)
-
-        new Thread(() -> {
-            // Fetch today's steps from the database
-            Steps todaySteps = database.stepsDao().findStepsByDate(today);
-
-            runOnUiThread(() -> {
-                if (todaySteps != null) {
-                    moveDailyValue.setText(todaySteps.getStepsTaken() + " steps");
-                } else {
-                    moveDailyValue.setText("0 steps");
-                }
-            });
-        }).start();
-    }
-
-    private Date getTodayDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        return calendar.getTime();  // Return today's date at midnight
     }
 
     public void onHomeClicked(View view) {

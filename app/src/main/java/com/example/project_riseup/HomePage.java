@@ -168,7 +168,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -176,12 +175,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 public class HomePage extends AppCompatActivity {
     ImageButton homeButton, groupsButton, calendarButton, profileButton;
-    ImageButton profilebutton;
     ImageView profileviewphoto;
     private float underCupAmount = 100; // Amount added per button press
     private ImageButton addWater;
     private TextView greetingText;
-    private Button profileButton;
     private long userId;
     private UserViewModel userViewModel;
 
@@ -213,10 +210,11 @@ public class HomePage extends AppCompatActivity {
         }
 
         // Set click listeners for CardViews
-        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
+//        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> startActivity(new Intent(HomePage.this, StepMain.class)));
 //        findViewById(R.id.cardStayHydrated).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardStayActive).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
         findViewById(R.id.cardEatBalanced).setOnClickListener(v -> startActivity(new Intent(HomePage.this, MainActivity.class)));
+
         if (userId == -1) {
             greetingText.setText("User ID not found in SharedPreferences");
             return;
@@ -254,6 +252,11 @@ public class HomePage extends AppCompatActivity {
         hydrationCard.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, HydrationActivity.class);
             intent.putExtra("USER_ID", userId);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, StepMain.class);
             startActivity(intent);
         });
     }
@@ -302,13 +305,9 @@ public class HomePage extends AppCompatActivity {
         editor.putFloat("HYDRATION_AMOUNT", hydrationAmount);
         editor.apply();
     }
-        findViewById(R.id.cardMoveDaily).setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, StepMain.class);
-            startActivity(intent);
-        });
 
-        addWater.setOnClickListener(v -> Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show());
-    }
+
+
 
     private void loadUserAndSteps() {
         // Load steps from SharedPreferences
@@ -368,3 +367,4 @@ public class HomePage extends AppCompatActivity {
         selectedButton.setSelected(true);
     }
 }
+

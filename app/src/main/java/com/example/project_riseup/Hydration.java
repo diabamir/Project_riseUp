@@ -1,6 +1,8 @@
 package com.example.project_riseup;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(tableName = "hydration")
@@ -11,15 +13,14 @@ public class Hydration {
 
     private Long userId;
 
-    private double waterAmount;
+    private double waterAmount = 0;
 
-
-    private Date drinkDate; // Use Date directly
+    private String drinkDate;
 
     // Constructors, Getters, and Setters
     public Hydration() {}
 
-    public Hydration(Long userId, double waterAmount, Date drinkDate) {
+    public Hydration(Long userId, double waterAmount, String drinkDate) {
         this.userId = userId;
         this.waterAmount = waterAmount;
         this.drinkDate = drinkDate;
@@ -49,11 +50,11 @@ public class Hydration {
         this.waterAmount = waterAmount;
     }
 
-    public Date getDrinkDate() {
+    public String getDrinkDate() {
         return drinkDate;
     }
 
-    public void setDrinkDate(Date drinkDate) {
+    public void setDrinkDate(String drinkDate) {
         this.drinkDate = drinkDate;
     }
 

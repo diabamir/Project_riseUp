@@ -303,11 +303,270 @@
 //        waterAmountText.setText(spannable);
 //    }
 //}
-
+/////////////////////////////////////////////////////////////////////////////////////////////
+//package com.example.project_riseup;
+//
+//import android.annotation.SuppressLint;
+//import android.content.Intent;
+//import android.content.SharedPreferences;
+//import android.graphics.Color;
+//import android.os.Bundle;
+//import android.text.Spannable;
+//import android.text.SpannableString;
+//import android.text.style.ForegroundColorSpan;
+//import android.view.View;
+//import android.widget.Button;
+//import android.widget.ImageButton;
+//import android.widget.TextView;
+//import android.widget.Toast;
+//
+//import androidx.appcompat.app.AppCompatActivity;
+//import androidx.lifecycle.ViewModelProvider;
+//
+//import retrofit2.Call;
+//import retrofit2.Callback;
+//import retrofit2.Response;
+//import retrofit2.Retrofit;
+//import retrofit2.converter.gson.GsonConverterFactory;
+//
+//import java.util.List;
+//
+//public class HydrationActivity extends AppCompatActivity {
+//
+//    private MyView myView;
+//    private Button increaseButton;
+//    private Button decreaseButton;
+//    private Button addDrinkButton;
+//    private TextView waterAmountText;
+//    private TextView cupText;
+//    private TextView motivateText;
+//    private float progress = 0f;
+//    private int underCupAmount = 100;
+//    private int maxHydration = 1000;
+//    private long userId;
+//    private HydrationAPI hydrationAPI; // Add this line
+//
+//    public User user;
+//
+//    ImageButton homeButton;
+//    ImageButton groupsButton;
+//    ImageButton calendarButton;
+//    ImageButton profileButton;
+//
+//    UserViewModel userViewModel;
+//
+//    @SuppressLint("MissingInflatedId")
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_hydration); // Update layout to activity_hydration
+//
+////        // Initialize Retrofit
+////        Retrofit retrofit = new Retrofit.Builder()
+////                .baseUrl("https://your-api-url.com/") // Update with your base URL
+////                .addConverterFactory(GsonConverterFactory.create())
+////                .build();
+////        hydrationAPI = retrofit.create(HydrationAPI.class);
+////
+//
+//        // Retrieve the userId from the Intent
+//        Intent intent = getIntent();
+//        if (intent != null && intent.hasExtra("USER_ID")) {
+//            userId = intent.getLongExtra("USER_ID", 1); // 1 is the default value if USER_ID is not found
+//        }
+//
+//        // Retrieve the user ID from SharedPreferences
+//        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+//        userId = sharedPreferences.getLong("USER_ID", -1);
+//
+//        if (userId != -1) {
+//            // Initialize ViewModel and fetch user data
+//            userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+//
+//            new Thread(() -> {
+//                user = userViewModel.getUserById(userId);
+//                runOnUiThread(() -> {
+//                    if (user != null) {
+//                        progress = user.getHydrationAmount();
+//                        maxHydration = (int) (user.getWeight()*35);
+//                    } else {
+//                        Toast.makeText(HydrationActivity.this, "user is n...", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }).start();
+//        } else {
+//            Toast.makeText(HydrationActivity.this, "user is -1...", Toast.LENGTH_SHORT).show();
+//        }
+//
+//
+//        homeButton = findViewById(R.id.homeImageButton);
+//        groupsButton = findViewById(R.id.groupsImageButton);
+//        calendarButton = findViewById(R.id.calendarImageButton);
+//        profileButton = findViewById(R.id.profileImageButton);
+//
+//        // Set the home button as selected by default
+//        homeButton.setSelected(true);
+//
+//        homeButton.setOnClickListener(this::onHomeClicked);
+//        groupsButton.setOnClickListener(this::onGroupsClicked);
+//        profileButton.setOnClickListener(this::onProfileClicked);
+//
+//
+//        initViews();
+////        setupButtonListeners();
+//        user.setHydrationAmount(progress);
+//    }
+//
+////    private void setupButtonListeners() {
+////        homeButton = findViewById(R.id.homeImageButton);
+////        groupsButton = findViewById(R.id.groupsImageButton);
+////        calendarButton = findViewById(R.id.calendarImageButton);
+////        profileButton = findViewById(R.id.profileImageButton);
+////
+////
+////        homeButton.setOnClickListener(this::onHomeClicked);
+////        groupsButton.setOnClickListener(this::onGroupsClicked);
+////        profileButton.setOnClickListener(this::onProfileClicked);
+////    }
+//
+//    private void initViews() {
+//        myView = findViewById(R.id.my_view);
+//        motivateText = findViewById(R.id.motivateTextView);
+//        increaseButton = findViewById(R.id.increase_button);
+//        decreaseButton = findViewById(R.id.decrease_button);
+//        addDrinkButton = findViewById(R.id.addDrinkButton);
+//        waterAmountText = findViewById(R.id.textViewWater);
+//        cupText = findViewById(R.id.cupText);
+//
+//        updateMotivateText();
+//        setWaterAmountText(waterAmountText, progress);
+//
+//        increaseButton.setOnClickListener(v -> {
+//            underCupAmount = Math.min(underCupAmount + 50, 500);
+//            updateCupText();
+//        });
+//
+//        decreaseButton.setOnClickListener(v -> {
+//            underCupAmount = Math.max(underCupAmount - 50, -500);
+//            updateCupText();
+//        });
+//
+//        addDrinkButton.setOnClickListener(v -> {
+//            progress = Math.max(0, Math.min(progress + underCupAmount, maxHydration));
+//            updateMotivateText();
+//            setWaterAmountText(waterAmountText, progress);
+//            updateCupText();
+//            myView.setProgress(progress, maxHydration);
+////            fetchAndUpdateHydrationRecords(); // Add this line
+//        });
+//    }
+//
+//    private void updateCupText() {
+//        String cupTextValue = underCupAmount + " ml";
+//        SpannableString spannable = new SpannableString(cupTextValue);
+//        cupText.setText(spannable);
+//    }
+//
+//    private void updateMotivateText() {
+//        String motivateMessage = (progress == maxHydration) ? "Great job! You've done it" : "You're almost there! Keep hydrated";
+//        motivateText.setText(motivateMessage);
+//    }
+//
+//    private void setWaterAmountText(TextView waterAmountText, float progress) {
+//        String waterText = progress + " ml of water";
+//        SpannableString spannable = new SpannableString(waterText);
+//        int appColor = getResources().getColor(R.color.appColor);
+//        spannable.setSpan(new ForegroundColorSpan(appColor), 0, String.valueOf(progress).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spannable.setSpan(new ForegroundColorSpan(Color.BLACK), String.valueOf(progress).length(), spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        waterAmountText.setText(spannable);
+//    }
+//
+//    private void fetchAndUpdateHydrationRecords() {
+//        // Fetch hydration records
+//        Call<List<Hydration>> call = hydrationAPI.getHydrationRecordsByUserId(userId);
+//        call.enqueue(new Callback<List<Hydration>>() {
+//            @Override
+//            public void onResponse(Call<List<Hydration>> call, Response<List<Hydration>> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    List<Hydration> hydrationRecords = response.body();
+//                    if (!hydrationRecords.isEmpty()) {
+//                        // For demonstration, let's update the first record
+//                        Hydration recordToUpdate = hydrationRecords.get(0);
+//                        updateHydrationAmount(recordToUpdate.getId(), progress);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Hydration>> call, Throwable t) {
+//                Toast.makeText(HydrationActivity.this, "failure in fetchUpdate..", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    private void updateHydrationAmount(Long hydrationId, float newAmount) {
+//        Hydration updatedHydration = new Hydration();
+//        updatedHydration.setId(hydrationId);
+//        updatedHydration.setUserId(userId);
+//        updatedHydration.setWaterAmount(newAmount);
+//        // Set other required fields if necessary
+//
+//        Call<Hydration> call = hydrationAPI.updateHydrationRecord(hydrationId, updatedHydration);
+//        call.enqueue(new Callback<Hydration>() {
+//            @Override
+//            public void onResponse(Call<Hydration> call, Response<Hydration> response) {
+//                if (response.isSuccessful()) {
+//                    // Handle success
+//                } else {
+//                    // Handle failure
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Hydration> call, Throwable t) {
+//                Toast.makeText(HydrationActivity.this, "Failure in updateHydrationAmount", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    // Methods to handle button clicks
+//    public void onHomeClicked(View view) {
+//        updateButtonStates(homeButton);
+//        Intent intent = new Intent(HydrationActivity.this, HomePage.class);
+//        intent.putExtra("USER_ID", userId);
+//        startActivity(intent);
+//    }
+//
+//    public void onGroupsClicked(View view) {
+//        updateButtonStates(groupsButton);
+//        Intent intent = new Intent(this, MapActivity.class);
+//        intent.putExtra("USER_ID", userId);
+//        startActivity(intent);
+//    }
+//
+//    public void onProfileClicked(View view) {
+//        updateButtonStates(profileButton);
+//        Intent intent = new Intent(this, Profile.class);
+//        intent.putExtra("USER_ID", userId);
+//        startActivity(intent);
+//    }
+//
+//    private void updateButtonStates(ImageButton selectedButton) {
+//        homeButton.setSelected(false);
+//        groupsButton.setSelected(false);
+//        calendarButton.setSelected(false);
+//        profileButton.setSelected(false);
+//        selectedButton.setSelected(true);
+//    }
+//}
 package com.example.project_riseup;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -317,14 +576,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HydrationActivity extends AppCompatActivity {
 
@@ -337,51 +604,184 @@ public class HydrationActivity extends AppCompatActivity {
     private TextView motivateText;
     private float progress = 0f;
     private int underCupAmount = 100;
-    private final int maxHydration = 1000;
+    private int maxHydration = 1000;
     private long userId;
-    private HydrationAPI hydrationAPI; // Add this line
+    private HydrationAPI hydrationAPI; // API interface for hydration data
+
+    private User user;
 
     ImageButton homeButton;
     ImageButton groupsButton;
     ImageButton calendarButton;
     ImageButton profileButton;
 
-    @SuppressLint("MissingInflatedId")
+    UserViewModel userViewModel;
+
+
+
+    //    @SuppressLint("MissingInflatedId")
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_hydration); // Ensure the layout is updated to activity_hydration
+//
+//        // Initialize Retrofit
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://your-api-url.com/") // Replace with your actual API base URL
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        hydrationAPI = retrofit.create(HydrationAPI.class);
+//
+//        // Retrieve userId from Intent or SharedPreferences
+//        Intent intent = getIntent();
+//        if (intent != null && intent.hasExtra("USER_ID")) {
+//            userId = intent.getLongExtra("USER_ID", -1);
+//        } else {
+//            SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+//            userId = sharedPreferences.getLong("USER_ID", -1);
+//        }
+//
+//        if (userId != -1) {
+//            // Initialize ViewModel and fetch user data
+//            userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+//            new Thread(() -> {
+//                user = userViewModel.getUserById(userId);
+//                runOnUiThread(() -> {
+//                    if (user != null) {
+//                        progress = user.getHydrationAmount();
+//                        maxHydration = (int) (user.getWeight() * 35);
+//                        initViews();
+//                        user.setHydrationAmount(progress);
+//                    } else {
+//                        Toast.makeText(HydrationActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }).start();
+//        } else {
+//            Toast.makeText(HydrationActivity.this, "Invalid user ID", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        homeButton = findViewById(R.id.homeImageButton);
+//        groupsButton = findViewById(R.id.groupsImageButton);
+//        calendarButton = findViewById(R.id.calendarImageButton);
+//        profileButton = findViewById(R.id.profileImageButton);
+//
+//        // Set default selected button
+//        homeButton.setSelected(true);
+//        homeButton.setOnClickListener(this::onHomeClicked);
+//        groupsButton.setOnClickListener(this::onGroupsClicked);
+//        profileButton.setOnClickListener(this::onProfileClicked);
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        if (userId != -1) {
+//            // Fetch user data when activity resumes
+//            new Thread(() -> {
+//                user = userViewModel.getUserById(userId);
+//                runOnUiThread(() -> {
+//                    if (user != null) {
+//                        progress = user.getHydrationAmount();
+//                        maxHydration = (int) (user.getWeight() * 35);
+//                        updateUI();
+//                    } else {
+//                        Toast.makeText(HydrationActivity.this, "User not found.", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }).start();
+//        }
+//    }
+@SuppressLint("MissingInflatedId")
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_hydration); // Ensure the layout is updated to activity_hydration
+
+
+    // Initialize Retrofit
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("https://your-api-url.com/") // Replace with your actual API base URL
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    hydrationAPI = retrofit.create(HydrationAPI.class);
+
+    // Retrieve userId from Intent or SharedPreferences
+    Intent intent = getIntent();
+    if (intent != null && intent.hasExtra("USER_ID")) {
+        userId = intent.getLongExtra("USER_ID", -1);
+    } else {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        userId = sharedPreferences.getLong("USER_ID", -1);
+    }
+
+    if (userId != -1) {
+        // Initialize ViewModel and fetch user data
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        new Thread(() -> {
+            user = userViewModel.getUserById(userId);
+            runOnUiThread(() -> {
+                if (user != null) {
+                    progress = user.getHydrationAmount();
+                    maxHydration = (int) (user.getWeight() * 35);
+                    initViews();
+                    user.setHydrationAmount(progress);
+                } else {
+                    Toast.makeText(HydrationActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }).start();
+    } else {
+        Toast.makeText(HydrationActivity.this, "Invalid user ID", Toast.LENGTH_SHORT).show();
+    }
+
+    // Retrieve underCupAmount from SharedPreferences
+    SharedPreferences sharedPreferences = getSharedPreferences("HydrationPreferences", MODE_PRIVATE);
+    underCupAmount = sharedPreferences.getInt("UNDER_CUP_AMOUNT", 100);
+
+    homeButton = findViewById(R.id.homeImageButton);
+    groupsButton = findViewById(R.id.groupsImageButton);
+    calendarButton = findViewById(R.id.calendarImageButton);
+    profileButton = findViewById(R.id.profileImageButton);
+
+    // Set default selected button
+    homeButton.setSelected(true);
+    homeButton.setOnClickListener(this::onHomeClicked);
+    groupsButton.setOnClickListener(this::onGroupsClicked);
+    //calendarButton.setOnClickListener(this::onCalendarClicked);
+    profileButton.setOnClickListener(this::onProfileClicked);
+
+}
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hydration); // Update layout to activity_hydration
-
-        // Initialize Retrofit
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://your-api-url.com/") // Update with your base URL
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        hydrationAPI = retrofit.create(HydrationAPI.class);
-
-        // Retrieve the userId from the Intent
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("USER_ID")) {
-            userId = intent.getLongExtra("USER_ID", 1); // 1 is the default value if USER_ID is not found
+    protected void onResume() {
+        super.onResume();
+        if (userId != -1) {
+            // Fetch user data when activity resumes
+            new Thread(() -> {
+                user = userViewModel.getUserById(userId);
+                runOnUiThread(() -> {
+                    if (user != null) {
+                        progress = user.getHydrationAmount();
+                        maxHydration = (int) (user.getWeight() * 35);
+                        updateUI();
+                    } else {
+                        Toast.makeText(HydrationActivity.this, "User not found.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }).start();
         }
 
-        initViews();
-        setupButtonListeners();
+        // Retrieve underCupAmount from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("HydrationPreferences", MODE_PRIVATE);
+        underCupAmount = sharedPreferences.getInt("UNDER_CUP_AMOUNT", 100);
+
+
     }
 
-    private void setupButtonListeners() {
-        homeButton = findViewById(R.id.homeImageButton);
-        groupsButton = findViewById(R.id.groupsImageButton);
-        calendarButton = findViewById(R.id.calendarImageButton);
-        profileButton = findViewById(R.id.profileImageButton);
 
-        // Set the home button as selected by default
-        homeButton.setSelected(true);
 
-        homeButton.setOnClickListener(this::onHomeClicked);
-        groupsButton.setOnClickListener(this::onGroupsClicked);
-        profileButton.setOnClickListener(this::onProfileClicked);
-    }
+
 
     private void initViews() {
         myView = findViewById(R.id.my_view);
@@ -405,14 +805,61 @@ public class HydrationActivity extends AppCompatActivity {
             updateCupText();
         });
 
+//        addDrinkButton.setOnClickListener(v -> {
+//            progress = Math.max(0, Math.min(progress + underCupAmount, maxHydration));
+//            updateMotivateText();
+//            setWaterAmountText(waterAmountText, progress);
+//            updateCupText();
+//            myView.setProgress(progress, maxHydration);
+//            fetchAndUpdateHydrationRecords(); // Update hydration records in the backend
+//        });
+//        addDrinkButton.setOnClickListener(v -> {
+//            progress = Math.max(0, Math.min(progress + underCupAmount, maxHydration));
+//            updateMotivateText();
+//            setWaterAmountText(waterAmountText, progress);
+//            updateCupText();
+//            myView.setProgress(progress, maxHydration);
+//
+//            // Update user hydrationAmount
+//            if (user != null) {
+//                user.setHydrationAmount(progress);
+//                new Thread(() -> {
+//                    userViewModel.updateUser(user);
+//                    runOnUiThread(() -> Toast.makeText(HydrationActivity.this, "Hydration updated!", Toast.LENGTH_SHORT).show());
+//                }).start();
+//            }
+//        });
         addDrinkButton.setOnClickListener(v -> {
             progress = Math.max(0, Math.min(progress + underCupAmount, maxHydration));
             updateMotivateText();
             setWaterAmountText(waterAmountText, progress);
             updateCupText();
             myView.setProgress(progress, maxHydration);
-            fetchAndUpdateHydrationRecords(); // Add this line
+
+            // Update user hydrationAmount
+            if (user != null) {
+                user.setHydrationAmount(progress);
+                new Thread(() -> {
+                    userViewModel.updateUser(user);
+                    runOnUiThread(() -> Toast.makeText(HydrationActivity.this, "Hydration updated!", Toast.LENGTH_SHORT).show());
+                }).start();
+            }
+
+            // Save underCupAmount to SharedPreferences
+            SharedPreferences sharedPreferences = getSharedPreferences("HydrationPreferences", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("UNDER_CUP_AMOUNT", underCupAmount);
+            editor.apply();
         });
+
+    }
+
+    private void updateUI() {
+        // Update UI elements with the current progress
+        setWaterAmountText(waterAmountText, progress);
+        updateCupText();
+        updateMotivateText();
+        myView.setProgress(progress, maxHydration);
     }
 
     private void updateCupText() {
@@ -443,42 +890,15 @@ public class HydrationActivity extends AppCompatActivity {
             public void onResponse(Call<List<Hydration>> call, Response<List<Hydration>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Hydration> hydrationRecords = response.body();
-                    if (!hydrationRecords.isEmpty()) {
-                        // For demonstration, let's update the first record
-                        Hydration recordToUpdate = hydrationRecords.get(0);
-                        updateHydrationAmount(recordToUpdate.getId(), progress);
-                    }
+                    // Handle the hydration records as needed
+                } else {
+                    Toast.makeText(HydrationActivity.this, "Failed to fetch hydration records", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Hydration>> call, Throwable t) {
-                // Handle failure
-            }
-        });
-    }
-
-    private void updateHydrationAmount(Long hydrationId, float newAmount) {
-        Hydration updatedHydration = new Hydration();
-        updatedHydration.setId(hydrationId);
-        updatedHydration.setUserId(userId);
-        updatedHydration.setWaterAmount(newAmount);
-        // Set other required fields if necessary
-
-        Call<Hydration> call = hydrationAPI.updateHydrationRecord(hydrationId, updatedHydration);
-        call.enqueue(new Callback<Hydration>() {
-            @Override
-            public void onResponse(Call<Hydration> call, Response<Hydration> response) {
-                if (response.isSuccessful()) {
-                    // Handle success
-                } else {
-                    // Handle failure
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Hydration> call, Throwable t) {
-                // Handle failure
+                Toast.makeText(HydrationActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -486,6 +906,9 @@ public class HydrationActivity extends AppCompatActivity {
     // Methods to handle button clicks
     public void onHomeClicked(View view) {
         updateButtonStates(homeButton);
+        Intent intent = new Intent(this, HomePage.class);
+        intent.putExtra("USER_ID", userId);
+        startActivity(intent);
     }
 
     public void onGroupsClicked(View view) {
@@ -494,6 +917,13 @@ public class HydrationActivity extends AppCompatActivity {
         intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
+
+    //public void onCalendarClicked(View view) {
+    //    updateButtonStates(calendarButton);
+    //     Intent intent = new Intent(this, CalendarActivity.class);
+    //   intent.putExtra("USER_ID", userId);  // Pass the user ID
+    // startActivity(intent);
+    //}
 
     public void onProfileClicked(View view) {
         updateButtonStates(profileButton);
@@ -509,4 +939,6 @@ public class HydrationActivity extends AppCompatActivity {
         profileButton.setSelected(false);
         selectedButton.setSelected(true);
     }
+
+
 }

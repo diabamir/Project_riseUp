@@ -35,14 +35,15 @@ public class User {
     private List<Workout> workoutList;
     @TypeConverters(Converters.class)
     private List<Nutrition> nutritionList;
-
-    private Hydration hydration;
+//    private Hydration hydration;
+    private float hydrationAmount;
+    private String drinkedDate;
 
     public User(){
 
     }
 
-    public User(long id, String userName, String firstName, String lastName, String phoneNumber, Date birthDate, String password, double weight, String gender, double height, String fitnessLevel, boolean seeTheInstructions, String profileImageUri, List<String> favActivities, List<Workout> workoutList, List<Nutrition> nutritionList) {
+    public User(long id, String userName, String firstName, String lastName, String phoneNumber, Date birthDate, String password, String gender, double weight, double height, String fitnessLevel, boolean seeTheInstructions, String profileImageUri, List<String> favActivities, List<Workout> workoutList, List<Nutrition> nutritionList, float hydrationAmount, String drinkedDate) {
         this.id = id;
         this.userName = userName;
         this.firstName = firstName;
@@ -50,8 +51,8 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.password = password;
-        this.weight = weight;
         this.gender = gender;
+        this.weight = weight;
         this.height = height;
         this.fitnessLevel = fitnessLevel;
         this.seeTheInstructions = seeTheInstructions;
@@ -59,6 +60,8 @@ public class User {
         this.favActivities = favActivities;
         this.workoutList = workoutList;
         this.nutritionList = nutritionList;
+        this.hydrationAmount = hydrationAmount;
+        this.drinkedDate = drinkedDate;
     }
 
     public long getId() {
@@ -187,6 +190,22 @@ public class User {
 
     public void setNutritionList(List<Nutrition> nutritionList) {
         this.nutritionList = nutritionList;
+    }
+
+    public float getHydrationAmount() {
+        return hydrationAmount;
+    }
+
+    public void setHydrationAmount(float hydrationAmount) {
+        this.hydrationAmount = hydrationAmount;
+    }
+
+    public String getDrinkedDate() {
+        return drinkedDate;
+    }
+
+    public void setDrinkedDate(String drinkedDate) {
+        this.drinkedDate = drinkedDate;
     }
 
     @Override

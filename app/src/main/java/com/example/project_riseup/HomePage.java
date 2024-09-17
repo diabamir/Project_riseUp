@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +19,8 @@ public class HomePage extends AppCompatActivity {
     Button profilebutton;
     long userId=1;
     ImageView profileviewphoto;
+    long userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

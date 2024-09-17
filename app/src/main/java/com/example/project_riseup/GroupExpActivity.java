@@ -160,7 +160,7 @@ public class GroupExpActivity extends AppCompatActivity {
 
                         // Start the new activity and pass the userId
                         Intent nextIntent = new Intent(GroupExpActivity.this, MapActivity.class);
-//                        nextIntent.putExtra("USER_ID", userId);
+                        nextIntent.putExtra("USER_ID", userId);
                         startActivity(nextIntent);
                         // Optional: finish the current activity
                     }

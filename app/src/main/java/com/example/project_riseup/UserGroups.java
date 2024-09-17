@@ -10,6 +10,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ public class UserGroups extends AppCompatActivity {
 
     private UserGroupJoinDao userGroupJoinDao;
     private groupDAO groupDao;
+    private ImageButton homeButton,groupsButton,calendarButton,profileButton;
     private long currentUserId;
 
     @Override
@@ -55,6 +57,58 @@ public class UserGroups extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Initialize buttons
+        homeButton = findViewById(R.id.homeImageButton);
+        groupsButton = findViewById(R.id.groupsImageButton);
+        calendarButton = findViewById(R.id.calendarImageButton);
+        profileButton = findViewById(R.id.profileImageButton);
+
+        // Set the home button as selected by default, since this is the HomeActivity
+        homeButton.setSelected(true);
+
+        // Set click listeners for each button
+        homeButton.setOnClickListener(this::onHomeClicked);
+        groupsButton.setOnClickListener(this::onGroupsClicked);
+//        calendarButton.setOnClickListener(this::onCalendarClicked);
+        profileButton.setOnClickListener(this::onProfileClicked);
+    }
+    // Methods to handle button clicks
+    public void onHomeClicked(View view) {
+        // No need to start the HomeActivity again, just update button state
+        updateButtonStates(homeButton)
+        ;
+    }
+
+    public void onGroupsClicked(View view) {
+        updateButtonStates(groupsButton);
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("USER_ID", currentUserId);
+        startActivity(intent);
+    }
+
+//    public void onCalendarClicked(View view) {
+//        updateButtonStates(calendarButton);
+//        Intent intent = new Intent(this, CalendarActivity.class);
+//        startActivity(intent);
+//    }
+
+    public void onProfileClicked(View view) {
+        updateButtonStates(profileButton);
+        Intent intent = new Intent(this, Profile.class);
+        intent.putExtra("USER_ID", currentUserId);
+        startActivity(intent);
+    }
+
+    // Method to update the selected state of the buttons
+    private void updateButtonStates(ImageButton selectedButton) {
+        // Deselect all buttons
+        homeButton.setSelected(false);
+        groupsButton.setSelected(false);
+        calendarButton.setSelected(false);
+        profileButton.setSelected(false);
+
+        // Set the selected button to true
+        selectedButton.setSelected(true);
     }
 
 //    private void fetchGroups() {

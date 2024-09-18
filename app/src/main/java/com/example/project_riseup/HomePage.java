@@ -185,7 +185,8 @@ public class HomePage extends AppCompatActivity {
     ImageView profileviewphoto;
     long userId;
     StepsHelper stepsHelper; // Declare a StepsHelper instance
-    private float underCupAmount = 100; // Amount added per button press
+    private int underCupAmount; // Amount added per button press
+    TextView stayHydratedValue;
 
     Handler handler = new Handler();
     int currentQuoteIndex = 0;
@@ -214,6 +215,7 @@ public class HomePage extends AppCompatActivity {
         profileviewphoto = findViewById(R.id.profileImage);
         moveDailyValue = findViewById(R.id.moveDailyValue);
 
+        stayHydratedValue = findViewById(R.id.stayHydratedValue);
 
         // Initialize StepsHelper
         stepsHelper = new StepsHelper(this); // Initialize StepsHelper
@@ -239,6 +241,8 @@ public class HomePage extends AppCompatActivity {
                 runOnUiThread(() -> {
                     if (user != null) {
                         greetingText.setText("Hello, " + user.getFirstName() + "!");
+                        // Set the TextView text to the user's hydration amount
+                        stayHydratedValue.setText(String.format("%.1f ml", user.getHydrationAmount()));
 
                         // Set the appropriate profile photo based on gender
                         if (user.getGender().equalsIgnoreCase("female")) {
@@ -270,8 +274,9 @@ public class HomePage extends AppCompatActivity {
 
         homeButton.setOnClickListener(this::onHomeClicked);
         groupsButton.setOnClickListener(this::onGroupsClicked);
+        calendarButton.setOnClickListener(this::onCalendarClicked);
         profileButton.setOnClickListener(this::onProfileClicked);
-        calendarButton.setOnClickListener(v -> startActivity(new Intent(HomePage.this, CalendarActivity.class)));
+//        calendarButton.setOnClickListener(v -> startActivity(new Intent(HomePage.this, CalendarActivity.class)));
         if (userId != -1) {
             // Initialize ViewModel and fetch user data
             userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
@@ -303,11 +308,6 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        // Set click listeners for navigation buttons
-        homeButton.setOnClickListener(this::onHomeClicked);
-        groupsButton.setOnClickListener(this::onGroupsClicked);
-        //calendarButton.setOnClickListener(this::onCalendarClicked);
-        profileButton.setOnClickListener(this::onProfileClicked);
 
         // Start updating the quotes every 30 seconds
         startQuoteRotation();
@@ -325,6 +325,11 @@ public class HomePage extends AppCompatActivity {
             Intent intent = new Intent(HomePage.this, StepMain.class);
             startActivity(intent);
         });
+
+        // Retrieve underCupAmount from SharedPreferences
+        SharedPreferences sharedPreferencescup = getSharedPreferences("HydrationPreferences", MODE_PRIVATE);
+        underCupAmount = sharedPreferencescup.getInt("UNDER_CUP_AMOUNT", 100); // Default value is 100
+
     }
 
     private void fetchUserData() {
@@ -347,23 +352,45 @@ public class HomePage extends AppCompatActivity {
         }).start();
     }
 
+//    private void addWater() {
+//        new Thread(() -> {
+//            User user = userViewModel.getUserById(userId);
+//            if (user != null) {
+//                float newHydrationAmount = user.getHydrationAmount() + underCupAmount;
+//                user.setHydrationAmount(newHydrationAmount);
+//
+//                userViewModel.updateUser(user);
+//                runOnUiThread(() -> {
+//                    Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show();
+//                    updateSharedPreferences(newHydrationAmount);
+//                });
+//            } else {
+//                runOnUiThread(() -> Toast.makeText(HomePage.this, "User not found.", Toast.LENGTH_SHORT).show());
+//            }
+//        }).start();
+//    }
     private void addWater() {
         new Thread(() -> {
             User user = userViewModel.getUserById(userId);
             if (user != null) {
                 float newHydrationAmount = user.getHydrationAmount() + underCupAmount;
                 user.setHydrationAmount(newHydrationAmount);
-
                 userViewModel.updateUser(user);
                 runOnUiThread(() -> {
+                    // Update the UI elements on the main thread
                     Toast.makeText(HomePage.this, "Water added!", Toast.LENGTH_SHORT).show();
+                    // Update the shared preferences if needed
                     updateSharedPreferences(newHydrationAmount);
+                    // Update the TextView with the new hydration amount
+                    TextView stayHydratedValue = findViewById(R.id.stayHydratedValue);
+                    stayHydratedValue.setText(String.format("%.1f ml", newHydrationAmount));
                 });
             } else {
                 runOnUiThread(() -> Toast.makeText(HomePage.this, "User not found.", Toast.LENGTH_SHORT).show());
             }
         }).start();
     }
+
 
     private void updateSharedPreferences(float hydrationAmount) {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
@@ -451,8 +478,14 @@ public class HomePage extends AppCompatActivity {
 
     public void onGroupsClicked(View view) {
         updateButtonStates(groupsButton);
-
         Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("USER_ID", userId);
+        startActivity(intent);
+    }
+
+    public void onCalendarClicked(View view) {
+        updateButtonStates(calendarButton);
+        Intent intent = new Intent(this, CalendarActivity.class);
         intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }

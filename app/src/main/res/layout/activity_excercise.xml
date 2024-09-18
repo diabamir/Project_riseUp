@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -13,14 +14,714 @@
         android:text="Select exercises you like and get recommendations!"
         android:textSize="18sp"
         android:layout_marginBottom="8dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/exerciseRecyclerView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- CardView 1 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Main Content: Image, Checkbox, and Info Button -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image and Checkbox Layout -->
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:contentDescription="@string/expand_for_info"
+                                android:paddingTop="10dp"
+                                android:src="@drawable/stationarybikingimage" />
+
+                            <CheckBox
+                                android:id="@+id/exerciseCheckBox1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="8dp"
+                                android:text="Exercise Done"
+                                android:textStyle="bold"
+                                android:textSize="13sp"
+                                android:contentDescription="Indicates if the exercise has been completed"/>
+                        </LinearLayout>
+
+                        <!-- Exercise Name Text -->
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Stationary \nBiking"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <!-- Info Button -->
+                        <ImageButton
+                            android:id="@+id/infoButton1"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_for_info"
+                            app:srcCompat="@drawable/infoarrow" />
+                    </LinearLayout>
+
+                    <!-- Additional Information Text (Initially Hidden) -->
+                    <TextView
+                        android:id="@+id/infoTextView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="To do stationary biking, sit on the bike with your back straight, adjust the seat for proper leg extension, and pedal at a steady pace. Gradually increase resistance for a more challenging workout.\nExercise level: 2 (Intermediate), Duration: 45 minutes, Frequency: 3-5 times per week."
+                        android:textStyle="bold"
+                        android:background="@color/gray2"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Activity/Exercise 2 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Main Content: Image, Checkbox, and Info Button -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image and Checkbox Layout -->
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:contentDescription="@string/expand_for_info"
+                                android:paddingTop="10dp"
+                                android:src="@drawable/dumbbellpushimage" />
+
+                            <CheckBox
+                                android:id="@+id/exerciseCheckBox2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="8dp"
+                                android:text="Exercise Done"
+                                android:textStyle="bold"
+                                android:textSize="13sp"
+                                android:contentDescription="Indicates if the exercise has been completed"/>
+                        </LinearLayout>
+
+                        <!-- Exercise Name Text -->
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Dumbbell \nPush"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <!-- Info Button -->
+                        <ImageButton
+                            android:id="@+id/infoButton2"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_for_info"
+                            app:srcCompat="@drawable/infoarrow" />
+                    </LinearLayout>
+
+                    <!-- Additional Information Text (Initially Hidden) -->
+                    <TextView
+                        android:id="@+id/infoTextView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="The Dumbbell Push exercise targets the chest, shoulders, and triceps. To perform this exercise, lie on a bench, hold a dumbbell in each hand, and push them upwards until your arms are fully extended. Lower the dumbbells slowly to your chest and repeat. This exercise is ideal for building upper body strength.\nExercise level: 2 (Intermediate), Duration: 30 minutes, Frequency: 3 times per week."
+                        android:textStyle="bold"
+                        android:background="@color/gray2"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+            <!-- Activity/Exercise 3 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Main Content: Image, Checkbox, and Info Button -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image and Checkbox Layout -->
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:contentDescription="@string/expand_for_info"
+                                android:paddingTop="10dp"
+                                android:src="@drawable/latpulldownimage" />
+
+                            <CheckBox
+                                android:id="@+id/exerciseCheckBox3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="8dp"
+                                android:text="Exercise Done"
+                                android:textStyle="bold"
+                                android:textSize="13sp"
+                                android:contentDescription="Indicates if the exercise has been completed"/>
+                        </LinearLayout>
+
+                        <!-- Exercise Name Text -->
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Lat Pulldown"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <!-- Info Button -->
+                        <ImageButton
+                            android:id="@+id/infoButton3"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_for_info"
+                            app:srcCompat="@drawable/infoarrow" />
+                    </LinearLayout>
+
+                    <!-- Additional Information Text (Initially Hidden) -->
+                    <TextView
+                        android:id="@+id/infoTextView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="To perform the Lat Pulldown, sit at the machine with your thighs secured under the pads, grasp the bar with a wide grip, and pull it down towards your chest. Slowly return to the starting position. Ensure controlled movements for effective results.\nExercise level: 2 (Intermediate), Duration: 30 minutes, Frequency: 3-4 times per week."
+                        android:textStyle="bold"
+                        android:background="@color/gray2"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+            <!-- Activity/Exercise 4 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Main Content: Image, Checkbox, and Info Button -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image and Checkbox Layout -->
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:contentDescription="@string/expand_for_info"
+                                android:paddingTop="10dp"
+                                android:src="@drawable/benchpressimage" />
+
+                            <CheckBox
+                                android:id="@+id/exerciseCheckBox4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="8dp"
+                                android:text="Exercise Done"
+                                android:textStyle="bold"
+                                android:textSize="13sp"
+                                android:contentDescription="Indicates if the exercise has been completed"/>
+                        </LinearLayout>
+
+                        <!-- Exercise Name Text -->
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Bench Press"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <!-- Info Button -->
+                        <ImageButton
+                            android:id="@+id/infoButton4"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_for_info"
+                            app:srcCompat="@drawable/infoarrow" />
+                    </LinearLayout>
+
+                    <!-- Additional Information Text (Initially Hidden) -->
+                    <TextView
+                        android:id="@+id/infoTextView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="To perform the Bench Press, lie on a bench with your feet flat on the ground, grasp the barbell with a slightly wider than shoulder-width grip, and lower it to your chest. Push the barbell back up to the starting position. Ensure controlled movements and proper form for best results.\nExercise level: 3 (Advanced), Duration: 30 minutes, Frequency: 2-3 times per week."
+                        android:textStyle="bold"
+                        android:background="@color/gray2"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+            <!-- Activity/Exercise 5 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Main Content: Image, Checkbox, and Info Button -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image and Checkbox Layout -->
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:contentDescription="@string/expand_for_info"
+                                android:paddingTop="10dp"
+                                android:src="@drawable/benchcableflyesimage" />
+
+                            <CheckBox
+                                android:id="@+id/exerciseCheckBox5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="8dp"
+                                android:text="Exercise Done"
+                                android:textStyle="bold"
+                                android:textSize="13sp"
+                                android:contentDescription="Indicates if the exercise has been completed"/>
+                        </LinearLayout>
+
+                        <!-- Exercise Name Text -->
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Bench Cable Flyes"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <!-- Info Button -->
+                        <ImageButton
+                            android:id="@+id/infoButton5"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_for_info"
+                            app:srcCompat="@drawable/infoarrow" />
+                    </LinearLayout>
+
+                    <!-- Additional Information Text (Initially Hidden) -->
+                    <TextView
+                        android:id="@+id/infoTextView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="To perform Bench Cable Flyes, stand with a cable in each hand, arms outstretched to the sides, and a slight bend in your elbows. Pull the cables together in front of you, then slowly return to the starting position. Maintain control and proper form throughout.\nExercise level: 2 (Intermediate), Duration: 30 minutes, Frequency: 2-3 times per week."
+                        android:textStyle="bold"
+                        android:background="@color/gray2"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+            <!-- Activity/Exercise 6 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Main Content: Image, Checkbox, and Info Button -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image and Checkbox Layout -->
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:contentDescription="@string/expand_for_info"
+                                android:paddingTop="10dp"
+                                android:src="@drawable/legstrengthimage" />
+
+                            <CheckBox
+                                android:id="@+id/exerciseCheckBox6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="8dp"
+                                android:text="Exercise Done"
+                                android:textStyle="bold"
+                                android:textSize="13sp"
+                                android:contentDescription="Indicates if the exercise has been completed"/>
+                        </LinearLayout>
+
+                        <!-- Exercise Name Text -->
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Leg Strength"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <!-- Info Button -->
+                        <ImageButton
+                            android:id="@+id/infoButton6"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_for_info"
+                            app:srcCompat="@drawable/infoarrow" />
+                    </LinearLayout>
+
+                    <!-- Additional Information Text (Initially Hidden) -->
+                    <TextView
+                        android:id="@+id/infoTextView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="To perform Leg Strength exercises, include various squats, lunges, and leg presses in your routine. Focus on proper form and gradually increase the weights to enhance strength and endurance.\nExercise level: 3 (Advanced), Duration: 40 minutes, Frequency: 3-4 times per week."
+                        android:textStyle="bold"
+                        android:background="@color/gray2"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+            <!-- Activity/Exercise 7 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Main Content: Image, Checkbox, and Info Button -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image and Checkbox Layout -->
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:contentDescription="@string/expand_for_info"
+                                android:paddingTop="10dp"
+                                android:src="@drawable/bicepsbrachiiimage" />
+
+                            <CheckBox
+                                android:id="@+id/exerciseCheckBox7"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="8dp"
+                                android:text="Exercise Done"
+                                android:textStyle="bold"
+                                android:textSize="13sp"
+                                android:contentDescription="Indicates if the exercise has been completed"/>
+                        </LinearLayout>
+
+                        <!-- Exercise Name Text -->
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Biceps Muscle"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <!-- Info Button -->
+                        <ImageButton
+                            android:id="@+id/infoButton7"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_for_info"
+                            app:srcCompat="@drawable/infoarrow" />
+                    </LinearLayout>
+
+                    <!-- Additional Information Text (Initially Hidden) -->
+                    <TextView
+                        android:id="@+id/infoTextView7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Biceps Muscle exercises focus on developing the biceps brachii, which are crucial for arm strength. Include curls, hammer curls, and concentration curls in your routine to build muscle and improve arm aesthetics.\nExercise level: 3 (Intermediate), Duration: 30 minutes, Frequency: 2-3 times per week."
+                        android:textStyle="bold"
+                        android:background="@color/gray2"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+            <!-- Activity/Exercise 8 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Main Content: Image, Checkbox, and Info Button -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image and Checkbox Layout -->
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:contentDescription="@string/expand_for_info"
+                                android:paddingTop="10dp"
+                                android:src="@drawable/chestmusclesimage" />
+
+                            <CheckBox
+                                android:id="@+id/exerciseCheckBox8"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="8dp"
+                                android:text="Exercise Done"
+                                android:textStyle="bold"
+                                android:textSize="13sp"
+                                android:contentDescription="Indicates if the exercise has been completed"/>
+                        </LinearLayout>
+
+                        <!-- Exercise Name Text -->
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Chest Muscles"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <!-- Info Button -->
+                        <ImageButton
+                            android:id="@+id/infoButton8"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_for_info"
+                            app:srcCompat="@drawable/infoarrow" />
+                    </LinearLayout>
+
+                    <!-- Additional Information Text (Initially Hidden) -->
+                    <TextView
+                        android:id="@+id/infoTextView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Chest muscles are crucial for upper body strength. Key exercises include bench press, chest flyes, and push-ups. Incorporate these into your routine for a well-rounded chest workout.\nExercise level: 4 (Advanced), Duration: 45 minutes, Frequency: 2-3 times per week."
+                        android:textStyle="bold"
+                        android:background="@color/gray2"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Plans and exercises based on your interests : "
+                android:textStyle="bold"/>
+
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/exerciseRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="8dp" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/submitBtn"
@@ -31,3 +732,39 @@
         android:layout_marginTop="16dp" />
 
 </LinearLayout>
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    android:background="#FFFFFF"-->
+<!--    android:padding="16dp">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/instructionsText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Select exercises you like and get recommendations!"-->
+<!--        android:textSize="18sp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:textStyle="bold"-->
+<!--        />-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/exerciseRecyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/submitBtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Get Recommendations"-->
+<!--        android:background="@drawable/rounded_button"-->
+<!--        android:layout_marginTop="16dp" />-->
+
+<!--</LinearLayout>-->

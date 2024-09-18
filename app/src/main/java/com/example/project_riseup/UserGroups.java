@@ -69,12 +69,16 @@ public class UserGroups extends AppCompatActivity {
         groupsButton.setOnClickListener(this::onGroupsClicked);
         calendarButton.setOnClickListener(v -> startActivity(new Intent(this, CalendarActivity.class)));
         profileButton.setOnClickListener(this::onProfileClicked);
+
+        profileButton.setSelected(true);
     }
     // Methods to handle button clicks
     public void onHomeClicked(View view) {
         // No need to start the HomeActivity again, just update button state
-        updateButtonStates(homeButton)
-        ;
+        updateButtonStates(homeButton);
+        Intent intent = new Intent(this, HomePage.class);
+        intent.putExtra("USER_ID", currentUserId);
+        startActivity(intent);
     }
 
     public void onGroupsClicked(View view) {

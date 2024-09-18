@@ -797,11 +797,15 @@ protected void onCreate(Bundle savedInstanceState) {
         increaseButton.setOnClickListener(v -> {
             underCupAmount = Math.min(underCupAmount + 50, 500);
             updateCupText();
+            // Save underCupAmount to SharedPreferences
+            saveUnderCupAmount();
         });
 
         decreaseButton.setOnClickListener(v -> {
             underCupAmount = Math.max(underCupAmount - 50, -500);
             updateCupText();
+            // Save underCupAmount to SharedPreferences
+            saveUnderCupAmount();
         });
 
 //        addDrinkButton.setOnClickListener(v -> {
@@ -851,6 +855,15 @@ protected void onCreate(Bundle savedInstanceState) {
             editor.apply();
         });
 
+        // Save underCupAmount to SharedPreferences
+        saveUnderCupAmount();
+    }
+
+    private void saveUnderCupAmount() {
+        SharedPreferences sharedPreferences = getSharedPreferences("HydrationPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("UNDER_CUP_AMOUNT", underCupAmount);
+        editor.apply();
     }
 
     private void updateUI() {

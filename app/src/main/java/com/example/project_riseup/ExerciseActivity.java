@@ -1,10 +1,16 @@
 package com.example.project_riseup;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.content.res.Resources;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -31,6 +37,13 @@ public class ExerciseActivity extends AppCompatActivity {
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private Handler mainThreadHandler = new Handler(); // For API 21 compatibility
 
+    // Variable to keep track of currently visible TextView
+    private TextView currentlyVisibleTextView = null;
+
+    ImageButton infoButton1, infoButton2, infoButton3, infoButton4, infoButton5, infoButton6, infoButton7, infoButton8;
+    TextView infoTextView1, infoTextView2, infoTextView3, infoTextView4, infoTextView5, infoTextView6, infoTextView7, infoTextView8;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +92,73 @@ public class ExerciseActivity extends AppCompatActivity {
                 exercises.addAll(randomExercises);
                 adapter.notifyDataSetChanged();
             });
+        });
+
+        infoButton1 = findViewById(R.id.infoButton1);
+        infoTextView1 = findViewById(R.id.infoTextView1);
+
+        infoButton2 = findViewById(R.id.infoButton2);
+        infoTextView2 = findViewById(R.id.infoTextView2);
+
+        infoButton3 = findViewById(R.id.infoButton3);
+        infoTextView3 = findViewById(R.id.infoTextView3);
+
+        infoButton4 = findViewById(R.id.infoButton4);
+        infoTextView4 = findViewById(R.id.infoTextView4);
+
+        infoButton5 = findViewById(R.id.infoButton5);
+        infoTextView5 = findViewById(R.id.infoTextView5);
+
+        infoButton6 = findViewById(R.id.infoButton6);
+        infoTextView6 = findViewById(R.id.infoTextView6);
+
+        infoButton7 = findViewById(R.id.infoButton7);
+        infoTextView7 = findViewById(R.id.infoTextView7);
+
+        infoButton8 = findViewById(R.id.infoButton8);
+        infoTextView8 = findViewById(R.id.infoTextView8);
+// Set up the click listeners for each button
+        setUpInfoButtonClickListener(infoButton1, infoTextView1);
+        setUpInfoButtonClickListener(infoButton2, infoTextView2);
+        setUpInfoButtonClickListener(infoButton3, infoTextView3);
+        setUpInfoButtonClickListener(infoButton4, infoTextView4);
+        setUpInfoButtonClickListener(infoButton5, infoTextView5);
+        setUpInfoButtonClickListener(infoButton6, infoTextView6);
+        setUpInfoButtonClickListener(infoButton7, infoTextView7);
+        setUpInfoButtonClickListener(infoButton8, infoTextView8);
+    }
+
+    // Method to close all TextViews
+    private void closeAllTextViews() {
+        infoTextView1.setVisibility(View.GONE);
+        infoTextView2.setVisibility(View.GONE);
+        infoTextView3.setVisibility(View.GONE);
+        infoTextView4.setVisibility(View.GONE);
+        infoTextView5.setVisibility(View.GONE);
+        infoTextView6.setVisibility(View.GONE);
+        infoTextView7.setVisibility(View.GONE);
+        infoTextView8.setVisibility(View.GONE);
+        currentlyVisibleTextView = null;
+    }
+    // Common click listener for info buttons
+    private void setUpInfoButtonClickListener(final ImageButton button, final TextView textView) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentlyVisibleTextView != null && currentlyVisibleTextView != textView) {
+                    // If there is a currently visible TextView that is not the one being clicked, hide it
+                    currentlyVisibleTextView.setVisibility(View.GONE);
+                }
+
+                // Toggle visibility of the clicked TextView
+                if (textView.getVisibility() == View.GONE) {
+                    textView.setVisibility(View.VISIBLE);
+                    currentlyVisibleTextView = textView; // Update the currently visible TextView
+                } else {
+                    textView.setVisibility(View.GONE);
+                    currentlyVisibleTextView = null; // No TextView is currently visible
+                }
+            }
         });
     }
 

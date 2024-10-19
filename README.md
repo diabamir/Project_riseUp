@@ -1,4 +1,4 @@
-# AI-Powered Fitness App
+# RiseUP AI-Powered Fitness App
 
 ### Elevate Your Fitness Journey with Personalized Workouts, Nutrition Plans, and Real-Time Tracking
 

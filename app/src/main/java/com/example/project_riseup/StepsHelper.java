@@ -25,17 +25,26 @@ public class StepsHelper {
         Date today = getStartOfDay(new Date());
         Date tomorrow = getStartOfDay(addDays(today, 1)); // Fetch range to avoid time issues
 
+        // Log the date range being used
+        Log.d("StepsHelper", "Today: " + today + " Tomorrow: " + tomorrow);
+
         new Thread(() -> {
             List<Steps> todayStepsList = database.stepsDao().findStepsByDateRange(today, tomorrow);
+
+            // Log the size of the steps list returned by the query
+            Log.d("StepsHelper", "Today steps list size: " + (todayStepsList != null ? todayStepsList.size() : 0));
 
             // Update UI on the main thread
             mainThreadHandler.post(() -> {
                 if (todayStepsList != null && !todayStepsList.isEmpty()) {
                     Steps todaySteps = todayStepsList.get(0); // Get the first entry
                     int stepsTakenToday = todaySteps.getStepsTaken();
+
+                    // Log the steps taken today
                     Log.d("StepsHelper", "Steps taken today: " + stepsTakenToday);
                     stepsTextView.setText(String.format("%d steps", stepsTakenToday));
                 } else {
+                    // Log that no steps data is available for today
                     Log.d("StepsHelper", "No steps data available for today.");
                     stepsTextView.setText("0 steps"); // Default if no data
                 }
